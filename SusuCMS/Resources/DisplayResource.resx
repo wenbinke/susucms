@@ -1,0 +1,674 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="Advanced" xml:space="preserve">
+    <value>Advanced</value>
+  </data>
+  <data name="AllPages" xml:space="preserve">
+    <value>All pages</value>
+  </data>
+  <data name="AllWidgets" xml:space="preserve">
+    <value>All widgets</value>
+  </data>
+  <data name="Analytics" xml:space="preserve">
+    <value>Analytics</value>
+  </data>
+  <data name="AnalyticsCode" xml:space="preserve">
+    <value>Analytics code</value>
+  </data>
+  <data name="AnonymousUser" xml:space="preserve">
+    <value>Anonymous user</value>
+  </data>
+  <data name="Cancel" xml:space="preserve">
+    <value>Cancel</value>
+  </data>
+  <data name="ChangeLanguage" xml:space="preserve">
+    <value>Change language</value>
+  </data>
+  <data name="ChangePassword" xml:space="preserve">
+    <value>Change password</value>
+  </data>
+  <data name="Chinese" xml:space="preserve">
+    <value>Chinese</value>
+  </data>
+  <data name="ClearLogs" xml:space="preserve">
+    <value>Clear logs</value>
+  </data>
+  <data name="Close" xml:space="preserve">
+    <value>Close</value>
+  </data>
+  <data name="Config" xml:space="preserve">
+    <value>Config</value>
+  </data>
+  <data name="ConfigWidget" xml:space="preserve">
+    <value>Config widget</value>
+  </data>
+  <data name="ConfirmPassword" xml:space="preserve">
+    <value>Confirm password</value>
+  </data>
+  <data name="Content" xml:space="preserve">
+    <value>Content</value>
+  </data>
+  <data name="Create" xml:space="preserve">
+    <value>Create</value>
+  </data>
+  <data name="CreateFolder" xml:space="preserve">
+    <value>Create folder</value>
+  </data>
+  <data name="CreateWidget" xml:space="preserve">
+    <value>Create widget</value>
+  </data>
+  <data name="CreationTime" xml:space="preserve">
+    <value>Creation time</value>
+  </data>
+  <data name="CultureName" xml:space="preserve">
+    <value>Culture name</value>
+  </data>
+  <data name="Current" xml:space="preserve">
+    <value>Current</value>
+  </data>
+  <data name="CurrentSite" xml:space="preserve">
+    <value>Current site</value>
+  </data>
+  <data name="CustomCss" xml:space="preserve">
+    <value>Custom Css</value>
+  </data>
+  <data name="Default" xml:space="preserve">
+    <value>Default</value>
+  </data>
+  <data name="Delete" xml:space="preserve">
+    <value>Delete</value>
+  </data>
+  <data name="Description" xml:space="preserve">
+    <value>Description</value>
+  </data>
+  <data name="Design" xml:space="preserve">
+    <value>Design</value>
+  </data>
+  <data name="Details" xml:space="preserve">
+    <value>Details</value>
+  </data>
+  <data name="DisplayName" xml:space="preserve">
+    <value>Display name</value>
+  </data>
+  <data name="DisplayOrder" xml:space="preserve">
+    <value>Display order</value>
+  </data>
+  <data name="Edit" xml:space="preserve">
+    <value>Edit</value>
+  </data>
+  <data name="EditFile" xml:space="preserve">
+    <value>Edit file</value>
+  </data>
+  <data name="EditFolder" xml:space="preserve">
+    <value>Edit folder</value>
+  </data>
+  <data name="EditLabel" xml:space="preserve">
+    <value>Edit label</value>
+  </data>
+  <data name="EditWidget" xml:space="preserve">
+    <value>Edit widget</value>
+  </data>
+  <data name="Email" xml:space="preserve">
+    <value>Email</value>
+  </data>
+  <data name="Enable" xml:space="preserve">
+    <value>Enable</value>
+  </data>
+  <data name="EnableCustomCss" xml:space="preserve">
+    <value>Enable custom css</value>
+  </data>
+  <data name="English" xml:space="preserve">
+    <value>English</value>
+  </data>
+  <data name="Error" xml:space="preserve">
+    <value>Error</value>
+  </data>
+  <data name="ErrorContent" xml:space="preserve">
+    <value>Oops... It seems there was a problem with our server. If the problem persists, use the Site Feedback form to tell us what steps led you to this page.</value>
+  </data>
+  <data name="ErrorTitle" xml:space="preserve">
+    <value>Sorry, an error occurred while processing your request.</value>
+  </data>
+  <data name="Export" xml:space="preserve">
+    <value>Export</value>
+  </data>
+  <data name="ExtractZip" xml:space="preserve">
+    <value>Extract zip</value>
+  </data>
+  <data name="Favicon" xml:space="preserve">
+    <value>Favicon</value>
+  </data>
+  <data name="File" xml:space="preserve">
+    <value>File</value>
+  </data>
+  <data name="FileName" xml:space="preserve">
+    <value>File name</value>
+  </data>
+  <data name="Folder" xml:space="preserve">
+    <value>Folder</value>
+  </data>
+  <data name="FolderName" xml:space="preserve">
+    <value>Folder name</value>
+  </data>
+  <data name="General" xml:space="preserve">
+    <value>General</value>
+  </data>
+  <data name="GlobalMenu" xml:space="preserve">
+    <value>Global menu</value>
+  </data>
+  <data name="Hello" xml:space="preserve">
+    <value>Hello</value>
+  </data>
+  <data name="Help" xml:space="preserve">
+    <value>Help</value>
+  </data>
+  <data name="Home" xml:space="preserve">
+    <value>Home</value>
+  </data>
+  <data name="Homepage" xml:space="preserve">
+    <value>Home page</value>
+  </data>
+  <data name="Id" xml:space="preserve">
+    <value>Id</value>
+  </data>
+  <data name="Import" xml:space="preserve">
+    <value>Import</value>
+  </data>
+  <data name="IsOnline" xml:space="preserve">
+    <value>Online</value>
+  </data>
+  <data name="Key" xml:space="preserve">
+    <value>Key</value>
+  </data>
+  <data name="Labels" xml:space="preserve">
+    <value>Labels</value>
+  </data>
+  <data name="LabelType" xml:space="preserve">
+    <value>Label type</value>
+  </data>
+  <data name="Language" xml:space="preserve">
+    <value>Language</value>
+  </data>
+  <data name="LastWriteTime" xml:space="preserve">
+    <value>Last write time</value>
+  </data>
+  <data name="Login" xml:space="preserve">
+    <value>Login</value>
+  </data>
+  <data name="LoginSusuCMS" xml:space="preserve">
+    <value>Login SusuCMS</value>
+  </data>
+  <data name="Logout" xml:space="preserve">
+    <value>Logout</value>
+  </data>
+  <data name="LogType" xml:space="preserve">
+    <value>LogType</value>
+  </data>
+  <data name="LostPassword" xml:space="preserve">
+    <value>Lost your password?</value>
+  </data>
+  <data name="Manage" xml:space="preserve">
+    <value>Manage</value>
+  </data>
+  <data name="ManageFolder" xml:space="preserve">
+    <value>Manage folder</value>
+  </data>
+  <data name="Media" xml:space="preserve">
+    <value>Media</value>
+  </data>
+  <data name="MediaFolders" xml:space="preserve">
+    <value>Media folders</value>
+  </data>
+  <data name="MediaUploadTips" xml:space="preserve">
+    <value>Multiple files must be in a zipped folder</value>
+  </data>
+  <data name="Menus" xml:space="preserve">
+    <value>Menus</value>
+  </data>
+  <data name="Message" xml:space="preserve">
+    <value>Message</value>
+  </data>
+  <data name="Name" xml:space="preserve">
+    <value>Name</value>
+  </data>
+  <data name="NewPassword" xml:space="preserve">
+    <value>New password</value>
+  </data>
+  <data name="NotFound404" xml:space="preserve">
+    <value>404 Not Found</value>
+  </data>
+  <data name="OldPassword" xml:space="preserve">
+    <value>Old password</value>
+  </data>
+  <data name="OpenInNewWindow" xml:space="preserve">
+    <value>Open in new window</value>
+  </data>
+  <data name="PageDesign" xml:space="preserve">
+    <value>Page design</value>
+  </data>
+  <data name="PageLabel" xml:space="preserve">
+    <value>Page label</value>
+  </data>
+  <data name="PageList" xml:space="preserve">
+    <value>Page list</value>
+  </data>
+  <data name="PageNotExist" xml:space="preserve">
+    <value>Page not exist</value>
+  </data>
+  <data name="Pages" xml:space="preserve">
+    <value>Pages</value>
+  </data>
+  <data name="ParentMenuItem" xml:space="preserve">
+    <value>Parent menu item</value>
+  </data>
+  <data name="Password" xml:space="preserve">
+    <value>Password</value>
+  </data>
+  <data name="PasswordMock" xml:space="preserve">
+    <value>******</value>
+  </data>
+  <data name="Path" xml:space="preserve">
+    <value>Path</value>
+  </data>
+  <data name="ProcessActionLoading" xml:space="preserve">
+    <value>Proccessing your action...</value>
+  </data>
+  <data name="Remove" xml:space="preserve">
+    <value>Remove</value>
+  </data>
+  <data name="Required" xml:space="preserve">
+    <value>Required</value>
+  </data>
+  <data name="Role" xml:space="preserve">
+    <value>Role</value>
+  </data>
+  <data name="Roles" xml:space="preserve">
+    <value>Roles</value>
+  </data>
+  <data name="Save" xml:space="preserve">
+    <value>Save</value>
+  </data>
+  <data name="Search" xml:space="preserve">
+    <value>Search</value>
+  </data>
+  <data name="SelectAFileToUpload" xml:space="preserve">
+    <value>Select a file to upload</value>
+  </data>
+  <data name="SelectFile" xml:space="preserve">
+    <value>Select file</value>
+  </data>
+  <data name="SelectSite" xml:space="preserve">
+    <value>Select Site</value>
+  </data>
+  <data name="Settings" xml:space="preserve">
+    <value>Settings</value>
+  </data>
+  <data name="SiteLabel" xml:space="preserve">
+    <value>Site label</value>
+  </data>
+  <data name="SiteNotExist" xml:space="preserve">
+    <value>Site not exist.</value>
+  </data>
+  <data name="SiteNotFoundTitle" xml:space="preserve">
+    <value>Website currently unavailable</value>
+  </data>
+  <data name="Sites" xml:space="preserve">
+    <value>Sites</value>
+  </data>
+  <data name="Size" xml:space="preserve">
+    <value>Size</value>
+  </data>
+  <data name="Slug" xml:space="preserve">
+    <value>Slug</value>
+  </data>
+  <data name="SystemLogs" xml:space="preserve">
+    <value>System logs</value>
+  </data>
+  <data name="Template" xml:space="preserve">
+    <value>Template</value>
+  </data>
+  <data name="Theme" xml:space="preserve">
+    <value>Theme</value>
+  </data>
+  <data name="Themes" xml:space="preserve">
+    <value>Themes</value>
+  </data>
+  <data name="Title" xml:space="preserve">
+    <value>Title</value>
+  </data>
+  <data name="Type" xml:space="preserve">
+    <value>Type</value>
+  </data>
+  <data name="UpdateTime" xml:space="preserve">
+    <value>Update time</value>
+  </data>
+  <data name="UploadFile" xml:space="preserve">
+    <value>Upload file</value>
+  </data>
+  <data name="Url" xml:space="preserve">
+    <value>Url</value>
+  </data>
+  <data name="UrlRewrite" xml:space="preserve">
+    <value>Url rewrite</value>
+  </data>
+  <data name="Urls" xml:space="preserve">
+    <value>Urls</value>
+  </data>
+  <data name="UserName" xml:space="preserve">
+    <value>User name</value>
+  </data>
+  <data name="Users" xml:space="preserve">
+    <value>Users</value>
+  </data>
+  <data name="Value" xml:space="preserve">
+    <value>Value</value>
+  </data>
+  <data name="Version" xml:space="preserve">
+    <value>Version</value>
+  </data>
+  <data name="VisitYourSite" xml:space="preserve">
+    <value>Visit site </value>
+  </data>
+  <data name="WelcomeToSusuCMS" xml:space="preserve">
+    <value>Welcome to SusuCMS</value>
+  </data>
+  <data name="WelcomeToSusuCMSDescription" xml:space="preserve">
+    <value>To learn more about SusuCMS visit &lt;a href="http://www.susucms.com" title="SusuCMS Website" target="_blank"&gt;
+        http://www.susucms.com&lt;/a&gt;.</value>
+  </data>
+  <data name="WidgetLabel" xml:space="preserve">
+    <value>Widget label</value>
+  </data>
+  <data name="Widgets" xml:space="preserve">
+    <value>Widgets</value>
+  </data>
+  <data name="Permissions" xml:space="preserve">
+    <value>Permissions</value>
+  </data>
+  <data name="System" xml:space="preserve">
+    <value>System</value>
+  </data>
+  <data name="SystemSettings" xml:space="preserve">
+    <value>System settings</value>
+  </data>
+  <data name="NoPermission" xml:space="preserve">
+    <value>No permission</value>
+  </data>
+  <data name="NoPermissionDescription" xml:space="preserve">
+    <value>Sorry, you have no permission about this page.</value>
+  </data>
+  <data name="CustomMetaFields" xml:space="preserve">
+    <value>Custom meta fields</value>
+  </data>
+  <data name="HtmlTitle" xml:space="preserve">
+    <value>Html title</value>
+  </data>
+  <data name="MetaDescription" xml:space="preserve">
+    <value>Meta description</value>
+  </data>
+  <data name="MetaKeywords" xml:space="preserve">
+    <value>Meta keywords</value>
+  </data>
+  <data name="MetaFields" xml:space="preserve">
+    <value>Meta fields</value>
+  </data>
+  <data name="SampleRobots_txt" xml:space="preserve">
+    <value>Sample robots.txt</value>
+  </data>
+  <data name="PageNotFoundContent" xml:space="preserve">
+    <value>The page you requested could not be found.Please check the URL and try again.</value>
+  </data>
+  <data name="View" xml:space="preserve">
+    <value>View</value>
+  </data>
+  <data name="EnableSsl" xml:space="preserve">
+    <value>Enable SSL</value>
+  </data>
+  <data name="Port" xml:space="preserve">
+    <value>Port</value>
+  </data>
+  <data name="SMTPServer" xml:space="preserve">
+    <value>SMTP Server</value>
+  </data>
+  <data name="MailSetting" xml:space="preserve">
+    <value>Mail setting</value>
+  </data>
+  <data name="Mails" xml:space="preserve">
+    <value>Mails</value>
+  </data>
+  <data name="Body" xml:space="preserve">
+    <value>Body</value>
+  </data>
+  <data name="From" xml:space="preserve">
+    <value>From</value>
+  </data>
+  <data name="FromName" xml:space="preserve">
+    <value>From name</value>
+  </data>
+  <data name="IsSent" xml:space="preserve">
+    <value>Sent?</value>
+  </data>
+  <data name="Reply" xml:space="preserve">
+    <value>Reply</value>
+  </data>
+  <data name="Subject" xml:space="preserve">
+    <value>Subject</value>
+  </data>
+  <data name="To" xml:space="preserve">
+    <value>To</value>
+  </data>
+  <data name="Resend" xml:space="preserve">
+    <value>Resend</value>
+  </data>
+  <data name="MailInfo" xml:space="preserve">
+    <value>Mail info</value>
+  </data>
+  <data name="Reset" xml:space="preserve">
+    <value>Reset</value>
+  </data>
+  <data name="CompactView" xml:space="preserve">
+    <value>Compact view</value>
+  </data>
+  <data name="RealView" xml:space="preserve">
+    <value>Real view</value>
+  </data>
+  <data name="AddMoreFields" xml:space="preserve">
+    <value>Add more fields?</value>
+  </data>
+  <data name="MetaFieldsTip" xml:space="preserve">
+    <value>Some search engines will use the name and content attributes of the meta element to index your pages.
+&lt;br&gt;&lt;br&gt;
+The following meta element defines a description of a page:
+&lt;br&gt;
+&amp;lt;meta name="description" content="Free Web tutorials on HTML, CSS, XML" /&amp;gt;&lt;br&gt;&lt;br&gt;
+The following meta element defines keywords for a page:
+&lt;br&gt;
+&amp;lt;meta name="keywords" content="HTML, CSS, XML" /&amp;gt;&lt;br&gt;&lt;br&gt;
+The intention of the name and content attributes is to describe the content of a page.</value>
+  </data>
+  <data name="Return" xml:space="preserve">
+    <value>Return</value>
+  </data>
+  <data name="SiteNotFoundMessage" xml:space="preserve">
+    <value>&lt;p&gt;The website you are trying to access is currently unavailable. Please try again at a later time.&lt;/p&gt;
+&lt;p&gt;If you are the site owner, review the following &lt;a href="http://www.susucms.com" target="_blank"&gt;www.susucms.com&lt;/a&gt; for help.&lt;/p&gt;</value>
+  </data>
+  <data name="NextPage" xml:space="preserve">
+    <value>Next</value>
+  </data>
+  <data name="PreviousPage" xml:space="preserve">
+    <value>Prev</value>
+  </data>
+  <data name="Sort" xml:space="preserve">
+    <value>Sort</value>
+  </data>
+  <data name="Down" xml:space="preserve">
+    <value>Down</value>
+  </data>
+  <data name="Up" xml:space="preserve">
+    <value>Up</value>
+  </data>
+  <data name="MainUrl" xml:space="preserve">
+    <value>Main url</value>
+  </data>
+  <data name="SetAsMainUrl" xml:space="preserve">
+    <value>Set as main url</value>
+  </data>
+  <data name="RedirectToMainUrl" xml:space="preserve">
+    <value>Always redirect to this url</value>
+  </data>
+  <data name="MailSettingHelpContent" xml:space="preserve">
+    <value>SMTP server: smtp.gmail.com (use authentication) &lt;br/&gt; 
+TLS / STARTTLS port: 587 &lt;br/&gt; 
+SSL port: 465 &lt;br/&gt; 
+User name: your full e-mail address(including@gmail.com, or @your_domain.com) &lt;br/&gt; 
+password: your Gmail password</value>
+  </data>
+  <data name="Administrators" xml:space="preserve">
+    <value>Administrators</value>
+  </data>
+  <data name="Nickname" xml:space="preserve">
+    <value>Nickname</value>
+  </data>
+  <data name="AppType_Google" xml:space="preserve">
+    <value>Google</value>
+  </data>
+  <data name="AppType_Live" xml:space="preserve">
+    <value>Live</value>
+  </data>
+  <data name="AppType_QQ" xml:space="preserve">
+    <value>QQ</value>
+  </data>
+  <data name="AppType_TencentWeibo" xml:space="preserve">
+    <value>Tencent Weibo</value>
+  </data>
+  <data name="AppType_Renren" xml:space="preserve">
+    <value>Renren</value>
+  </data>
+  <data name="AppType_Sina" xml:space="preserve">
+    <value>Sina</value>
+  </data>
+  <data name="AppType_Taobao" xml:space="preserve">
+    <value>Taobao</value>
+  </data>
+  <data name="UserSettings" xml:space="preserve">
+    <value>User settings</value>
+  </data>
+</root>

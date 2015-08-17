@@ -1,0 +1,63 @@
+﻿@model MailSetting
+@{
+    ViewBag.Title = DisplayResource.MailSetting;
+    ViewBag.Subtitle = DisplayResource.MailSetting;
+    ViewBag.HelpContent = DisplayResource.MailSettingHelpContent;
+}
+@using (Html.BeginForm("Setting", "Mail", null, FormMethod.Post, new { autocomplete = "off" }))
+{
+    <table class="form-table">
+        <tbody>
+            <tr>
+                <th>@Html.LabelFor(m => m.Host)
+                </th>
+                <td>
+                    @Html.TextBoxFor(m => m.Host)
+                    @Html.ValidationMessageFor(m => m.Host)
+                </td>
+            </tr>
+            <tr>
+                <th>@Html.LabelFor(m => m.Port)
+                </th>
+                <td>
+                    @Html.TextBoxFor(m => m.Port)
+                    @Html.ValidationMessageFor(m => m.Port)
+                </td>
+            </tr>
+            <tr>
+                <th>@Html.LabelFor(m => m.UserName)
+                </th>
+                <td>
+                    @Html.TextBoxFor(m => m.UserName)
+                    @Html.ValidationMessageFor(m => m.UserName)
+                </td>
+            </tr>
+            <tr>
+                <th>@Html.LabelFor(m => m.Password)
+                </th>
+                <td>
+                    @Html.PasswordFor(m => m.Password)
+                    @Html.ValidationMessageFor(m => m.Password)
+                </td>
+            </tr>
+            <tr>
+                <th>
+                    @Html.LabelFor(m => m.EnableSsl)
+                </th>
+                <td>
+                    @Html.CheckBoxFor(m => m.EnableSsl)
+                    @Html.ValidationMessageFor(m => m.EnableSsl)
+                </td>
+            </tr>
+            <tr>
+                <th>
+                </th>
+                <td>
+                    @Html.AntiForgeryToken()
+                    @Html.SaveButton()
+                    @Html.ReturnButton()
+                </td>
+            </tr>
+        </tbody>
+    </table>
+}

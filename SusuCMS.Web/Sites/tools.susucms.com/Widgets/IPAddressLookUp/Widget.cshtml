@@ -1,0 +1,38 @@
+﻿@inherits SusuCMS.Web.Front.WidgetPageBase
+
+@{
+    var ip = Request.QueryString["ip"];
+    if (String.IsNullOrWhiteSpace(ip))
+    {
+        ip = Request.UserHostAddress;
+    }
+    try
+    {
+        var url = "http://www.youdao.com/smartresult-xml/search.s?type=ip&q=" + ip;
+        var doc = System.Xml.Linq.XDocument.Load(url);
+        var result = doc.Element("smartresult");
+        ViewBag.Result = result.Element("product").Element("location").Value;
+    }
+    catch
+    {
+        ViewBag.Result = WidgetLabel("No result");
+    }
+}
+<h2>@WidgetLabel("IP address look up")</h2>
+<form action="@Request.Url.AbsolutePath" method="get">
+<p>
+    @if (String.IsNullOrWhiteSpace(Request.QueryString["ip"]))
+    {
+        @WidgetLabel("Your IP:")  @Request.UserHostAddress
+    }
+    @ViewBag.Result
+</p>
+<div class="watermark">
+    @Html.Label("ip", "Enter ip address...")
+    @Html.TextBox("ip", Request.QueryString["ip"])
+</div>
+<p class="buttons">
+    <button type="submit">
+        @WidgetLabel("Query")</button>
+</p>
+</form>

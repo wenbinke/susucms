@@ -1,0 +1,25 @@
+﻿#header .inner, #page-introduction .inner, #main .inner, #footer .inner
+{
+    width: 800px;
+    margin: 0 auto;
+}
+#content, #lsidebar, #rsidebar
+{
+    min-height: 250px;
+}
+#lsidebar, #rsidebar
+{
+    width: 200px;
+}
+#rsidebar
+{
+    width: 280px;
+    float: right;
+    padding-left: 10px;
+}
+#content
+{
+    float: left;
+    width: 495px;
+    padding-right: 10px;
+}

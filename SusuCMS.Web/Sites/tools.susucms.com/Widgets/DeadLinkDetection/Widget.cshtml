@@ -1,0 +1,222 @@
+﻿@inherits SusuCMS.Web.Front.WidgetPageBase
+
+@{
+    FrontHtml.ClientScript.jQuery(true);
+}
+@using System.Text
+@using System.Text.RegularExpressions
+@using Winista.Text.HtmlParser
+@using Winista.Text.HtmlParser.Filters
+@using Winista.Text.HtmlParser.Lex
+@using Winista.Text.HtmlParser.Tags
+@functions {
+    Encoding GetEncoding(string html)
+    {
+        var pattern = @"charset=([-a-zA-Z_0-9]+)";
+        var charset = Regex.Match(html, pattern).Groups[1].Value;
+        if (charset.Length == 0)
+        {
+            charset = Encoding.UTF8.BodyName;
+        }
+
+        try
+        {
+            return Encoding.GetEncoding(charset);
+        }
+        catch (Exception)
+        {
+            return Encoding.Default;
+        }
+    }
+
+    string GetLinkStatusCode(string url)
+    {
+        string statusCode = null;
+        if (!String.IsNullOrWhiteSpace(url))
+        {
+            try
+            {
+                var request = WebRequest.Create(url);
+                using (var response = (HttpWebResponse)request.GetResponse())
+                {
+                    statusCode = ((int)response.StatusCode).ToString();
+                }
+            }
+            catch
+            {
+                statusCode = WidgetLabel("Unknown").ToString();
+            }
+        }
+
+        return statusCode;
+    }
+
+    Dictionary<string, string> GetLinks(string url)
+    {
+        var links = new Dictionary<string, string>();
+        try
+        {
+            if (!url.StartsWith("http://") && !url.StartsWith("https://"))
+            {
+                url = "http://" + url;
+            }
+
+            using (var client = new WebClient())
+            {
+                var uri = new Uri(url);
+                var data = client.DownloadData(uri);
+                var encoding = GetEncoding(Encoding.UTF8.GetString(data));
+                var html = encoding.GetString(data);
+
+                var parser = new Parser(new Lexer(html));
+                var nodes = parser.ExtractAllNodesThatMatch(new TagNameFilter("a"));
+
+                var urlPrefix = string.Format("{0}://{1}{2}", uri.Scheme, uri.DnsSafeHost, uri.IsDefaultPort ? "" : ":" + uri.Port);
+
+                var imageLinkText = WidgetLabel("Image link").ToString();
+                for (var i = 0; i < nodes.Count; i++)
+                {
+                    var tag = nodes[i] as ATag;
+                    if (!String.IsNullOrWhiteSpace(tag.Link) && !tag.JavascriptLink && !tag.MailLink)
+                    {
+                        var link = tag.Link.ToLower();
+                        if (!link.StartsWith("http://") && !link.StartsWith("https://"))
+                        {
+                            link = string.Format("{0}/{1}", urlPrefix, link.TrimStart("/".ToCharArray()));
+                        }
+
+                        if (!links.ContainsKey(link))
+                        {
+                            if (tag.ChildrenHTML.TrimStart().StartsWith("<img"))
+                            {
+                                links.Add(link, imageLinkText);
+                            }
+                            else
+                            {
+                                links.Add(link, tag.LinkText);
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        catch
+        {
+        }
+
+        return links;
+    }
+}
+@{
+    var url = Request.QueryString["url"];
+    Dictionary<string, string> links = null;
+    if (!String.IsNullOrWhiteSpace(url))
+    {
+        if (IsAjax)
+        {
+            Response.Write(GetLinkStatusCode(url));
+            Response.End();
+        }
+        else
+        {
+            links = GetLinks(url);
+        }
+    }
+    else
+    {
+        links = new Dictionary<string, string>();
+    }
+}
+<h2>
+    @WidgetLabel("Dead link detection")</h2>
+<div class="description">
+    @WidgetLabel(@"Dead links - also known as broken links, that is, those who can not reach the link. There is a dead website links is not a good thing, first of all a site if there are a lot of dead links, it will greatly damage the overall image of the site, the search engine spiders Moreover links to crawl through the search, if too many links can not be reached, not only included the page will decrease, and your site in search engines will greatly reduce the weight. <br/>The tool can traverse all the links given page, and analyze the effectiveness of each link, find dead links.")
+</div>
+<p>
+    @WidgetLabel("Enter the full page url (example: http://tools.susucms.com/Tools/DeadLinkDetection):")
+</p>
+<form action="@Request.Url.AbsolutePath" method="get">
+@Html.TextBox("url", url)
+<p class="buttons">
+    <button type="submit">
+        @WidgetLabel("Show links")</button>
+    @if (links.Any())
+    {
+        <button type="button" id="detect">
+            @WidgetLabel("Detect")</button>
+    }
+</p>
+</form>
+@if (links.Any())
+{
+    var i = 1;
+    <p id="detect-message" class="hide">@WidgetLabel("Link being tested, it may take a few minutes ...")</p>
+    <table class="data-table">
+        <colgroup>
+            <col width="50" />
+            <col width="150" />
+            <col />
+        </colgroup>
+        <thead>
+            <tr>
+                <th>
+                </th>
+                <th>
+                    @WidgetLabel("Text")
+                </th>
+                <th>
+                    @WidgetLabel("Link")
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in links)
+            {
+                <tr>
+                    <td>
+                        @(i++)
+                    </td>
+                    <td>
+                        @item.Value
+                    </td>
+                    <td>
+                        <a href="@item.Key" target="_blank">@item.Key</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    @Html.Hidden("UrlAbsolutePath", Request.Url.AbsolutePath)
+    @Html.Hidden("DetectCompleteMessage", WidgetLabel("Link test is complete! Link to this page Total: {0}; dead link: {1}."))
+}
+<script type="text/javascript">
+    $(function () {
+        var linkCount = $('.data-table tbody tr').length;
+        var deadLinkCount = 0;
+
+        function GetLinkStatusCode(i) {
+            var link = $('.data-table tbody tr:eq(' + i + ') td:eq(2) a');
+            var linkUrl = link.attr('href');
+            $.get($('#UrlAbsolutePath').val(), { url: linkUrl }, function (result) {
+                if (result == '200') {
+                    link.after(' ( <span class=""green"">√ 200</span> )');
+                } else {
+                    link.after(' ( <span class=""red"">X ' + result + '</span> )');
+                    deadLinkCount++;
+                }
+
+                if (++i < linkCount) {
+                    GetLinkStatusCode(i);
+                } else {
+                    $('#detect-message').text($.format($('#DetectCompleteMessage').val(), linkCount, deadLinkCount.toString()));
+                }
+            });
+        }
+
+        $('#detect').click(function() {
+            $(this).attr('disabled', 'disabled');
+            $('#detect-message').show();
+            GetLinkStatusCode(0);
+        });
+    });
+</script>

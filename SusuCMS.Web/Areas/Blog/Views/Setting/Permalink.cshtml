@@ -1,0 +1,59 @@
+﻿@model PermalinkSetting
+@{
+    ViewBag.Title = SusuCMS.Blog.DisplayResource.PermalinkSettings;
+    ViewBag.Subtitle = SusuCMS.Blog.DisplayResource.PermalinkSettings;
+}
+@Html.Partial("SettingTabs")
+@using (Html.BeginForm())
+{
+    <table class="form-table">
+        <tbody>
+            <tr>
+                <th>@Html.LabelFor(m => m.ArticleUrl)
+                </th>
+                <td>
+                    @Html.TextBoxFor(m => m.ArticleUrl)
+                    @Html.HelpTip(SusuCMS.Blog.DisplayResource.ArticleUrlSettingTip)
+                    @Html.ValidationMessageFor(m => m.ArticleUrl)
+                </td>
+            </tr>
+            <tr>
+                <th>@Html.LabelFor(m => m.CategoryUrl)
+                </th>
+                <td>
+                    @Html.TextBoxFor(m => m.CategoryUrl)
+                    @Html.HelpTip(SusuCMS.Blog.DisplayResource.CategoryUrlSettingTip)
+                    @Html.ValidationMessageFor(m => m.CategoryUrl)
+                </td>
+            </tr>
+            <tr>
+                <th>
+                    @Html.LabelFor(m => m.TagUrl)
+                </th>
+                <td>
+                    @Html.TextBoxFor(m => m.TagUrl)
+                    @Html.HelpTip(SusuCMS.Blog.DisplayResource.TagUrlSettingTip)
+                    @Html.ValidationMessageFor(m => m.TagUrl)
+                </td>
+            </tr>
+                       <tr>
+                <th>
+                    @Html.LabelFor(m => m.ArchiveUrl)
+                </th>
+                <td>
+                    @Html.TextBoxFor(m => m.ArchiveUrl)
+                    @Html.HelpTip(SusuCMS.Blog.DisplayResource.ArchiveUrlSettingTip)
+                    @Html.ValidationMessageFor(m => m.ArchiveUrl)
+                </td>
+            </tr>
+            <tr>
+                <th>
+                </th>
+                <td>
+                    @Html.AntiForgeryToken()
+                    @Html.SaveButton()
+                </td>
+            </tr>
+        </tbody>
+    </table>
+}

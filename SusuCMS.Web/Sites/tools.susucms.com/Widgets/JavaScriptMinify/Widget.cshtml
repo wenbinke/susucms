@@ -1,0 +1,40 @@
+﻿@inherits SusuCMS.Web.Front.WidgetPageBase
+
+@using SusuCMS.Tools
+@{
+    FrontHtml.ClientScript.jQuery(true);
+    FrontHtml.ClientScript.RegisterScript("~/Scripts/codeMirror/codemirror.js");
+    if (IsPost)
+    {
+        var source = Request.Form["Text"];
+        if (!String.IsNullOrWhiteSpace(source))
+        {
+            ViewBag.Text = JavaScriptMinifier.Minify(source).Replace("\r", "").Replace("\n", "").Replace("\t", "");
+        }
+    }
+}
+<h2>@WidgetLabel("JavaScript minify")</h2>
+<div class="description">
+    @WidgetLabel("This tool help you minify js code.")
+</div>
+@using (Html.BeginForm())
+{
+    <div class="code-editor">
+        @Html.TextArea("Text", (string)ViewBag.Text, null)
+    </div>
+    <p class="buttons">
+        <button type="submit">
+            @WidgetLabel("Minify")</button>
+    </p>
+}
+<script type="text/javascript">
+    $(function () {
+        var editor = CodeMirror.fromTextArea('Text', {
+            height: '450px',
+            parserfile: ['tokenizejavascript.js', 'parsejavascript.js'],
+            stylesheet: '@Url.Content("~/Scripts/codeMirror/jscolors.css")',
+            path: '@Url.Content("~/Scripts/codeMirror/")',
+            continuousScanning: 500
+        });
+    });
+</script>

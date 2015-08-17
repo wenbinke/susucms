@@ -1,0 +1,29 @@
+﻿@inherits SusuCMS.Web.Front.WidgetPageBase
+@using SusuCMS.Blog;
+@{
+    var dataContext = BlogWorkContext.GetDataContext();
+    var list = dataContext.Categories.WithSiteId(CurrentSite.Id).Where(i => i.IsOnline).ToList();
+}
+@helper BuildItems(string categoryUrl, int? categoryId, IList<Category> list)
+    {
+        var children = list.Where(i => i.ParentId == categoryId);
+        if (children.Any())
+        {
+    <ul>
+        @foreach (var item in children)
+        {
+            <li><a href="@FrontUrl.GetClientUrl(categoryUrl, new { CategoryId = item.Id, Slug = item.Name.AsSlug() })">@item.Name</a><span>(@item.ArticleCount)</span>
+                @BuildItems(categoryUrl, item.Id, list)</li>
+        }
+    </ul>
+        }
+}
+<div class="widget article-categories">
+    <h2>
+        @WidgetLabel("Categories")</h2>
+    @if (list.Any())
+    {
+        var permalinkSetting = CurrentSite.GetPermalinkSetting();
+        @BuildItems(permalinkSetting.CategoryUrl, null, list)
+    }
+</div>

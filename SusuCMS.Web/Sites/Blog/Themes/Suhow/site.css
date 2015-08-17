@@ -1,0 +1,230 @@
+﻿@import url("/Content/reset.css");
+
+/* = 1 Base
+---------------------------------------------------------------------------------------------------------------------*/
+html
+{
+    overflow: auto;
+}
+body
+{
+    font-size: 12px;
+    line-height: 1.5em;
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: #dcf0f8;
+    color: #232323;
+}
+a
+{
+    color: #0086df;
+}
+a:hover 
+{
+    text-decoration:underline;
+}
+.hide
+{
+    display: none;
+}
+.clear
+{
+    clear: both;
+}
+.clearfix
+{
+    display: block;
+}
+.clearfix:after
+{
+    content: ".";
+    display: block;
+    clear: both;
+    visibility: hidden;
+    height: 0;
+}
+/* For Safari */
+html[xmlns] .clearfix
+{
+    display: block;
+}
+/* For IE6 */
+*html .clearfix
+{
+    height: 1%;
+}
+/* For IE7 */
+* + html .clearfix
+{
+    height: 1%;
+}
+
+/* = 2 Layout
+---------------------------------------------------------------------------------------------------------------------*/
+#wrapper
+{
+    width: 990px;
+    margin: 0 auto;
+    box-shadow: 0 0 20px rgba(0,0,0,.16);
+}
+#content, #lsidebar, #rsidebar
+{
+    min-height: 250px;
+}
+#lsidebar, #rsidebar
+{
+    width: 200px;
+}
+.layout2 #lsidebar
+{
+    float: left;
+}
+.layout2 #content
+{
+    margin-left: 210px;
+}
+.layout3 #rsidebar
+{
+    float: right;
+}
+.layout3 #content
+{
+    margin-right: 210px;
+}
+.layout4 #lsidebar
+{
+    float: left;
+}
+.layout4 #content
+{
+    margin-left: 210px;
+    margin-right: 210px;
+}
+.layout4 #rsidebar
+{
+    float: right;
+}
+.layout5 #lsidebar
+{
+    float: left;
+    margin-right: 10px;
+}
+.layout5 #rsidebar
+{
+    float: left;
+}
+.layout5 #content
+{
+    margin-left: 420px;
+}
+.layout6 #lsidebar
+{
+    float: right;
+    margin-right: 10px;
+}
+.layout6 #rsidebar
+{
+    float: right;
+}
+.layout6 #content
+{
+    margin-right: 420px;
+}
+
+/* = 2 Typography
+---------------------------------------------------------------------------------------------------------------------*/
+#header
+{
+    height: 125px;
+    padding-left: 20px;
+    background-color: #69be28;
+}
+#header h1 a
+{
+    display:block;
+    width: 258px;
+    height: 130px;
+    background: url(images/logo.png) top left no-repeat;
+    text-indent: -9999px;
+}
+#header .description
+{
+    display:none;
+}
+#nav
+{
+    height: 37px;
+    background-color: #69be28;
+}
+#nav ul
+{
+    overflow: hidden;
+}
+#nav ul li
+{
+    float: left;
+}
+#nav ul li a
+{
+    border-right: 2px dotted rgba(255, 255, 255, .5);
+    color: #fff;
+    display: block;
+    line-height: 37px;
+    padding: 0 30px;
+    white-space: nowrap;
+    font-size: 20px;
+    font-weight: 700;
+}
+#nav ul li a:hover
+{
+    color: #1f2122;
+    background-color: #fff;
+    text-decoration: none;
+}
+
+#main
+{
+    background-color: #fff;
+    min-height: 300px;
+    padding-bottom: 15px;
+}
+
+#footer
+{
+    background: #f9f9f9;
+    border-top: 1px solid #ddd;
+    padding: 30px 0;
+    text-align: center;
+}
+#footer a
+{
+    color: #333;
+    font-weight: 700;
+}
+
+/* = 3 Widgets
+---------------------------------------------------------------------------------------------------------------------*/
+.widget
+{
+    color: #555;
+}
+.widget h3
+{
+    color: #1F2122;
+    font-size: 14px;
+    text-transform: uppercase;
+    padding: 15px 0 10px 10px;
+    margin-bottom: 15px;
+    border-bottom: 1px solid #D9D9D9;
+}
+.widget ul
+{
+    padding-left: 10px;
+    list-style-position: inside;
+    list-style-type: disc;
+}
+.widget.article-category li a, .widget.article-list li a
+{
+    margin-bottom: 3px;
+    padding-right: 5px;
+    line-height: 22px;
+}

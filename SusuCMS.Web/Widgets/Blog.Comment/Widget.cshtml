@@ -1,0 +1,41 @@
+﻿@inherits SusuCMS.Web.Front.WidgetPageBase
+@using SusuCMS.Blog;
+@{
+    var dataContext = BlogWorkContext.GetDataContext();
+
+    var id = ((string)ViewContext.RouteData.Values["articleId"]).AsInt();
+    var article = dataContext.Articles.WithSiteId(CurrentSite.Id).FirstOrDefault(i => i.Id == id);
+    var list = dataContext.Comments.WithSiteId(CurrentSite.Id).Where(i => i.ArticleId == id && i.Status == (int)CommentStatus.Approved);
+}
+@helper BuildItems(string categoryUrl, int? categoryId, IList<Category> list)
+    {
+        var children = list.Where(i => i.ParentId == categoryId);
+        if (children.Any())
+        {
+    <ul>
+        @foreach (var item in children)
+        {
+            <li><a href="@FrontUrl.GetClientUrl(categoryUrl, new { CategoryId = item.Id, Slug = item.Name.AsSlug() })">@item.Name</a><span>(@item.ArticleCount)</span>
+                @BuildItems(categoryUrl, item.Id, list)</li>
+        }
+    </ul>
+        }
+}
+<div class="widget article-comments">
+    <h2>
+        @list.Count() @WidgetLabel("Responses to ") "<span>@article.Title</span>"</h2>
+    @if (list.Any())
+    {
+        // TODO: add comment function
+        var permalinkSetting = CurrentSite.GetPermalinkSetting();
+        <ul class="comment-list">
+            <li>
+                <div class="comment-author">
+                    <img alt="" src="" class="avatar avatar-68 photo" height="68" width="68"><span class="author">admin</span>
+                    on <span>May 19, 2012 at 4:31 am</span><span class="says">said:</span> <span class="edit-link">
+                    </span>
+                </div>
+            </li>
+        </ul>
+    }
+</div>

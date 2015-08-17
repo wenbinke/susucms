@@ -1,0 +1,202 @@
+﻿/*  Header
+--------------------------------------------------------------------------------*/
+#header
+{
+    height: 60px;
+    background: #162850 url(images/header-bg.png) top left repeat-x;
+    border-bottom: 1px solid #0C1832;
+}
+#header h1 a
+{
+    text-indent: -9000em;
+    width: 224px;
+    height: 60px;
+    background: url(images/logo.png) center center no-repeat;
+    float: left;
+}
+#nav
+{
+    float: right;
+    width: 550px;
+}
+#nav li
+{
+    float: left;
+    display: inline-block;
+    height: 60px;
+    line-height: 60px;
+    padding: 0 15px;
+}
+#nav li a
+{
+    text-align: center;
+    font-weight: bold;
+    color: #fff;
+    font-size: 16px;
+}
+#nav li a:hover
+{
+    color: #bbb;
+}
+/*  Page Introduction
+------------------------------------------------------------------------------------*/
+#page-introduction
+{
+    background: #BECAE4;
+}
+#page-introduction .inner
+{
+    padding: 25px 0;
+    background: url(images/page-introduction-bg.png) center right no-repeat;
+    overflow: hidden;
+}
+#page-introduction h2
+{
+    margin-bottom: 8px;
+}
+#page-introduction h2:first-child
+{
+    font-size: 48px;
+}
+#page-introduction h2 + h2
+{
+    font-size: 52px;
+    float: right;
+}
+
+/*  Main
+-----------------------------------------------------------------------------------------*/
+#main
+{
+    background: url(images/main-bg.png) top left repeat-x;
+    margin-bottom: 20px;
+}
+#main .inner
+{
+    padding-top: 41px;
+    background: url(images/main-arrow.png) 50px top no-repeat;
+    min-height: 200px;
+}
+/*  Footer
+-----------------------------------------------------------------------------------*/
+#footer
+{
+    background: #BFCBE4;
+    height: 60px;
+    border-top: 1px solid #8D9BBA;
+    padding: 10px 0;
+}
+#footer .inner
+{
+    overflow: hidden;
+}
+#footer h5
+{
+    font-size: 20px;
+    font-weight: bold;
+}
+/*  Home left block
+-----------------------------------------------------------------------------------*/
+.reasons h3
+{
+    font-size: 30px;
+}
+.reasons h3 span
+{
+    font-size: 36px;
+    color: #777;
+}
+.reasons p
+{
+    margin-bottom: 10px;
+    font-size: 11pt;
+}
+.home-buttons
+{
+    margin-top: 25px;
+}
+.home-buttons a
+{
+    width: 220px;
+    height: 69px;
+    display: inline-block;
+    background: url(images/home-button.png);
+    font-size: 22px;
+    line-height: 69px;
+    text-align: center;
+    color: #fff;
+    text-transform: uppercase;
+}
+.home-buttons a:first-child
+{
+    margin: 0 10px;
+}
+/*  Contact
+-----------------------------------------------------------------------------------*/
+.contact-info h3, .home-projects h3
+{
+    height: 48px;
+    line-height: 58px;
+    font-size: 34px;
+    padding-bottom: 10px;
+    margin-bottom: 8px;
+    border-bottom: 1px solid #8D9BBA;
+}
+.home-projects > p
+{
+    margin-bottom: 5px;
+}
+.home-projects a
+{
+    border: 5px solid #bfcbe4;
+    display: block;
+    font-size: 20px;
+    line-height: 80px;
+    padding: 5px 2px;
+}
+.home-projects a:hover
+{
+    border: 5px solid #162850;
+}
+.home-projects a img
+{
+    height: 80px;
+    width: 80px;
+    float: left;
+}
+form .success
+{
+    color: #39b54a;
+    font-weight: bold;
+}
+.contact-form input[type="text"], .contact-form textarea
+{
+    border: 1px solid #B9BBCA;
+    padding: 5px;
+    width: 300px;
+}
+.contact-form .field-validation-error
+{
+    color: red;
+}
+.contact-form textarea
+{
+    height: 100px;
+    overflow: auto;
+}
+.contact-form dt
+{
+    padding: 3px;
+}
+.contact-form span
+{
+    color: red;
+}
+.contact-form button
+{
+    width: 71px;
+    margin-top: 5px;
+    border: none;
+    padding: 5px 0;
+    background: url(images/button.png) no-repeat center center;
+}

@@ -1,0 +1,35 @@
+﻿@inherits SusuCMS.Web.Front.WidgetPageBase
+@{
+    var key = string.Empty;
+    var data = CurrentWidget.GetData();
+    if (data != null)
+    {
+        key = data.SearchEngineUniqueId;
+    }
+}
+<h2>
+    @WidgetLabel("Search result")</h2>
+<div id="cse" class="loading">
+    @WidgetLabel("Loading...")
+</div>
+<script src="http://www.google.com/jsapi" type="text/javascript"></script>
+<script type="text/javascript">
+    google.load('search', '1', { language: '@CurrentSite.CultureName', "nocss": true });
+
+    google.setOnLoadCallback(function () {
+        var customSearchControl = new google.search.CustomSearchControl('@key');
+        customSearchControl.setLinkTarget(google.search.Search.LINK_TARGET_SELF);
+        customSearchControl.setResultSetSize(google.search.Search.FILTERED_CSE_RESULTSET);
+        customSearchControl.setSearchCompleteCallback(null, function () {
+            $('input#search').val('@Request.QueryString["q"]').select();
+            $('a.gs-title').unwrap().wrap('<h3></h3>').each(function () {
+                var title = $(this).html().replace(/\|.*/g, '');
+                $(this).html(title);
+            });
+            $('b:contains("...")').contents().unwrap();
+        });
+
+        customSearchControl.draw('cse');
+        customSearchControl.execute('@Request.QueryString["q"]');
+    }, true);
+</script>

@@ -1,0 +1,108 @@
+﻿@model IList<SusuCMS.Menu>
+@{
+    ViewBag.Title = DisplayResource.Menus;
+    ViewBag.Subtitle = DisplayResource.Menus;
+}
+@helper GetSortButtons(SusuCMS.Menu menu)
+    {
+        if (!IsFirstItem(menu))
+        {
+    @Html.ActionLink(DisplayResource.Up, "MoveUp", "Menu", new { id = menu.Id, returnUrl = Request.RawUrl }, new { @class = "up" })
+        }
+
+        if (!IsLastItem(menu))
+        {
+    @Html.ActionLink(DisplayResource.Down, "MoveDown", "Menu", new { id = menu.Id, returnUrl = Request.RawUrl }, new { @class = "down" })
+        }
+}
+@functions{
+    bool IsFirstItem(SusuCMS.Menu menu)
+    {
+        var list = Model.Where(i => i.ParentId == menu.ParentId).ToList();
+        var helper = new SortHelper<SusuCMS.Menu>(list);
+
+        return helper.IsFirstItem(menu);
+    }
+
+    bool IsLastItem(SusuCMS.Menu menu)
+    {
+        var list = Model.Where(i => i.ParentId == menu.ParentId).ToList();
+        var helper = new SortHelper<SusuCMS.Menu>(list);
+
+        return helper.IsLastItem(menu);
+    }
+}
+<div class="toolbar clearfix">
+    @Html.LinkButton(DisplayResource.Create, Url.Action("Create", "Menu", new { returnUrl = Request.RawUrl }))
+</div>
+@using (Html.BeginForm("Delete", "Menu"))
+{
+    @Html.AntiForgeryToken()
+    <table class="data-table" id="tree-table">
+        <colgroup>
+            <col />
+            <col />
+            <col />
+            <col class="action" />
+            <col class="action" />
+            <col class="action" />
+        </colgroup>
+        <thead>
+            <tr>
+                <th>
+                    @DisplayResource.Name
+                </th>
+                <th>
+                    @DisplayResource.Url
+                </th>
+                <th>
+                    @DisplayResource.IsOnline
+                </th>
+                <th>
+                    @DisplayResource.Sort
+                </th>
+                <th>
+                    @DisplayResource.Edit
+                </th>
+                <th>
+                    @DisplayResource.Delete
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr id="node-@item.Id" @if (item.ParentId != null)
+                                       {<text>class="child-of-node-@item.ParentId"</text>}>
+                    <td>
+                        @item.Name
+                    </td>
+                    <td>
+                        @item.Url
+                    </td>
+                    <td>
+                        @Html.ActionLink(DisplayResource.IsOnline, "ToggleOnline", "Menu", new { id = item.Id, returnUrl = Request.RawUrl }, new { @class = item.IsOnline.ToString().ToLower() })
+                    </td>
+                    <td>
+                        @GetSortButtons(item)
+                    </td>
+                    <td>
+                        @Html.ActionLink(DisplayResource.Edit, "Edit", "Menu", new { id = item.Id }, new { @class = "edit" })
+                    </td>
+                    <td>
+                        @Html.DeleteButton("Id", (int)item.Id)
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+<script type="text/javascript" src="@Url.Content("~/Scripts/jqueryui")"></script>
+<script type="text/javascript" src="@Url.Content("~/Scripts/jquery.treeTable")"></script>
+<script type="text/javascript">
+    $(function () {
+        $("#tree-table").treeTable({
+            initialState: "expanded"
+        });
+    });
+</script>

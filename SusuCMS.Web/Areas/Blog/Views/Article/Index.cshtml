@@ -1,0 +1,66 @@
+﻿@model IQueryable<Article>
+@{
+    ViewBag.Title = SusuCMS.Blog.DisplayResource.Articles;
+    ViewBag.Subtitle = SusuCMS.Blog.DisplayResource.Articles;
+    var dataContext = BlogWorkContext.GetDataContext();
+    var categories = dataContext.Categories.WithSiteId(CurrentSite.Id).ToList();
+    var tags = dataContext.Tags.WithSiteId(CurrentSite.Id).ToList();
+}
+@functions{
+    string GetTags(IEnumerable<Tag> tags)
+    {
+        if (tags.Any())
+        {
+            var links = new List<string>();
+            foreach (var tag in tags)
+            {
+                links.Add(Html.ActionLink(tag.Name, "Index", "Article", new { TagId = tag.Id }, null).ToHtmlString());
+            }
+
+            return string.Join(", ", links);
+        }
+
+        return string.Empty;
+    }
+
+    string GetCategory(Category category)
+    {
+        if (category != null)
+        {
+            return Html.ActionLink(category.Name, "Index", "Article", new { CategoryId = category.Id }, null).ToHtmlString();
+        }
+
+        return string.Empty;
+    }
+}
+<div class="toolbar clearfix">
+    @Html.LinkButton(SusuCMS.DisplayResource.Create, Url.Action("Create", "Article", new { returnUrl = Request.RawUrl }))
+    <div class="right">
+        @using (Html.BeginForm("Search", "Article", FormMethod.Get))
+        {
+            @Html.TextBox("keywords", Request["keywords"], new { @class = "mini" })
+            <button type="submit" class="button blue">
+                <span>@SusuCMS.Blog.DisplayResource.Search</span></button>
+        }
+    </div>
+</div>
+@{
+    var grid = new WebGrid(Model, rowsPerPage: 15);
+    using (Html.BeginForm("Delete", "Article"))
+    {
+    @Html.ReturnUrl()
+    @Html.AntiForgeryToken()
+    @grid.GetHtml(
+                tableStyle: "data-table",
+                columns: grid.Columns(
+                    grid.Column("Title", SusuCMS.DisplayResource.Title),
+                    grid.Column(header: SusuCMS.Blog.DisplayResource.Category, format: (item) => Html.Raw(GetCategory(item.Category))),
+                    grid.Column(header: SusuCMS.Blog.DisplayResource.Tags, format: (item) => Html.Raw(GetTags(item.Tags))),
+                    grid.Column("CreationTime", SusuCMS.DisplayResource.CreationTime),
+                    grid.Column("IsOnline", SusuCMS.DisplayResource.IsOnline, format: (item) => Html.ActionLink(SusuCMS.DisplayResource.IsOnline, "ToggleOnline", "Article", new { id = item.Id, returnUrl = Request.RawUrl }, new { @class = item.IsOnline.ToString().ToLower() })),
+                    grid.Column(header: SusuCMS.DisplayResource.Edit, format: (item) => Html.ActionLink(SusuCMS.DisplayResource.Edit, "Edit", "Article", new { id = item.Id, returnUrl = Request.RawUrl }, new { @class = "edit" })),
+                    grid.Column(header: SusuCMS.DisplayResource.Delete, format: (item) => Html.DeleteButton("Id", (int)item.Id), style: "action")
+                )
+           )
+    }
+}

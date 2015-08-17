@@ -1,0 +1,19 @@
+﻿@inherits SusuCMS.Web.Front.WidgetPageBase
+
+@{
+    var tools = CurrentSite.Pages.FirstOrDefault(i => i.Name == "Online query");
+}
+<div class="query-list">
+    <h3>
+        @WidgetLabel("Online query")</h3>
+    @if (tools != null)
+    {
+        var pages = CurrentSite.Pages.Where(i => i.ParentId == tools.Id);
+        <ul>
+            @foreach (var page in pages)
+            {
+                <li><a href="@FrontUrl.GetClientUrl(page.Url)">@WidgetLabel(page.Name)</a></li>
+            }
+        </ul>
+    }
+</div>

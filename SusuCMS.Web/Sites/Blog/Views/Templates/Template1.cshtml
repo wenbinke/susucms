@@ -1,0 +1,19 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>@FrontHtml.HtmlTitle()</title>
+    @FrontHtml.HeadContent()
+</head>
+<body>
+    <div id="wrapper">
+        @FrontHtml.Shared("Header")
+        @FrontHtml.Shared("Navigation")
+        <div id="main" class="layout1">
+            <div id="content" class="zone">
+                @FrontHtml.Zone("content")
+            </div>
+        </div>
+        @FrontHtml.Shared("Footer")
+    </div>
+</body>
+</html>

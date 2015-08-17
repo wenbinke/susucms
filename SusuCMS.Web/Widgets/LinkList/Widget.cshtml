@@ -1,0 +1,21 @@
+﻿@inherits SusuCMS.Web.Front.WidgetPageBase
+@{
+    var links = CurrentWidget.GetData();
+}
+<div class="widget link-list">
+    <h2>
+        @WidgetLabel("Links")</h2>
+    @if (links != null)
+    {
+        <ul>
+            @foreach (var link in links)
+            {
+                <li><a href="@link.LinkUrl" @if (link.OpenInNewWindow)
+                                            { <text>target="_blank"</text>}>@link.LinkName
+                </a>
+                    <p>@link.LinkDesription</p>
+                </li>
+            }
+        </ul>
+    }
+</div>

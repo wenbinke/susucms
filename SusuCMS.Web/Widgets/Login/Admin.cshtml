@@ -1,0 +1,20 @@
+﻿@inherits SusuCMS.Web.Admin.WidgetAdminPageBase
+<tr>
+    <th>
+        @Html.Label("Content", Localize("Content"))
+    </th>
+    <td>
+        @TelerikHelper.Editor("Content", i => { i.HtmlAttributes(new { style = "height:420px" }); })
+        <script type="text/javascript">
+            function getData() {
+                return { Content: $('#Content').data('tEditor').value() };
+            }
+
+            function setData(data) {
+                if (data != null) {
+                    $('#Content').data('tEditor').value(data.Content);
+                }
+            }
+        </script>
+    </td>
+</tr>

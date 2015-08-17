@@ -1,0 +1,55 @@
+﻿@inherits SusuCMS.Web.Front.WidgetPageBase
+
+@using System.Security.Cryptography
+@using System.Text
+@functions{    
+    string CreateKey(int len)
+    {
+        var buffer = new byte[len];
+        new RNGCryptoServiceProvider().GetBytes(buffer);
+        var sb = new StringBuilder(len);
+        for (var i = 0; i < buffer.Length; i++)
+        {
+            sb.Append(string.Format("{0:X2}", buffer[i]));
+        }
+
+        return sb.ToString();
+    }
+}
+<h2>
+    @WidgetLabel("ASP.NET MachineKey")</h2>
+<div class="description">
+    @WidgetLabel("Asp.Net many encryption, which are dependent on the value of MachineKey, such as Forms Authentication Cookie, ViewState encryption. This page will randomly generate MachineKey, each time you refresh the page generated MachineKey not the same, safe to use.")
+</div>
+<h3>
+    @WidgetLabel("The recommended key lengths are as follows")
+</h3>
+<ul>
+    <li>@WidgetLabel("For SHA1, set the validationKey to 64 bytes (128 hexadecimal characters).")</li>
+    <li>@WidgetLabel("For AES, set the decryptionKey to 32 bytes (64 hexadecimal characters).")</li>
+    <li>@WidgetLabel("For 3DES, set the decryptionKey to 24 bytes (48 hexadecimal characters).")</li>
+</ul>
+<h3>
+    Keys</h3>
+<ul>
+    <li><strong>64 bytes:</strong>
+        <br />@CreateKey(64)</li>
+    <li><strong>32 bytes:</strong>
+        <br />@CreateKey(32)</li>
+    <li><strong>24 bytes:</strong>
+        <br />@CreateKey(24)</li>
+</ul>
+<h3>
+    Web.config</h3>
+<p>
+    <pre>
+    &lt;?xml version="1.0" ?&gt;
+        &lt;configuration&gt;
+        &lt;system.web&gt;
+            &lt;machineKey validationKey="@CreateKey(64)" 
+            decryptionKey="@CreateKey(24)" 
+            decryption="3DES" validation="SHA1"/&gt;
+            &lt;/system.web&gt;
+    &lt;/configuration&gt;
+</pre>
+</p>

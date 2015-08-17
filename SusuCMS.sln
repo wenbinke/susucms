@@ -1,0 +1,96 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.23107.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SusuCMS.Web", "SusuCMS.Web\SusuCMS.Web.csproj", "{B9B0607C-D1EA-4AB9-88E0-98CED5F7D7B0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SusuCMS", "SusuCMS\SusuCMS.csproj", "{8882A7FF-25E4-4831-AD35-ABD2F8F649A4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SusuCMS.Blog", "SusuCMS.Blog\SusuCMS.Blog.csproj", "{ACC5F826-7EB9-42F6-8802-56701F01D591}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SusuCMS.Shop", "SusuCMS.Shop\SusuCMS.Shop.csproj", "{9A9663D2-443E-4FF3-92CB-F49936492DF8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SusuCMS.Tools", "SusuCMS.Tools\SusuCMS.Tools.csproj", "{C55C283C-889A-4503-B0B4-9D02D659ADDE}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "1. Core", "1. Core", "{A2551D1A-4C11-427A-8BCB-CDBD087F2829}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "2. Modules", "2. Modules", "{486C605C-190B-4FA5-8A66-17C02944BADD}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "3. Sites", "3. Sites", "{6E3F9FF6-FB8D-4503-B0EF-133717229DAB}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Debug|Mixed Platforms = Debug|Mixed Platforms
+		Debug|x86 = Debug|x86
+		Release|Any CPU = Release|Any CPU
+		Release|Mixed Platforms = Release|Mixed Platforms
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{B9B0607C-D1EA-4AB9-88E0-98CED5F7D7B0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B9B0607C-D1EA-4AB9-88E0-98CED5F7D7B0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B9B0607C-D1EA-4AB9-88E0-98CED5F7D7B0}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{B9B0607C-D1EA-4AB9-88E0-98CED5F7D7B0}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{B9B0607C-D1EA-4AB9-88E0-98CED5F7D7B0}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{B9B0607C-D1EA-4AB9-88E0-98CED5F7D7B0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B9B0607C-D1EA-4AB9-88E0-98CED5F7D7B0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B9B0607C-D1EA-4AB9-88E0-98CED5F7D7B0}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{B9B0607C-D1EA-4AB9-88E0-98CED5F7D7B0}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{B9B0607C-D1EA-4AB9-88E0-98CED5F7D7B0}.Release|x86.ActiveCfg = Release|Any CPU
+		{8882A7FF-25E4-4831-AD35-ABD2F8F649A4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8882A7FF-25E4-4831-AD35-ABD2F8F649A4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8882A7FF-25E4-4831-AD35-ABD2F8F649A4}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{8882A7FF-25E4-4831-AD35-ABD2F8F649A4}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{8882A7FF-25E4-4831-AD35-ABD2F8F649A4}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{8882A7FF-25E4-4831-AD35-ABD2F8F649A4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8882A7FF-25E4-4831-AD35-ABD2F8F649A4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8882A7FF-25E4-4831-AD35-ABD2F8F649A4}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{8882A7FF-25E4-4831-AD35-ABD2F8F649A4}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{8882A7FF-25E4-4831-AD35-ABD2F8F649A4}.Release|x86.ActiveCfg = Release|Any CPU
+		{ACC5F826-7EB9-42F6-8802-56701F01D591}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ACC5F826-7EB9-42F6-8802-56701F01D591}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ACC5F826-7EB9-42F6-8802-56701F01D591}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{ACC5F826-7EB9-42F6-8802-56701F01D591}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{ACC5F826-7EB9-42F6-8802-56701F01D591}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{ACC5F826-7EB9-42F6-8802-56701F01D591}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ACC5F826-7EB9-42F6-8802-56701F01D591}.Release|Any CPU.Build.0 = Release|Any CPU
+		{ACC5F826-7EB9-42F6-8802-56701F01D591}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{ACC5F826-7EB9-42F6-8802-56701F01D591}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{ACC5F826-7EB9-42F6-8802-56701F01D591}.Release|x86.ActiveCfg = Release|Any CPU
+		{9A9663D2-443E-4FF3-92CB-F49936492DF8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9A9663D2-443E-4FF3-92CB-F49936492DF8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9A9663D2-443E-4FF3-92CB-F49936492DF8}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{9A9663D2-443E-4FF3-92CB-F49936492DF8}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{9A9663D2-443E-4FF3-92CB-F49936492DF8}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{9A9663D2-443E-4FF3-92CB-F49936492DF8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9A9663D2-443E-4FF3-92CB-F49936492DF8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9A9663D2-443E-4FF3-92CB-F49936492DF8}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{9A9663D2-443E-4FF3-92CB-F49936492DF8}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{9A9663D2-443E-4FF3-92CB-F49936492DF8}.Release|x86.ActiveCfg = Release|Any CPU
+		{C55C283C-889A-4503-B0B4-9D02D659ADDE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C55C283C-889A-4503-B0B4-9D02D659ADDE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C55C283C-889A-4503-B0B4-9D02D659ADDE}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{C55C283C-889A-4503-B0B4-9D02D659ADDE}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{C55C283C-889A-4503-B0B4-9D02D659ADDE}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{C55C283C-889A-4503-B0B4-9D02D659ADDE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C55C283C-889A-4503-B0B4-9D02D659ADDE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C55C283C-889A-4503-B0B4-9D02D659ADDE}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{C55C283C-889A-4503-B0B4-9D02D659ADDE}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{C55C283C-889A-4503-B0B4-9D02D659ADDE}.Release|x86.ActiveCfg = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{B9B0607C-D1EA-4AB9-88E0-98CED5F7D7B0} = {6E3F9FF6-FB8D-4503-B0EF-133717229DAB}
+		{8882A7FF-25E4-4831-AD35-ABD2F8F649A4} = {A2551D1A-4C11-427A-8BCB-CDBD087F2829}
+		{ACC5F826-7EB9-42F6-8802-56701F01D591} = {486C605C-190B-4FA5-8A66-17C02944BADD}
+		{9A9663D2-443E-4FF3-92CB-F49936492DF8} = {486C605C-190B-4FA5-8A66-17C02944BADD}
+		{C55C283C-889A-4503-B0B4-9D02D659ADDE} = {486C605C-190B-4FA5-8A66-17C02944BADD}
+	EndGlobalSection
+	GlobalSection(TestCaseManagementSettings) = postSolution
+		CategoryFile = SusuCMS.vsmdi
+	EndGlobalSection
+EndGlobal

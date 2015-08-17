@@ -1,0 +1,34 @@
+﻿@helper BuildItems(Menu menu, IEnumerable<Menu> list)
+    {
+        var children = list.Where(i => i.ParentId == menu.Id).OrderBy(i => i.DisplayOrder);
+        if (children.Count() > 0)
+        {
+    <ul>
+        @foreach (var item in children)
+        {
+            <li><a href="@FrontUrl.GetClientUrl(item.Url)"  
+            @if (item.OpenInNewWindow)
+            {<text>target="_blank"</text>}>@item.Name</a>
+                @BuildItems(item, list)</li>
+        }
+    </ul>
+        }
+}
+@{   
+    var menus = CurrentSite.Menus.Where(i => i.IsOnline).ToList();
+}
+<div id="nav">
+    @if (menus.Any())
+    {
+        var parents = menus.Where(i => i.ParentId == null).OrderBy(i => i.DisplayOrder);
+        <ul>
+            @foreach (var item in parents)
+            {
+                <li><a href="@FrontUrl.GetClientUrl(item.Url)" 
+                 @if (item.OpenInNewWindow)
+                 {<text>target="_blank"</text>}>@item.Name</a>
+                    @BuildItems(item, menus)</li>
+            }
+        </ul>
+    }
+</div>

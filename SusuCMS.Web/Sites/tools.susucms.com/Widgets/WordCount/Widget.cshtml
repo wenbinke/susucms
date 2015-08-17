@@ -1,0 +1,68 @@
+﻿@inherits SusuCMS.Web.Front.WidgetPageBase
+@{
+    FrontHtml.ClientScript.jQuery(true);
+}
+<h2>
+    @WidgetLabel("Word count")</h2>
+<div class="word-count">
+    <div class="description">
+        @WidgetLabel("This tool can be easily statistics the number of characters. And that the statistics were Chinese characters, English characters, the number of punctuation.")
+    </div>
+    <p>
+        @WidgetLabel("Enter the words you want the contents of statistics:")
+    </p>
+    <textarea id="text"></textarea>
+    <p>
+        @WidgetLabel("Chinese Characters"):<span id="hanzi">0</span> @WidgetLabel("Punctuation"):<span
+            id="biaodian">0</span>
+        @WidgetLabel("Letter"):<span id="zimu">0</span> @WidgetLabel("Number"):<span id="shuzi">0</span>
+    </p>
+    <p>
+        @WidgetLabel("Total"):<span id="zishu">0</span> @WidgetLabel("Words"), <span id="zifu">
+            0</span> @WidgetLabel("Characters")
+        <p>
+            @WidgetLabel("Note: numbers, spaces and punctuation marks as a character! Chinese characters for the two characters!")</p>
+    </p>
+</div>
+<script type="text/javascript">
+    $(function () {
+        function wordCount() {
+            var words = $('#text').val();
+            var biaodian = 0;
+            var hanzi = 0;
+            var zimu = 0;
+            var shuzi = 0;
+            var zifu = 0;
+
+            for (i = 0; i < words.length; i++) {
+                var c = words.charAt(i);
+                if (c.match(/[\u4e00-\u9fa5]/)) {
+                    hanzi++;
+                    zifu += 2;
+                } else if (c.match(/[a-zA-Z]/)) {
+                    zimu++;
+                    zifu++;
+                } else if (c.match(/[0-9]/)) {
+                    shuzi++;
+                    zifu++;
+                } else {
+                    if (c.match(/[^\x00-\xff]/)) {
+                        zifu += 2;
+                    } else {
+                        zifu++;
+                    }
+                    biaodian++;
+                }
+            }
+
+            $('#hanzi').text(hanzi);
+            $('#zishu').text(shuzi + hanzi + zimu);
+            $('#biaodian').text(biaodian);
+            $('#zimu').text(zimu);
+            $('#shuzi').text(shuzi);
+            $("#zifu").text(zifu);
+        }
+
+        $('#text').change(wordCount).keyup(wordCount).keydown(wordCount);
+    });
+</script>

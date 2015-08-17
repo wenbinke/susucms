@@ -1,0 +1,114 @@
+﻿body
+{
+    font-size: 12px;
+    line-height: 1.5em;
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: #ecf3f9;
+}
+a
+{
+    color: #3F4DBF;
+}
+#header
+{
+    width:800px;
+    margin: 0 auto;
+    padding-top: 25px;
+    padding-bottom: 15px;
+}
+#header h1 a
+{
+    font-size: 36px;
+    color: #4073b2;
+}
+#main
+{
+    background-color: #4A74B5;
+}
+.login-wrapper
+{
+    margin: 0 auto;
+    width:800px;
+    background: url(images/login-bg.jpg) no-repeat;
+    padding-top: 40px;
+    padding: 40px 0 30px 0;
+}
+.login-panel
+{
+    margin: 0 20px 0 400px;
+    background: url(images/login-panel-bg.gif) repeat-y;
+}
+.login-panel-top
+{
+    height: 30px;
+    background: url(images/login-panel-top.gif) no-repeat;
+}
+.login-panel-bottom
+{
+    height: 35px;
+    background: url(images/login-panel-bottom.gif) no-repeat left bottom;
+}
+.login-panel-content
+{
+    margin: 0 28px;
+}
+.login-panel h2
+{
+    padding: 0 30px 4px 5px;
+    font-size: 14px;
+}
+.login-panel .separate
+{
+    border-bottom:1px solid #e6eaf5;
+    border-top:1px solid #7390bf;
+}
+.login-panel ul
+{
+    list-style:disc;
+    margin-left:20px;
+}
+.login-panel p
+{
+    text-align:right;
+    padding-right: 26px;
+}
+form
+{
+    padding-left: 5px;
+    padding-top: 10px;
+}
+.form th
+{
+    font-weight:normal;
+    font-size: 14px;
+    padding: 0 0 0 2px;
+    line-height: 24px;
+    text-align: left;
+    width: 95px;
+}
+.form .required
+{
+    display:none;
+}
+.form th, .form td
+{
+    padding: 3px 0;
+}
+.form input[type="text"], .form input[type="password"]
+{
+    border: 1px solid #C3C3C3;
+    border-top: 1px solid #7C7C7C;
+    border-left: 1px solid #9A9A9A;
+    margin-bottom: 10px;
+    padding: 5px 3px;
+    width: 210px;
+}
+
+.field-validation-error, .validation-summary-errors
+{
+    color: #ff0000;
+}
+.field-validation-valid, .validation-summary-valid
+{
+    display: none;
+}

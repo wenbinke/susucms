@@ -1,0 +1,30 @@
+﻿@{
+    Layout = "~/Areas/Admin/Views/Shared/_Dialog.cshtml";
+    
+    ViewBag.Title = DisplayResource.ChangeLanguage;
+    ViewBag.Subtitle = DisplayResource.ChangeLanguage;
+    var language = new Dictionary<string, string> { { "en-US", "English" }, { "zh-CN", "中文简体" } };
+}
+@using (Ajax.BeginForm(new AjaxOptions { OnSuccess = "OnChangeLanguageSuccess" }))
+{
+    <table class="form-table">
+        <tbody>
+            <tr>
+                <th>@Html.Label("Language", DisplayResource.Language)</th>
+                <td>@Html.DropDownList("Language", new SelectList(language, "key", "value"), new { @class="small" })</td>
+            </tr>
+            <tr>
+                <th></th>
+                <td>
+                    @Html.AntiForgeryToken()
+                    @Html.SaveButton()
+                </td>
+            </tr>
+        </tbody>
+    </table>
+}
+<script type="text/javascript">
+    function OnChangeLanguageSuccess(){
+        parent.window.location.href = parent.window.location.href;
+    }
+</script>

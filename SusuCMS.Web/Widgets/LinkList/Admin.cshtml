@@ -1,0 +1,233 @@
+﻿@inherits SusuCMS.Web.Admin.WidgetAdminPageBase
+@using Telerik.Web.Mvc.UI
+@{
+    var links = Model.GetData();
+}
+<tr>
+    <th>
+        @Localize("Links")
+    </th>
+    <td>
+        @(Html.Telerik().Window()
+        .Name("AddLinkWindow")
+        .Content(@<text>
+        <table class="form-table" id="link-form">
+            <tbody>
+                <tr>
+                    <th>
+                        <label for="LinkName">@Localize("Link name")</label><span class="required">*</span>
+                    </th>
+                    <td>
+                        <input type="text" name="LinkName" id="LinkName" @Validation.For("LinkName") class="small" maxlength="250" />
+                        @Html.ValidationMessage("LinkName")
+                    </td>
+                </tr>
+                <tr>
+                    <th>
+                        <label for="LinkUrl">@Localize("Link url")</label><span class="required">*</span>
+                    </th>
+                    <td>
+                        <input type="text" name="LinkUrl" id="LinkUrl"  @Validation.For("LinkUrl") class="small" maxlength="250" />
+                        @Html.ValidationMessage("LinkUrl")
+                    </td>
+                </tr>
+                <tr>
+                    <th>
+                        <label for="LinkDescription">@Localize("Description")</label>
+                    </th>
+                    <td>
+                        <input type="text" name="LinkDescription" id="LinkDescription" class="small" maxlength="250" />
+                    </td>
+                </tr>
+                <tr>
+                    <th>
+                        <label for="OpenInNewWindow">@Localize("Open in new window")</label>
+                    </th>
+                    <td>
+                        <input type="checkbox" name="OpenInNewWindow" id="OpenInNewWindow" />
+                    </td>
+                </tr>
+                <tr>
+                    <th>
+                    </th>
+                    <td>
+                        @Html.Hidden("LinkIndex")
+                        <a href="javascript://" class="button blue" id="add-link"><span>@Localize("Add link")</span></a>
+                        <a href="javascript://" class="button blue" id="edit-link"><span>@Localize("Edit link")</span></a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        </text>)
+        .Title(Localize("Add link"))
+        .Buttons(buttons => buttons.Refresh().Maximize().Close())
+        .Modal(true).Width(490).Draggable(true).Visible(false).Resizable())
+        <div class="toolbar clearfix">
+            <a href="javascript://" class="button blue" id="open-link-form"><span>@Localize("Add link")</span></a>
+        </div>
+        <div class="data-table-wrapper">
+            <table class="data-table" id="links-table">
+                <thead>
+                    <tr>
+                        <th>
+                            @Localize("Link name")
+                        </th>
+                        <th>
+                            @Localize("Link url")
+                        </th>
+                        <th>
+                            @Localize("Description")
+                        </th>
+                        <th>
+                            @Localize("Open in new window")
+                        </th>
+                        <th class="action">
+                            @SusuCMS.DisplayResource.Edit
+                        </th>
+                        <th class="action">
+                            @SusuCMS.DisplayResource.Delete
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @if (links != null)
+                    {
+                        foreach (var item in links)
+                        {
+                        <tr>
+                            <td>
+                                @item.LinkName
+                            </td>
+                            <td>
+                                @item.LinkUrl
+                            </td>
+                            <td>
+                                @item.LinkDescription
+                            </td>
+                            <td>
+                                <span class="@item.OpenInNewWindow.ToString().ToLower()"></span>
+                            </td>
+                            <td>
+                                <a href="javascript://" class="edit"></a>
+                            </td>
+                            <td>
+                                <a href="javascript://" class="delete"></a>
+                            </td>
+                        </tr> 
+                        }
+                    }
+                </tbody>
+            </table>
+        </div>
+        <script id="links-template" type="text/x-jquery-tmpl"> 
+            <tr>
+                <td>
+                    ${LinkName}
+                </td>
+                <td>
+                    ${LinkUrl}
+                </td>
+                <td>
+                    ${LinkDescription}
+                </td>
+                <td>
+                    <span class="${OpenInNewWindow}"></span>
+                </td>
+                <td>
+                    <a href="javascript://" class="edit"></a>
+                </td>
+                <td>
+                    <a href="javascript://" class="delete"></a>
+                </td>
+            </tr> 
+        </script>
+        <script type="text/javascript">
+            function getLinkFromTr($tr) {
+                var td = $tr.find('td');
+                return {
+                    LinkIndex: $tr.index(),
+                    LinkName: $.trim(td.eq(0).text()),
+                    LinkUrl: $.trim(td.eq(1).text()),
+                    LinkDescription: $.trim(td.eq(2).text()),
+                    OpenInNewWindow: td.eq(3).find('span').attr('class') == 'true' ? true : false
+                };
+            }
+
+            function getData() {
+                var links = new Array();
+                $('#links-table tbody tr').each(function () {
+                    links.push(getLinkFromTr($(this)));
+                });
+
+                return links;
+            }
+
+            $(function () {
+                function clearLinkForm() {
+                    $('#LinkIndex').val('');
+                    $('#LinkName').val('');
+                    $('#LinkUrl').val('');
+                    $('#LinkDescription').val('');
+                    $('#OpenInNewWindow').data('sCheckBox').val(false);
+                }
+
+                function getLinkFromForm() {
+                    return {
+                        LinkIndex: $('#LinkIndex').val(),
+                        LinkName: $('#LinkName').val(),
+                        LinkUrl: $('#LinkUrl').val(),
+                        LinkDescription: $('#LinkDescription').val(),
+                        OpenInNewWindow: $('#OpenInNewWindow').is(':checked')
+                    };
+                }
+
+                function getLinkHtml(link) {
+                    return $("#links-template").tmpl(link);
+                }
+
+                $('#links-table .delete').live('click', function () {
+                    $(this).closest('tr').remove();
+                });
+
+                $('#links-table .edit').live('click', function () {
+                    var link = getLinkFromTr($(this).closest('tr'));
+                    $('#LinkIndex').val(link.LinkIndex);
+                    $('#LinkName').val(link.LinkName);
+                    $('#LinkUrl').val(link.LinkUrl);
+                    $('#LinkDescription').val(link.LinkDescription);
+
+                    $('#OpenInNewWindow').data('sCheckBox').val(link.OpenInNewWindow);
+
+                    $('#add-link').hide();
+                    $('#edit-link').show();
+                    $('#AddLinkWindow').data('tWindow').center().open();
+                });
+
+                $('#add-link').click(function () {
+                    var link = getLinkFromForm();
+                    $('#links-table tbody').append(getLinkHtml(link));
+
+                    clearLinkForm();
+
+                    $('#AddLinkWindow').data('tWindow').close();
+                });
+
+                $('#edit-link').click(function () {
+                    var link = getLinkFromForm();
+                    $('#links-table tbody tr').eq(link.LinkIndex).replaceWith(getLinkHtml(link));
+
+                    clearLinkForm();
+
+                    $('#AddLinkWindow').data('tWindow').close();
+                });
+
+                $('#open-link-form').click(function () {
+                    $('#add-link').show();
+                    $('#edit-link').hide();
+                    $('#LinkIndex').val('');
+                    $('#AddLinkWindow').data('tWindow').center().open();
+                });
+            });
+        </script>
+    </td>
+</tr>

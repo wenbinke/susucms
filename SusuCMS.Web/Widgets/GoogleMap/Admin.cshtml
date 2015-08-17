@@ -1,0 +1,33 @@
+﻿@inherits SusuCMS.Web.Admin.WidgetAdminPageBase
+@{ 
+    var data = Model.GetData();
+    if (data != null)
+    {
+        ViewBag.ShowStreetView = data.ShowStreetView;
+        ViewBag.Address = data.Address;
+    }
+}
+<tr>
+    <th>
+        @Html.Label("Address", Localize("Address"))
+    </th>
+    <td>
+        @Html.TextBox("Address", null, new { @class = "small" })
+    </td>
+</tr>
+<tr>
+    <th>
+        @Html.Label("ShowStreetView", Localize("Show stree view"))
+    </th>
+    <td>
+        @Html.CheckBox("ShowStreetView")
+        <script type="text/javascript">
+            function getData() {
+                return {
+                    Address: $('#Address').val(),
+                    ShowStreetView: $('#ShowStreetView').is(':checked')
+                };
+            }
+        </script>
+    </td>
+</tr>

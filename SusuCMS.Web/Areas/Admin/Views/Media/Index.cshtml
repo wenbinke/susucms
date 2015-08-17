@@ -1,0 +1,49 @@
+﻿@model IEnumerable<Media>
+@{
+    ViewBag.Title = DisplayResource.Media;
+    ViewBag.Subtitle = DisplayResource.Media;
+    var path = Request.QueryString["path"];
+}
+@helper GetLink(string name, string path, bool isFolder)
+    {
+        if (isFolder)
+        {
+    @Html.ActionLink(name, "Index", new { name = name, path = path }, new { @class = "folder" })
+        }
+        else
+        {
+    <span class="file">@name</span>
+        }
+}
+@helper GetEditLink(string name, string path, bool isFolder)
+    {
+        var action = "EditFile";
+        if (isFolder)
+        {
+            action = "EditFolder";
+        }
+    @Html.ActionLink(DisplayResource.Edit, action, "Media", new { name = name, path = path, returnUrl = Request.RawUrl }, new { @class = "edit" })
+}
+@Html.Partial("BreadCrumbs")
+<div class="toolbar clearfix">
+    @Html.LinkButton(DisplayResource.CreateFolder, Url.Action("CreateFolder", "Media", new { returnUrl = Request.RawUrl, path = path }))
+    @Html.LinkButton(DisplayResource.UploadFile, Url.Action("Upload", "Media", new { returnUrl = Request.RawUrl, path = path }))
+</div>
+@using (Html.BeginForm("Delete", "Media"))
+{
+    var grid = new WebGrid(Model, rowsPerPage: 15);
+    @Html.ReturnUrl()
+    @Html.AntiForgeryToken()
+    @grid.GetHtml(
+            tableStyle: "data-table",
+            columns: grid.Columns(
+                grid.Column("Name", DisplayResource.Name, format: (item) => GetLink(item.Name, item.Path, item.IsFolder)),
+                grid.Column("CreationTime", DisplayResource.CreationTime),
+                grid.Column("LastWriteTime", DisplayResource.LastWriteTime),
+                grid.Column("Path", DisplayResource.Path, format: (item) => string.Format("/Cms_Data/{0}/Media/{1}", CurrentSiteId, item.Path)),
+                grid.Column("Size", DisplayResource.Size, format: (item) => ((long)item.Size).ToFriendlySizeString()),
+                grid.Column(header: DisplayResource.Edit, format: (item) => GetEditLink(item.Name, item.Path, item.IsFolder), style: "action"),
+                grid.Column(header: DisplayResource.Delete, format: (item) => Html.DeleteButton("path", (string)item.Path), style: "action")
+            )
+       )
+}

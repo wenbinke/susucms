@@ -1,0 +1,57 @@
+﻿body
+{
+    font-family: Arial, Helvetica, sans-serif;
+}
+a
+{
+    color: #465E92;
+    text-decoration: none;
+}
+.hide
+{
+    display: none;
+}
+.clear
+{
+    clear: both;
+}
+.clearfix
+{
+    display: block;
+}
+.clearfix:after
+{
+    content: ".";
+    display: block;
+    clear: both;
+    visibility: hidden;
+    height: 0;
+}
+/* For Safari */
+html[xmlns] .clearfix
+{
+    display: block;
+}
+/* For IE6 */
+*html .clearfix
+{
+    height: 1%;
+}
+/* For IE7 */
+* + html .clearfix
+{
+    height: 1%;
+}
+h2, h3, h4, h5, h6
+{
+    font-family: Georgia,Times,serif;
+    font-weight: 100;
+}
+.left
+{
+    float:left;
+}
+.right
+{
+    float: right;
+}

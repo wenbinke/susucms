@@ -1,0 +1,76 @@
+﻿@inherits SusuCMS.Web.Front.WidgetPageBase
+
+@{
+    WebHeaderCollection headers = null;
+    var url = Request.QueryString["url"];
+    if (!String.IsNullOrWhiteSpace(url))
+    {
+        try
+        {
+            if (!url.StartsWith("http://") && !url.StartsWith("https://"))
+            {
+                url = "http://" + url;
+            }
+
+            using (var client = new WebClient())
+            {
+                client.Headers["Accept-Encoding"] = "gzip";
+                client.OpenRead(new Uri(url));
+                headers = client.ResponseHeaders;
+            }
+        }
+        catch
+        {
+
+        }
+    }
+}
+<h2>
+    @WidgetLabel("Page response header analysis")
+</h2>
+<div class="description">
+    @WidgetLabel(" This tool will request the page which you entered, and return the page header information.")
+</div>
+<p>
+    @WidgetLabel("Enter page URL address,for example: http://tools.susucms.com/Tools/ResponseHeaderAnalysis")
+</p>
+<form action="@Request.Url.AbsolutePath" method="get">
+@Html.TextBox("url", url)
+<p class="buttons">
+    <button type="submit">
+        @WidgetLabel("Analysis")
+    </button>
+</p>
+</form>
+@if (headers != null)
+{
+    <table class="data-table">
+        <colgroup>
+            <col width="25%" />
+            <col />
+        </colgroup>
+        <thead>
+            <tr>
+                <th>
+                    @WidgetLabel("Property")
+                </th>
+                <th>
+                    @WidgetLabel("Value")
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (string key in headers.Keys)
+            {
+                <tr>
+                    <td>
+                        @key
+                    </td>
+                    <td>
+                        @headers[key]
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}

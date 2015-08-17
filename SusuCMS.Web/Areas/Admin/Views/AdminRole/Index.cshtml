@@ -1,0 +1,31 @@
+﻿@{
+    ViewBag.Title = DisplayResource.Roles;
+    ViewBag.Subtitle = DisplayResource.Roles;
+}
+@helper GetDelteButton(bool isRoot, int id)
+    {
+        if (!isRoot)
+        { 
+    @Html.DeleteButton("Id", (int)id)
+        }
+}
+@Html.Partial("UserRoleTabs")
+<div class="toolbar clearfix">
+    @Html.LinkButton(DisplayResource.Create, Url.Action("Create", "AdminRole", new { returnUrl = Request.RawUrl }))
+</div>
+@using (Html.BeginForm("Delete", "AdminRole"))
+{
+    var grid = new WebGrid(Model);
+    @Html.ReturnUrl()
+    @Html.AntiForgeryToken()
+    @grid.GetHtml(
+        tableStyle: "data-table",
+        columns: grid.Columns(
+            grid.Column("Name", DisplayResource.Name),
+            grid.Column(header: DisplayResource.Edit, format: (item) =>
+                Html.ActionLink(DisplayResource.Edit, "Edit", "AdminRole",
+            new { id = item.Id, returnUrl = Request.RawUrl }, new { @class = "edit" }), style: "action"),
+            grid.Column(header: DisplayResource.Delete, format: (item) => GetDelteButton((bool)item.IsRoot, (int)item.Id), style: "action")
+        )
+    )
+}

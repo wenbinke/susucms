@@ -1,0 +1,42 @@
+﻿@inherits SusuCMS.Web.Front.WidgetPageBase
+@using SusuCMS.Blog;
+@{
+    var permalinkSetting = CurrentSite.GetPermalinkSetting();
+    var articleUrl = permalinkSetting.ArticleUrl;
+
+    var dataContext = BlogWorkContext.GetDataContext();
+
+    var list = dataContext.Articles.WithSiteId(CurrentSite.Id).AsQueryable();
+    var displayNumber = 5;
+    
+    var data = CurrentWidget.GetData();
+    if (data != null)
+    {
+        displayNumber = Convert.ToInt32(data.DisplayNumber);
+        string orderBy = data.OrderBy;
+        switch (orderBy)
+        {
+            case "CreateTimeDesc":
+                list = list.OrderByDescending(i => i.CreationTime);
+                break;
+            default:
+                list = list.OrderBy(i => i.CreationTime);
+                break;
+        }
+    }
+
+    list = list.Take(displayNumber);
+}
+<div class="widget article-links">
+    <h2>
+        @WidgetLabel("Article links")</h2>
+    @if (list.Any())
+    {
+        <ul>
+            @foreach (var item in list)
+            {
+                <li><a href="@FrontUrl.GetClientUrl(articleUrl, new { ArticleId = item.Id, Slug = item.Slug })">@item.Title</a></li>
+            }
+        </ul>
+    }
+</div>

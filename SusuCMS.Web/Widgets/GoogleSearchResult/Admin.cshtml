@@ -1,0 +1,23 @@
+﻿@inherits SusuCMS.Web.Admin.WidgetAdminPageBase
+<tr>
+    <th>
+        @Localize("Search engine unique ID")
+    </th>
+    <td>
+        @Html.TextBox("SearchEngineUniqueId", null, new { @class = "small" })
+        <a href="http://www.google.com/cse/" target="_blank" class="form-text">@Localize("Help")</a>
+        <script type="text/javascript">
+            function getData() {
+                return {
+                    Key: $('#SearchEngineUniqueId').val()
+                };
+            }
+
+            function setData(data) {
+                if (data != null) {
+                    $('#SearchEngineUniqueId').val(data.Key);
+                }
+            }
+        </script>
+    </td>
+</tr>

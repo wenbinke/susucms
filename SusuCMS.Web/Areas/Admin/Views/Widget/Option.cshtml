@@ -1,0 +1,31 @@
+﻿@model Widget
+@{
+    IList<PageWidget> pageWidgets;
+    if (ViewBag.PageWidgets != null)
+    {
+        pageWidgets = ViewBag.PageWidgets as IList<PageWidget>;
+    }
+    else
+    {
+        pageWidgets = new List<PageWidget>();
+    }
+
+    var widgetId = "widget-" + Model.Id;
+    var widgetInfo = Model.GetWidgetInfo();
+}
+<li>
+    <label for="@widgetId">
+        <span>@Model.DisplayName</span>
+        @Html.CheckBox(widgetId, pageWidgets.Any(i => i.WidgetId == Model.Id),
+        new
+        {
+            data_widget_id = Model.Id,
+            data_window_width = widgetInfo.AdminWindowWidth,
+            data_window_height = widgetInfo.AdminWindowHeight
+        })
+    </label>
+    <p class="buttons">
+        <a href="javascript://" class="edit"></a><a href="javascript://" class="delete">
+        </a>
+    </p>
+</li>

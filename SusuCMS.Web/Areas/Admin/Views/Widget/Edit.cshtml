@@ -1,0 +1,73 @@
+﻿@model Widget
+@{
+    Layout = "~/Areas/Admin/Views/Shared/_Dialog.cshtml";
+    var adminPath = Model.GetAdminPath();
+}
+@using (Ajax.BeginForm("Edit", "Widget", new { area = "Admin" }, new AjaxOptions { OnSuccess = "editWidgetSuccess" }, new { id = "edit-widget-form" }))
+{
+    <table class="form-table">
+        <tbody>
+            <tr>
+                <th>@Html.LabelFor(m => m.DisplayName)
+                </th>
+                <td>
+                    @Html.TextBoxFor(m => m.DisplayName, new { @class = "small" })
+                    @Html.ValidationMessageFor(m => m.DisplayName)
+                </td>
+            </tr>
+            @if (System.IO.File.Exists(Server.MapPath(adminPath)))
+            {
+                @Html.Partial(adminPath, Model)
+            }
+            <tr>
+                <th>
+                </th>
+                <td>
+                    @Html.SaveButton()
+                    <a class="button close-window" href="javascript://"><span>@DisplayResource.Cancel</span></a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    @Html.HiddenFor(m => m.Id)
+    @Html.HiddenFor(m => m.DataJson)
+    @Html.AntiForgeryToken()
+}
+@Html.Telerik().ScriptRegistrar().OutputScriptFiles(false)
+<script type="text/javascript">
+
+    function closeEditWidgetWindow() {
+        parent.$("#EditWidgetWindow").data("tWindow").close();
+    }
+
+    function editWidgetSuccess(result) {
+
+        if (result.IsSuccess) {
+            parent.showSuccess(result.Message);
+
+            var widgetId = $('#Id').val();
+            parent.changeWidgetName(widgetId, $('#DisplayName').val());
+            parent.refreshWidgetInPage(widgetId);
+        } else {
+            parent.showError(result.Message);
+        }
+
+        closeEditWidgetWindow();
+    }
+
+    $(function () {
+        $.validator.unobtrusive.parse('#edit-widget-form');
+
+        if (typeof (setData) == 'function') {
+            setData($.parseJSON($('#DataJson').val()));
+        }
+
+        $('#edit-widget-form').submit(function () {
+            if (typeof (getData) == 'function') {
+                $('#DataJson').val(JSON.stringify(getData()));
+            }
+        });
+
+        $('.form-table .close-window').click(closeEditWidgetWindow);
+    });
+</script>

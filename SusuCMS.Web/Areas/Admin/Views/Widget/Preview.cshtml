@@ -1,0 +1,9 @@
+﻿@model Widget
+@using SusuCMS.Data.Enums
+@{
+    var htmlHelper = new FrontHtmlHelper(Html, FrontContext.Current);
+
+    WidgetViewType viewType;
+    Enum.TryParse<WidgetViewType>(Request.QueryString["ViewType"], true, out viewType);
+}
+@htmlHelper.WidgetPreview(Model, viewType)

@@ -1,0 +1,21 @@
+﻿@model Site
+@{
+    ViewBag.Title = SusuCMS.DisplayResource.Settings;
+    ViewBag.Subtitle = SusuCMS.DisplayResource.Settings;
+}
+@Html.Partial("SettingTabs")
+@using (Html.BeginForm())
+{
+@*    <table class="form-table">
+        <tbody>
+            <tr>
+                <th>
+                </th>
+                <td>
+                    @Html.AntiForgeryToken()
+                    @Html.SaveButton()
+                </td>
+            </tr>
+        </tbody>
+    </table>*@
+}

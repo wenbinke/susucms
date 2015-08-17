@@ -1,0 +1,39 @@
+﻿body
+{
+    font-size: 12px;
+    line-height: 1.5em;
+    font-family: Arial, Helvetica, sans-serif;
+    background: #f5f5f5;
+}
+.site-not-found
+{
+    border: 1px solid #E8E8E8;
+    border-radius: 12px;
+    box-shadow: 0px 2px 2px #c0c0c0;
+    width: 720px;
+    margin: 100px auto 0 auto;
+    padding: 30px;
+    color: #404040;
+    background-color: #fff;
+}
+.site-not-found img
+{
+    float: left;
+}
+.site-not-found h1
+{
+    font-size: 24px;
+    line-height: 24px;
+    margin-bottom: 10px;
+    margin-top: 5px;
+}
+.site-not-found p
+{
+    font-size: 12px;
+    line-height: 16px;
+    margin-bottom: 10px;
+}
+.site-not-found h1, .site-not-found p
+{
+    margin-left: 130px;
+}

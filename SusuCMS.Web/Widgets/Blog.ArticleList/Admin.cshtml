@@ -1,0 +1,37 @@
+﻿@inherits SusuCMS.Web.Admin.WidgetAdminPageBase
+@{
+    var filters = new Dictionary<string, string> { { "None", Localize("None") },
+    { "FilterByCategory", Localize("Filter by category") }, 
+    { "FilterByTag", Localize("Filter by tag") } };
+
+    var data = Model.GetData();
+    if (data != null)
+    {
+        ViewBag.PageSize = data.PageSize;
+        ViewBag.FilterBy = data.FilterBy;
+    }
+}
+<tr>
+    <th>
+        @Localize("Page size")
+    </th>
+    <td>
+        @Html.DropDownList("PageSize", new SelectList(new[] { 5, 10, 20, 25 }), new { @class = "small" })
+    </td>
+</tr>
+<tr>
+    <th>
+        @Localize("Filter")
+    </th>
+    <td>
+        @Html.DropDownList("FilterBy", new SelectList(filters, "key", "value"), new { @class = "small" })
+        <script type="text/javascript">
+            function getData() {
+                return {
+                    PageSize: parseInt($('#PageSize').val()),
+                    FilterBy: $('#FilterBy').val()
+                };
+            }
+        </script>
+    </td>
+</tr>

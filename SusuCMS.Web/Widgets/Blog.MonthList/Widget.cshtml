@@ -1,0 +1,31 @@
+﻿@inherits SusuCMS.Web.Front.WidgetPageBase
+@using SusuCMS.Blog;
+@{
+    var blogDataContext = BlogWorkContext.GetDataContext();
+    var months = blogDataContext.Articles.WithSiteId(CurrentSite.Id)
+        .Where(i => i.IsOnline)
+        .Select(i => new { Year = i.CreationTime.Year, Month = i.CreationTime.Month })
+        .ToList();
+
+}
+<div class="widget month-list">
+    <h2>
+        @WidgetLabel("Month list")</h2>
+    @if (months.Any())
+    {
+        <ul>
+            @foreach (var item in months.GroupBy(i => i.Year).OrderByDescending(i => i.Key))
+            {
+                <li>
+                    @item.Key
+                    <ul>
+                        @foreach (var month in months.Where(i => i.Year == item.Key).GroupBy(i => i.Month).OrderByDescending(i => i.Key))
+                        {
+                            <li><a href="#">@month.Key</a>(@month.Count())</li>
+                        }
+                    </ul>
+                </li>
+            }
+        </ul>
+    }
+</div>

@@ -1,0 +1,57 @@
+﻿@model Label
+@{
+    Layout = "~/Areas/Admin/Views/Shared/_Dialog.cshtml";  
+}
+@using (Ajax.BeginForm("Edit", "Label", new { area = "Admin" },
+    new AjaxOptions { OnSuccess = "editLabelSuccess" }, new { id = "edit-label-form" }))
+{
+    <table class="form-table">
+        <tbody>
+            <tr>
+                <th>@Html.LabelFor(m => m.Value)
+                </th>
+                <td>
+                    @Html.TextAreaFor(m => m.Value, new { style = "height:250px;" })
+                </td>
+                <td valign="bottom" style="width: 60px;">
+                    <a href="javascript://" id="reset-label">@DisplayResource.Reset</a>
+                </td>
+            </tr>
+            <tr>
+                <th>
+                </th>
+                <td colspan="2">
+                    @Html.Hidden("LabelType")
+                    @Html.HiddenFor(m => m.Id)
+                    @Html.AntiForgeryToken()
+                    @Html.SaveButton()
+                    <a class="button cancel close-window" href="javascript://"><span>@DisplayResource.Cancel</span></a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    @Html.HiddenFor(m => m.Key)
+}
+<script type="text/javascript">
+    function closeEditLabelWindow() {
+        parent.$("#EditLabelWindow").data("tWindow").close();
+    }
+
+    function editLabelSuccess(result) {
+        if (result.IsSuccess) {
+            parent.refreshLabelData($('#LabelType').val(), $('#Id').val(), $('#Value').val());
+            parent.showSuccess(result.Message);
+        } else {
+            parent.showError(result.Message);
+        }
+        closeEditLabelWindow();
+    }
+
+    $(function () {
+        $('.form-table .close-window').click(closeEditLabelWindow);
+
+        $('#reset-label').click(function () {
+            $('#Value').val($('#Key').val());
+        });
+    });
+</script>

@@ -1,0 +1,32 @@
+﻿@model IQueryable<Mail>
+@{
+    ViewBag.Title = DisplayResource.Mails;
+    ViewBag.Subtitle = DisplayResource.Mails;
+}
+@helper GetMailInfo(string from, string fromName, string to, string reply)
+    {
+    <strong>@DisplayResource.From:</strong> @from<br />
+    <strong>@DisplayResource.FromName:</strong> @fromName<br />
+    <strong>@DisplayResource.To:</strong> @to<br />
+    <strong>@DisplayResource.Reply:</strong> @reply
+}
+<div class="toolbar clearfix">
+    <a href="@Url.Action("Setting")" class="button blue"><span>@DisplayResource.Config</span></a>
+</div>
+@{
+    var grid = new WebGrid(Model);
+    @grid.GetHtml(
+        tableStyle: "data-table",
+        columns: grid.Columns(
+            grid.Column("Subject", DisplayResource.Subject),
+            grid.Column(header: DisplayResource.MailInfo, format: (item) => GetMailInfo(item.From, item.FromName, item.To, item.ReplyTo)),
+            grid.Column("Body", DisplayResource.Body, format: (item) => Html.Raw(item.Body)),
+            grid.Column("CreationTime", DisplayResource.CreationTime),
+            grid.Column("IsSent", DisplayResource.IsSent,
+                format: (item) => Html.Raw(string.Format(@"<a class=""{0}""></a>", item.IsSent.ToString().ToLower()))),
+            grid.Column(header: DisplayResource.Resend,
+                format: (item) => Html.ActionLink(DisplayResource.Resend, "Resend", "Mail",
+                    new { id = item.Id, returnUrl = Request.RawUrl }, null), style: "action")
+        )
+   )
+}

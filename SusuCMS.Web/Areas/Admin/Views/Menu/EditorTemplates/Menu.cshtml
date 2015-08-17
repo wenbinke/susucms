@@ -1,0 +1,65 @@
+﻿@model SusuCMS.Menu
+@{
+    var list = DataContext.Menus.WithSiteId(CurrentSiteId).ToList();
+    if (Model.Id != 0)
+    {
+        list.RemoveOffspring(Model);
+        var item = list.First(i => i.Id == Model.Id);
+        list.Remove(item);
+    }
+}
+@using (Html.BeginForm())
+{
+    <table class="form-table">
+        <tbody>
+            <tr>
+                <th>@Html.LabelFor(m => m.Name)
+                </th>
+                <td>
+                    @Html.TextBoxFor(m => m.Name)
+                    @Html.ValidationMessageFor(m => m.Name)
+                </td>
+            </tr>
+            <tr>
+                <th>@Html.LabelFor(m => m.Url)
+                </th>
+                <td>
+                    @Html.TextBoxFor(m => m.Url)
+                    @Html.ValidationMessageFor(m => m.Url)
+                </td>
+            </tr>
+            <tr>
+                <th>@Html.LabelFor(m => m.ParentId)
+                </th>
+                <td>
+                    @Html.DropDownListFor(m => m.ParentId, new SelectList(list, "Id", "Name"), "None", null)
+                </td>
+            </tr>
+            <tr>
+                <th>
+                    @Html.LabelFor(m => m.OpenInNewWindow)
+                </th>
+                <td>
+                    @Html.CheckBoxFor(m => m.OpenInNewWindow)
+                </td>
+            </tr>
+            <tr>
+                <th>
+                    @Html.LabelFor(m => m.IsOnline)
+                </th>
+                <td>
+                    @Html.CheckBoxFor(m => m.IsOnline)
+                </td>
+            </tr>
+            <tr>
+                <th>
+                </th>
+                <td>
+                    @Html.AntiForgeryToken()
+                    @Html.SaveButton()
+                    @Html.ReturnButton()
+                </td>
+            </tr>
+        </tbody>
+    </table>
+}

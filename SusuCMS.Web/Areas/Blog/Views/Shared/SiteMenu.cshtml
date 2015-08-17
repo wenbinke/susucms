@@ -1,0 +1,20 @@
+﻿@{
+    var controller = GetControllerName();
+    var action = GetActionName();
+    var area = GetAreaName();
+}
+<li @if (area == "blog" && controller == "home")
+    { <text>class="current"</text>}>@Html.ActionLink(SusuCMS.Blog.DisplayResource.Blog, "Index", "Home", new { area = "Blog" }, null)
+    <ul>
+        <li @if (area == "blog" && controller == "article")
+            { <text>class="current"</text> }>@Html.ActionLink(SusuCMS.Blog.DisplayResource.Articles, "Index", "Article", new { area = "Blog" }, null)</li>
+        <li @if (area == "blog" && controller == "category")
+            { <text>class="current"</text> }>@Html.ActionLink(SusuCMS.Blog.DisplayResource.Categories, "Index", "Category", new { area = "Blog" }, null)</li>
+        <li @if (area == "blog" && controller == "comment")
+            { <text>class="current"</text> }>@Html.ActionLink(SusuCMS.Blog.DisplayResource.Comments, "Index", "Comment", new { area = "Blog" }, null)</li>
+        <li @if (area == "blog" && controller == "contact")
+            { <text>class="current"</text> }>@Html.ActionLink(SusuCMS.Blog.DisplayResource.Contacts, "Index", "Contact", new { area = "Blog" }, null)</li>
+        <li @if (area == "blog" && controller == "setting")
+            { <text>class="current"</text> }>@Html.ActionLink(SusuCMS.DisplayResource.Settings, "Index", "Setting", new { area = "Blog" }, null)</li>
+    </ul>
+</li>

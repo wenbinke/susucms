@@ -1,0 +1,16 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>@ViewBag.Title</title>
+    <link href="@Url.Content("~/favicon.ico")" rel="icon" type="image/x-icon" />
+    @Styles.Render("~/Content/telerik", "~/Areas/Admin/Content/dialog")
+    @RenderSection("Header", false)
+    @Scripts.Render("~/Scripts/jquery")
+</head>
+<body>
+    <div id="wrapper">
+        @RenderBody()
+    </div>
+</body>
+</html>
+@Scripts.Render("~/Scripts/validate", "~/Scripts/telerik", "~/Scripts/admin")

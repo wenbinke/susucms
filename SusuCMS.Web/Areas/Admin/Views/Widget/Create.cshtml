@@ -1,0 +1,67 @@
+﻿@model Widget
+@{
+    Layout = "~/Areas/Admin/Views/Shared/_Dialog.cshtml";
+}
+@using (Ajax.BeginForm("Create", "Widget", new { area = "Admin" }, new AjaxOptions { OnSuccess = "createWidgetSuccess" }, new { id = "create-widget-form" }))
+{
+    <table class="form-table">
+        <tbody>
+            <tr>
+                <th>@Html.LabelFor(m => m.Name)
+                </th>
+                <td>
+                    <select class="small" id="Name" name="Name">
+                        @foreach (var item in CurrentSite.GetWidgetInfos().OrderBy(i => i.Name))
+                        {
+                            <option value="@item.Name" data-is-system="@(item.IsSystem.ToString())">@item.DisplayName</option>
+                        }
+                    </select>
+                    @Html.ValidationMessageFor(m => m.Name)
+                    @Html.HiddenFor(i => i.IsSystem)
+                </td>
+            </tr>
+            <tr>
+                <th>@Html.LabelFor(m => m.DisplayName)
+                </th>
+                <td>@Html.TextBoxFor(m => m.DisplayName, new { @class = "small" })
+                    @Html.ValidationMessageFor(m => m.DisplayName)
+                </td>
+            </tr>
+            <tr>
+                <th>
+                </th>
+                <td>
+                    @Html.AntiForgeryToken()
+                    @Html.SaveButton()
+                    <a class="button close-window" href="javascript://"><span>@DisplayResource.Cancel</span></a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+}
+<script type="text/javascript">
+    function closeCreateWidgetWindow() {
+        // clear data
+        $('#DisplayName').val('');
+
+        parent.$("#CreateWidgetWindow").data("tWindow").close();
+    }
+
+    function createWidgetSuccess(result) {
+        $('#widgets-content ul').append(result);
+
+        parent.sc.ui.Message.showSuccess('@MessageResource.CreateSuccess');
+        parent.addWidgetToToolbar(result);
+
+        closeCreateWidgetWindow();
+    }
+
+    $(function () {
+        $('.form-table .close-window').click(closeCreateWidgetWindow);
+
+        $('#IsSystem').val($('#Name').find("option:selected").data('is-system'));
+        $('#Name').change(function () {
+            $('#IsSystem').val($(this).find("option:selected").data('is-system'));
+        });
+    });
+</script>

@@ -1,0 +1,34 @@
+﻿@model IQueryable<AdminUser>
+@{
+    ViewBag.Title = DisplayResource.Administrators;
+    ViewBag.Subtitle = DisplayResource.Administrators;
+}
+@helper GetDelteButton(bool isRoot, int id)
+    {
+        if (!isRoot)
+        { 
+    @Html.DeleteButton("Id", (int)id)
+        }
+}
+@Html.Partial("UserRoleTabs")
+<div class="toolbar clearfix">
+    @Html.LinkButton(DisplayResource.Create, Url.Action("Create", "AdminUser", new { returnUrl = Request.RawUrl }))
+</div>
+@{
+    var grid = new WebGrid(Model);
+}
+@using (Html.BeginForm("Delete", "AdminUser"))
+{
+    @Html.ReturnUrl()
+    @Html.AntiForgeryToken()
+    @grid.GetHtml(
+        tableStyle: "data-table",
+        columns: grid.Columns(
+            grid.Column("UserName", DisplayResource.UserName),
+            grid.Column("Email", DisplayResource.Email),
+            grid.Column("CreationTime", DisplayResource.CreationTime),
+            grid.Column(header: DisplayResource.Edit, format: (item) => Html.ActionLink(DisplayResource.Edit, "Edit", "AdminUser", new { id = item.Id }, new { @class = "edit" }), style: "action"),
+            grid.Column(header: DisplayResource.Delete, format: (item) => GetDelteButton((bool)item.IsRoot, (int)item.Id), style: "action")
+        )
+   )
+}

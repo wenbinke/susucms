@@ -1,0 +1,1335 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{B9B0607C-D1EA-4AB9-88E0-98CED5F7D7B0}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>SusuCMS.Web</RootNamespace>
+    <AssemblyName>SusuCMS.Web</AssemblyName>
+    <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
+    <MvcBuildViews>false</MvcBuildViews>
+    <UseIISExpress>false</UseIISExpress>
+    <MvcProjectUpgradeChecked>true</MvcProjectUpgradeChecked>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <UpgradeBackupLocation>
+    </UpgradeBackupLocation>
+    <OldToolsVersion>4.0</OldToolsVersion>
+    <TargetFrameworkProfile />
+    <IISExpressSSLPort />
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+    <UseGlobalApplicationHostFile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Accessibility">
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </Reference>
+    <Reference Include="Antlr3.Runtime, Version=3.4.1.9004, Culture=neutral, PublicKeyToken=eb42632606e9261f, processorArchitecture=MSIL">
+      <HintPath>..\packages\Antlr.3.4.1.9004\lib\Antlr3.Runtime.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=4.5.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.5.0.4\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Data.Entity" />
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Web.Helpers, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.Helpers.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.Mvc, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Mvc.5.2.3\lib\net45\System.Web.Mvc.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.Optimization, Version=1.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Web.Optimization.1.1.3\lib\net40\System.Web.Optimization.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Razor.3.2.3\lib\net45\System.Web.Razor.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.WebPages, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Deployment, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.Deployment.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Abstractions" />
+    <Reference Include="System.Web.Routing" />
+    <Reference Include="System.Web.WebPages.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="Telerik.Web.Mvc">
+      <HintPath>..\Lib\Telerik.Web.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="WebGrease, Version=1.6.5135.21930, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\WebGrease.1.6.0\lib\WebGrease.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App_Data\SystemInfo.config" />
+    <Content Include="Areas\Admin\Content\admin.css" />
+    <Content Include="Areas\Admin\Content\base.css" />
+    <Content Include="Areas\Admin\Content\button.css" />
+    <Content Include="Areas\Admin\Content\design.css" />
+    <Content Include="Areas\Admin\Content\dialog.css" />
+    <Content Include="Areas\Admin\Content\form.css" />
+    <Content Include="Areas\Admin\Content\helptip.css" />
+    <Content Include="Areas\Admin\Content\iframe.css" />
+    <Content Include="Areas\Admin\Content\images\down.png" />
+    <Content Include="Areas\Admin\Content\images\favicon-demo.png" />
+    <Content Include="Areas\Admin\Content\images\file.png" />
+    <Content Include="Areas\Admin\Content\images\folder.gif" />
+    <Content Include="Areas\Admin\Content\images\helptip.gif" />
+    <Content Include="Areas\Admin\Content\images\home.png" />
+    <Content Include="Areas\Admin\Content\images\loading.gif" />
+    <Content Include="Areas\Admin\Content\images\loading_background.png" />
+    <Content Include="Areas\Admin\Content\images\login-bg.jpg" />
+    <Content Include="Areas\Admin\Content\images\login-panel-bg.gif" />
+    <Content Include="Areas\Admin\Content\images\login-panel-bottom.gif" />
+    <Content Include="Areas\Admin\Content\images\login-panel-top.gif" />
+    <Content Include="Areas\Admin\Content\images\reset.png" />
+    <Content Include="Areas\Admin\Content\images\small-loading.gif" />
+    <Content Include="Areas\Admin\Content\images\sprites.png" />
+    <Content Include="Areas\Admin\Content\images\textarea\textarea-mm-focus.gif" />
+    <Content Include="Areas\Admin\Content\images\textarea\textarea-mm-hover.gif" />
+    <Content Include="Areas\Admin\Content\images\textarea\textarea-mm.gif" />
+    <Content Include="Areas\Admin\Content\images\textarea\textarea_bl.gif" />
+    <Content Include="Areas\Admin\Content\images\textarea\textarea_bm.gif" />
+    <Content Include="Areas\Admin\Content\images\textarea\textarea_br.gif" />
+    <Content Include="Areas\Admin\Content\images\textarea\textarea_ml.gif" />
+    <Content Include="Areas\Admin\Content\images\textarea\textarea_mr.gif" />
+    <Content Include="Areas\Admin\Content\images\textarea\textarea_tl.gif" />
+    <Content Include="Areas\Admin\Content\images\textarea\textarea_tm.gif" />
+    <Content Include="Areas\Admin\Content\images\textarea\textarea_tr.gif" />
+    <Content Include="Areas\Admin\Content\images\theme-preview.png" />
+    <Content Include="Areas\Admin\Content\images\toggle-collapse.png" />
+    <Content Include="Areas\Admin\Content\images\toggle-expand.png" />
+    <Content Include="Areas\Admin\Content\images\up.png" />
+    <Content Include="Areas\Admin\Content\login.css" />
+    <Content Include="Areas\Admin\Content\reset.css" />
+    <Content Include="Areas\Blog\Content\admin.css" />
+    <Content Include="Content\Calendar\Descriptions\Accessibility.html" />
+    <Content Include="Content\Calendar\Descriptions\ClientSideApi.html" />
+    <Content Include="Content\Calendar\Descriptions\ClientSideEvents.html" />
+    <Content Include="Content\Calendar\Descriptions\FirstLook.html" />
+    <Content Include="Content\Calendar\Descriptions\Globalization.html" />
+    <Content Include="Content\Calendar\Descriptions\RtlSupport.html" />
+    <Content Include="Content\Calendar\Descriptions\SelectAction.html" />
+    <Content Include="Content\Chart\Descriptions\AjaxBinding.html" />
+    <Content Include="Content\Chart\Descriptions\AreaChart.html" />
+    <Content Include="Content\Chart\Descriptions\ClientSideApi.html" />
+    <Content Include="Content\Chart\Descriptions\ClientSideEvents.html" />
+    <Content Include="Content\Chart\Descriptions\CombinationChart.html" />
+    <Content Include="Content\Chart\Descriptions\FirstLook.html" />
+    <Content Include="Content\Chart\Descriptions\HighPerformance.html" />
+    <Content Include="Content\Chart\Descriptions\MissingValues.html" />
+    <Content Include="Content\Chart\Descriptions\MultipleAxes.html" />
+    <Content Include="Content\Chart\Descriptions\PieChart.html" />
+    <Content Include="Content\Chart\Descriptions\PlotBands.html" />
+    <Content Include="Content\Chart\Descriptions\ScatterChart.html" />
+    <Content Include="Content\Chart\Descriptions\ScatterLineChart.html" />
+    <Content Include="Content\ComboBox\Descriptions\Accessibility.html" />
+    <Content Include="Content\ComboBox\Descriptions\AjaxLoading.html" />
+    <Content Include="Content\ComboBox\Descriptions\AnimationEffects.html" />
+    <Content Include="Content\ComboBox\Descriptions\CascadingComboBox.html" />
+    <Content Include="Content\ComboBox\Descriptions\ClientSideApi.html" />
+    <Content Include="Content\ComboBox\Descriptions\ClientSideBinding.html" />
+    <Content Include="Content\ComboBox\Descriptions\ClientSideEvents.html" />
+    <Content Include="Content\ComboBox\Descriptions\ClientValidation.html" />
+    <Content Include="Content\ComboBox\Descriptions\FilteringClient.html" />
+    <Content Include="Content\ComboBox\Descriptions\FilteringServer.html" />
+    <Content Include="Content\ComboBox\Descriptions\FirstLook.html" />
+    <Content Include="Content\ComboBox\Descriptions\RtlSupport.html" />
+    <Content Include="Content\ComboBox\Descriptions\ServerValidation.html" />
+    <Content Include="Content\common.css" />
+    <Content Include="Content\Common\Icons\Ajax\Editor.png" />
+    <Content Include="Content\Common\Icons\Ajax\Grid.png" />
+    <Content Include="Content\Common\Icons\Ajax\Scheduler.png" />
+    <Content Include="Content\Common\Icons\delete.png" />
+    <Content Include="Content\Common\Icons\edit.png" />
+    <Content Include="Content\Common\Icons\favicon.png" />
+    <Content Include="Content\Common\Icons\folder.png" />
+    <Content Include="Content\Common\Icons\Mvc\Grid.png" />
+    <Content Include="Content\Common\Icons\Mvc\Menu.png" />
+    <Content Include="Content\Common\Icons\Mvc\PanelBar.png" />
+    <Content Include="Content\Common\Icons\Mvc\TabStrip.png" />
+    <Content Include="Content\Common\Icons\page_white_text.png" />
+    <Content Include="Content\Common\Icons\Sl\Chart.gif" />
+    <Content Include="Content\Common\Icons\Sl\Docking.gif" />
+    <Content Include="Content\Common\Icons\Sl\GridView.gif" />
+    <Content Include="Content\Common\Icons\Sl\Scheduler.gif" />
+    <Content Include="Content\Common\Icons\Suites\ajax.png" />
+    <Content Include="Content\Common\Icons\Suites\mvc.png" />
+    <Content Include="Content\Common\Icons\Suites\orm.png" />
+    <Content Include="Content\Common\Icons\Suites\rep.png" />
+    <Content Include="Content\Common\Icons\Suites\sitefinity.png" />
+    <Content Include="Content\Common\Icons\Suites\sl.png" />
+    <Content Include="Content\Common\Icons\Suites\test.png" />
+    <Content Include="Content\Common\Icons\Suites\win.png" />
+    <Content Include="Content\Common\Icons\Suites\wpf.png" />
+    <Content Include="Content\Common\Icons\Suites_32\AJAX.png" />
+    <Content Include="Content\Common\Icons\Suites_32\CMS.png" />
+    <Content Include="Content\Common\Icons\Suites_32\JustCode.png" />
+    <Content Include="Content\Common\Icons\Suites_32\MVC.png" />
+    <Content Include="Content\Common\Icons\Suites_32\ORM.png" />
+    <Content Include="Content\Common\Icons\Suites_32\PD.png" />
+    <Content Include="Content\Common\Icons\Suites_32\REP.png" />
+    <Content Include="Content\Common\Icons\Suites_32\SL.png" />
+    <Content Include="Content\Common\Icons\Suites_32\Test.png" />
+    <Content Include="Content\Common\Icons\Suites_32\TFS.png" />
+    <Content Include="Content\Common\Icons\Suites_32\WinForms.png" />
+    <Content Include="Content\Common\Icons\Suites_32\WPF.png" />
+    <Content Include="Content\Common\Icons\wave.png" />
+    <Content Include="Content\Common\orm-comparison.png" />
+    <Content Include="Content\Common\RelatedData.png" />
+    <Content Include="Content\Common\sprite.png" />
+    <Content Include="Content\Common\validation-error-message.png" />
+    <Content Include="Content\DatePicker\Descriptions\Accessibility.html" />
+    <Content Include="Content\DatePicker\Descriptions\AnimationEffects.html" />
+    <Content Include="Content\DatePicker\Descriptions\ClientSideApi.html" />
+    <Content Include="Content\DatePicker\Descriptions\ClientSideEvents.html" />
+    <Content Include="Content\DatePicker\Descriptions\ClientValidation.html" />
+    <Content Include="Content\DatePicker\Descriptions\DateParsing.html" />
+    <Content Include="Content\DatePicker\Descriptions\EditTemplate.html" />
+    <Content Include="Content\DatePicker\Descriptions\FirstLook.html" />
+    <Content Include="Content\DatePicker\Descriptions\Globalization.html" />
+    <Content Include="Content\DatePicker\Descriptions\RtlSupport.html" />
+    <Content Include="Content\DatePicker\Descriptions\ServerValidation.html" />
+    <Content Include="Content\Editor\CustomTools\insert-html-icon.png" />
+    <Content Include="Content\Editor\Descriptions\Accessibility.html" />
+    <Content Include="Content\Editor\Descriptions\ClientSideApi.html" />
+    <Content Include="Content\Editor\Descriptions\ClientSideEvents.html" />
+    <Content Include="Content\Editor\Descriptions\ClientValidation.html" />
+    <Content Include="Content\Editor\Descriptions\CustomTools.html" />
+    <Content Include="Content\Editor\Descriptions\EditorInGrid.html" />
+    <Content Include="Content\Editor\Descriptions\FirstLook.html" />
+    <Content Include="Content\Editor\Descriptions\ImageTool.html" />
+    <Content Include="Content\Editor\Descriptions\KeyboardNavigation.html" />
+    <Content Include="Content\Editor\Descriptions\Localization.html" />
+    <Content Include="Content\Editor\Descriptions\RtlSupport.html" />
+    <Content Include="Content\Editor\Descriptions\ServerValidation.html" />
+    <Content Include="Content\Editor\Descriptions\Snippets.html" />
+    <Content Include="Content\Editor\Descriptions\Styles.html" />
+    <Content Include="Content\Editor\editor.png" />
+    <Content Include="Content\Editor\Snippets\Features.html" />
+    <Content Include="Content\Editor\Styles\blockquote.png" />
+    <Content Include="Content\Editor\Styles\editorStyles.css" />
+    <Content Include="Content\Grid\Customers\ALFKI.jpg" />
+    <Content Include="Content\Grid\Customers\ANATR.jpg" />
+    <Content Include="Content\Grid\Customers\ANTON.jpg" />
+    <Content Include="Content\Grid\Customers\AROUT.jpg" />
+    <Content Include="Content\Grid\Customers\BERGS.jpg" />
+    <Content Include="Content\Grid\Customers\BLAUS.jpg" />
+    <Content Include="Content\Grid\Customers\BLONP.jpg" />
+    <Content Include="Content\Grid\Customers\BOLID.jpg" />
+    <Content Include="Content\Grid\Customers\BONAP.jpg" />
+    <Content Include="Content\Grid\Customers\BOTTM.jpg" />
+    <Content Include="Content\Grid\Customers\BSBEV.jpg" />
+    <Content Include="Content\Grid\Customers\CACTU.jpg" />
+    <Content Include="Content\Grid\Customers\CENTC.jpg" />
+    <Content Include="Content\Grid\Customers\CHOPS.jpg" />
+    <Content Include="Content\Grid\Customers\COMMI.jpg" />
+    <Content Include="Content\Grid\Customers\CONSH.jpg" />
+    <Content Include="Content\Grid\Customers\DRACD.jpg" />
+    <Content Include="Content\Grid\Customers\DUMON.jpg" />
+    <Content Include="Content\Grid\Customers\EASTC.jpg" />
+    <Content Include="Content\Grid\Customers\ERNSH.jpg" />
+    <Content Include="Content\Grid\Customers\FAMIA.jpg" />
+    <Content Include="Content\Grid\Customers\FISSA.jpg" />
+    <Content Include="Content\Grid\Customers\FOLIG.jpg" />
+    <Content Include="Content\Grid\Customers\FOLKO.jpg" />
+    <Content Include="Content\Grid\Customers\FRANK.jpg" />
+    <Content Include="Content\Grid\Customers\FRANR.jpg" />
+    <Content Include="Content\Grid\Customers\FRANS.jpg" />
+    <Content Include="Content\Grid\Customers\FURIB.jpg" />
+    <Content Include="Content\Grid\Customers\GALED.jpg" />
+    <Content Include="Content\Grid\Customers\GODOS.jpg" />
+    <Content Include="Content\Grid\Customers\GOURL.jpg" />
+    <Content Include="Content\Grid\Customers\GREAL.jpg" />
+    <Content Include="Content\Grid\Customers\GROSR.jpg" />
+    <Content Include="Content\Grid\Customers\HANAR.jpg" />
+    <Content Include="Content\Grid\Customers\HILAA.jpg" />
+    <Content Include="Content\Grid\Customers\HUNGC.jpg" />
+    <Content Include="Content\Grid\Customers\HUNGO.jpg" />
+    <Content Include="Content\Grid\Customers\ISLAT.jpg" />
+    <Content Include="Content\Grid\Customers\KOENE.jpg" />
+    <Content Include="Content\Grid\Customers\LACOR.jpg" />
+    <Content Include="Content\Grid\Customers\LAMAI.jpg" />
+    <Content Include="Content\Grid\Customers\LAUGB.jpg" />
+    <Content Include="Content\Grid\Customers\LAZYK.jpg" />
+    <Content Include="Content\Grid\Customers\LEHMS.jpg" />
+    <Content Include="Content\Grid\Customers\LETSS.jpg" />
+    <Content Include="Content\Grid\Customers\LILAS.jpg" />
+    <Content Include="Content\Grid\Customers\LINOD.jpg" />
+    <Content Include="Content\Grid\Customers\LONEP.jpg" />
+    <Content Include="Content\Grid\Customers\MAGAA.jpg" />
+    <Content Include="Content\Grid\Customers\MAISD.jpg" />
+    <Content Include="Content\Grid\Customers\MEREP.jpg" />
+    <Content Include="Content\Grid\Customers\MORGK.jpg" />
+    <Content Include="Content\Grid\Customers\NORTS.jpg" />
+    <Content Include="Content\Grid\Customers\OCEAN.jpg" />
+    <Content Include="Content\Grid\Customers\OLDWO.jpg" />
+    <Content Include="Content\Grid\Customers\OTTIK.jpg" />
+    <Content Include="Content\Grid\Customers\PARIS.jpg" />
+    <Content Include="Content\Grid\Customers\PERIC.jpg" />
+    <Content Include="Content\Grid\Customers\PICCO.jpg" />
+    <Content Include="Content\Grid\Customers\PRINI.jpg" />
+    <Content Include="Content\Grid\Customers\QUEDE.jpg" />
+    <Content Include="Content\Grid\Customers\QUEEN.jpg" />
+    <Content Include="Content\Grid\Customers\QUICK.jpg" />
+    <Content Include="Content\Grid\Customers\RANCH.jpg" />
+    <Content Include="Content\Grid\Customers\RATTC.jpg" />
+    <Content Include="Content\Grid\Customers\REGGC.jpg" />
+    <Content Include="Content\Grid\Customers\RICAR.jpg" />
+    <Content Include="Content\Grid\Customers\RICSU.jpg" />
+    <Content Include="Content\Grid\Customers\ROMEY.jpg" />
+    <Content Include="Content\Grid\Customers\SANTG.jpg" />
+    <Content Include="Content\Grid\Customers\SAVEA.jpg" />
+    <Content Include="Content\Grid\Customers\SEVES.jpg" />
+    <Content Include="Content\Grid\Customers\SIMOB.jpg" />
+    <Content Include="Content\Grid\Customers\SPECD.jpg" />
+    <Content Include="Content\Grid\Customers\SPLIR.jpg" />
+    <Content Include="Content\Grid\Customers\SUPRD.jpg" />
+    <Content Include="Content\Grid\Customers\THEBI.jpg" />
+    <Content Include="Content\Grid\Customers\THECR.jpg" />
+    <Content Include="Content\Grid\Customers\TOMSP.jpg" />
+    <Content Include="Content\Grid\Customers\TORTU.jpg" />
+    <Content Include="Content\Grid\Customers\TRADH.jpg" />
+    <Content Include="Content\Grid\Customers\TRAIH.jpg" />
+    <Content Include="Content\Grid\Customers\VAFFE.jpg" />
+    <Content Include="Content\Grid\Customers\VICTE.jpg" />
+    <Content Include="Content\Grid\Customers\VINET.jpg" />
+    <Content Include="Content\Grid\Customers\WANDK.jpg" />
+    <Content Include="Content\Grid\Customers\WARTH.jpg" />
+    <Content Include="Content\Grid\Customers\WELLI.jpg" />
+    <Content Include="Content\Grid\Customers\WHITC.jpg" />
+    <Content Include="Content\Grid\Customers\WILMK.jpg" />
+    <Content Include="Content\Grid\Customers\WOLZA.jpg" />
+    <Content Include="Content\Grid\Descriptions\Accessibility.html" />
+    <Content Include="Content\Grid\Descriptions\AggregatesAjax.html" />
+    <Content Include="Content\Grid\Descriptions\AggregatesServerSide.html" />
+    <Content Include="Content\Grid\Descriptions\AjaxBinding.html" />
+    <Content Include="Content\Grid\Descriptions\AutoGenerateColumns.html" />
+    <Content Include="Content\Grid\Descriptions\CheckBoxesAjax.html" />
+    <Content Include="Content\Grid\Descriptions\CheckBoxesServerSide.html" />
+    <Content Include="Content\Grid\Descriptions\ClientEditTemplates.html" />
+    <Content Include="Content\Grid\Descriptions\ClientRowTemplate.html" />
+    <Content Include="Content\Grid\Descriptions\ClientSideEvents.html" />
+    <Content Include="Content\Grid\Descriptions\ColumnContextMenu.html" />
+    <Content Include="Content\Grid\Descriptions\ColumnReordering.html" />
+    <Content Include="Content\Grid\Descriptions\ColumnResizing.html" />
+    <Content Include="Content\Grid\Descriptions\ColumnSettings.html" />
+    <Content Include="Content\Grid\Descriptions\CustomBinding.html" />
+    <Content Include="Content\Grid\Descriptions\CustomColumnCommand.html" />
+    <Content Include="Content\Grid\Descriptions\CustomCommand.html" />
+    <Content Include="Content\Grid\Descriptions\CustomFormatting.html" />
+    <Content Include="Content\Grid\Descriptions\CustomRoute.html" />
+    <Content Include="Content\Grid\Descriptions\CustomServerBinding.html" />
+    <Content Include="Content\Grid\Descriptions\CustomToolBar.html" />
+    <Content Include="Content\Grid\Descriptions\DetailsAjax.html" />
+    <Content Include="Content\Grid\Descriptions\DetailsServerSide.html" />
+    <Content Include="Content\Grid\Descriptions\EditingAjax.html" />
+    <Content Include="Content\Grid\Descriptions\EditingBatch.html" />
+    <Content Include="Content\Grid\Descriptions\EditingServerSide.html" />
+    <Content Include="Content\Grid\Descriptions\EditingWebService.html" />
+    <Content Include="Content\Grid\Descriptions\ExternalServiceTwitter.html" />
+    <Content Include="Content\Grid\Descriptions\Filtering.html" />
+    <Content Include="Content\Grid\Descriptions\FirstLook.html" />
+    <Content Include="Content\Grid\Descriptions\ForeignKeyColumn.html" />
+    <Content Include="Content\Grid\Descriptions\Grouping.html" />
+    <Content Include="Content\Grid\Descriptions\HeaderFooterTemplates.html" />
+    <Content Include="Content\Grid\Descriptions\HierarchyAjax.html" />
+    <Content Include="Content\Grid\Descriptions\HierarchyServerSide.html" />
+    <Content Include="Content\Grid\Descriptions\KeyboardNavigation.html" />
+    <Content Include="Content\Grid\Descriptions\Localization.html" />
+    <Content Include="Content\Grid\Descriptions\OperationMode.html" />
+    <Content Include="Content\Grid\Descriptions\PageOnScroll.html" />
+    <Content Include="Content\Grid\Descriptions\Paging.html" />
+    <Content Include="Content\Grid\Descriptions\RtlSupport.html" />
+    <Content Include="Content\Grid\Descriptions\SelectionClientSide.html" />
+    <Content Include="Content\Grid\Descriptions\SelectionServerSide.html" />
+    <Content Include="Content\Grid\Descriptions\ServerBinding.html" />
+    <Content Include="Content\Grid\Descriptions\ServerEditTemplates.html" />
+    <Content Include="Content\Grid\Descriptions\ServerRowTemplate.html" />
+    <Content Include="Content\Grid\Descriptions\Sorting.html" />
+    <Content Include="Content\Grid\Descriptions\TemplatesClientSide.html" />
+    <Content Include="Content\Grid\Descriptions\TemplatesServerSide.html" />
+    <Content Include="Content\Grid\Descriptions\WebService.html" />
+    <Content Include="Content\Grid\Employees\1.jpg" />
+    <Content Include="Content\Grid\Employees\2.jpg" />
+    <Content Include="Content\Grid\Employees\3.jpg" />
+    <Content Include="Content\Grid\Employees\4.jpg" />
+    <Content Include="Content\Grid\Employees\5.jpg" />
+    <Content Include="Content\Grid\Employees\6.jpg" />
+    <Content Include="Content\Grid\Employees\7.jpg" />
+    <Content Include="Content\Grid\Employees\8.jpg" />
+    <Content Include="Content\Grid\Employees\9.jpg" />
+    <Content Include="Content\Grid\ExternalServiceFacebook\background.png" />
+    <Content Include="Content\Grid\ExternalServiceFacebook\fb_connect.png" />
+    <Content Include="Content\Grid\ExternalServiceFacebook\fb_silhouette.png" />
+    <Content Include="Content\Grid\ExternalServiceFacebook\loading.gif" />
+    <Content Include="Content\Grid\ExternalServiceFacebook\xd_receiver.htm" />
+    <Content Include="Content\Grid\ExternalServiceTwitter\twitter-logo.png" />
+    <Content Include="Content\images\avatar.png" />
+    <Content Include="Content\images\background.png" />
+    <Content Include="Content\images\menu-separator.png" />
+    <Content Include="Content\images\menu.png" />
+    <Content Include="Content\images\overview-sprite.jpg" />
+    <Content Include="Content\images\sprite.png" />
+    <Content Include="Content\images\teampulse-portal.png" />
+    <Content Include="Content\images\telerik-logo.png" />
+    <Content Include="Content\images\Themes\Calendar\Black.png" />
+    <Content Include="Content\images\Themes\Calendar\Default.png" />
+    <Content Include="Content\images\Themes\Calendar\Forest.png" />
+    <Content Include="Content\images\Themes\Calendar\Hay.png" />
+    <Content Include="Content\images\Themes\Calendar\Metro.png" />
+    <Content Include="Content\images\Themes\Calendar\Office2007.png" />
+    <Content Include="Content\images\Themes\Calendar\Office2010Black.png" />
+    <Content Include="Content\images\Themes\Calendar\Office2010Blue.png" />
+    <Content Include="Content\images\Themes\Calendar\Office2010Silver.png" />
+    <Content Include="Content\images\Themes\Calendar\Outlook.png" />
+    <Content Include="Content\images\Themes\Calendar\Simple.png" />
+    <Content Include="Content\images\Themes\Calendar\Sitefinity.png" />
+    <Content Include="Content\images\Themes\Calendar\Sunset.png" />
+    <Content Include="Content\images\Themes\Calendar\Telerik.png" />
+    <Content Include="Content\images\Themes\Calendar\Transparent.png" />
+    <Content Include="Content\images\Themes\Calendar\Vista.png" />
+    <Content Include="Content\images\Themes\Calendar\Web20.png" />
+    <Content Include="Content\images\Themes\Calendar\WebBlue.png" />
+    <Content Include="Content\images\Themes\Calendar\Windows7.png" />
+    <Content Include="Content\images\Themes\Chart\Black.png" />
+    <Content Include="Content\images\Themes\Chart\Default.png" />
+    <Content Include="Content\images\Themes\Chart\Forest.png" />
+    <Content Include="Content\images\Themes\Chart\Hay.png" />
+    <Content Include="Content\images\Themes\Chart\Metro.png" />
+    <Content Include="Content\images\Themes\Chart\Office2007.png" />
+    <Content Include="Content\images\Themes\Chart\Office2010Black.png" />
+    <Content Include="Content\images\Themes\Chart\Office2010Blue.png" />
+    <Content Include="Content\images\Themes\Chart\Office2010Silver.png" />
+    <Content Include="Content\images\Themes\Chart\Outlook.png" />
+    <Content Include="Content\images\Themes\Chart\Simple.png" />
+    <Content Include="Content\images\Themes\Chart\Sitefinity.png" />
+    <Content Include="Content\images\Themes\Chart\Sunset.png" />
+    <Content Include="Content\images\Themes\Chart\Telerik.png" />
+    <Content Include="Content\images\Themes\Chart\Transparent.png" />
+    <Content Include="Content\images\Themes\Chart\Vista.png" />
+    <Content Include="Content\images\Themes\Chart\Web20.png" />
+    <Content Include="Content\images\Themes\Chart\WebBlue.png" />
+    <Content Include="Content\images\Themes\Chart\Windows7.png" />
+    <Content Include="Content\images\Themes\ComboBox\Black.png" />
+    <Content Include="Content\images\Themes\ComboBox\Default.png" />
+    <Content Include="Content\images\Themes\ComboBox\Forest.png" />
+    <Content Include="Content\images\Themes\ComboBox\Hay.png" />
+    <Content Include="Content\images\Themes\ComboBox\Metro.png" />
+    <Content Include="Content\images\Themes\ComboBox\Office2007.png" />
+    <Content Include="Content\images\Themes\ComboBox\Office2010Black.png" />
+    <Content Include="Content\images\Themes\ComboBox\Office2010Blue.png" />
+    <Content Include="Content\images\Themes\ComboBox\Office2010Silver.png" />
+    <Content Include="Content\images\Themes\ComboBox\Outlook.png" />
+    <Content Include="Content\images\Themes\ComboBox\Simple.png" />
+    <Content Include="Content\images\Themes\ComboBox\Sitefinity.png" />
+    <Content Include="Content\images\Themes\ComboBox\Sunset.png" />
+    <Content Include="Content\images\Themes\ComboBox\Telerik.png" />
+    <Content Include="Content\images\Themes\ComboBox\Transparent.png" />
+    <Content Include="Content\images\Themes\ComboBox\Vista.png" />
+    <Content Include="Content\images\Themes\ComboBox\Web20.png" />
+    <Content Include="Content\images\Themes\ComboBox\WebBlue.png" />
+    <Content Include="Content\images\Themes\ComboBox\Windows7.png" />
+    <Content Include="Content\images\Themes\DatePicker\Black.png" />
+    <Content Include="Content\images\Themes\DatePicker\Default.png" />
+    <Content Include="Content\images\Themes\DatePicker\Forest.png" />
+    <Content Include="Content\images\Themes\DatePicker\Hay.png" />
+    <Content Include="Content\images\Themes\DatePicker\Metro.png" />
+    <Content Include="Content\images\Themes\DatePicker\Office2007.png" />
+    <Content Include="Content\images\Themes\DatePicker\Office2010Black.png" />
+    <Content Include="Content\images\Themes\DatePicker\Office2010Blue.png" />
+    <Content Include="Content\images\Themes\DatePicker\Office2010Silver.png" />
+    <Content Include="Content\images\Themes\DatePicker\Outlook.png" />
+    <Content Include="Content\images\Themes\DatePicker\Simple.png" />
+    <Content Include="Content\images\Themes\DatePicker\Sitefinity.png" />
+    <Content Include="Content\images\Themes\DatePicker\Sunset.png" />
+    <Content Include="Content\images\Themes\DatePicker\Telerik.png" />
+    <Content Include="Content\images\Themes\DatePicker\Transparent.png" />
+    <Content Include="Content\images\Themes\DatePicker\Vista.png" />
+    <Content Include="Content\images\Themes\DatePicker\Web20.png" />
+    <Content Include="Content\images\Themes\DatePicker\WebBlue.png" />
+    <Content Include="Content\images\Themes\DatePicker\Windows7.png" />
+    <Content Include="Content\images\Themes\Editor\Black.png" />
+    <Content Include="Content\images\Themes\Editor\Default.png" />
+    <Content Include="Content\images\Themes\Editor\Forest.png" />
+    <Content Include="Content\images\Themes\Editor\Hay.png" />
+    <Content Include="Content\images\Themes\Editor\Metro.png" />
+    <Content Include="Content\images\Themes\Editor\Office2007.png" />
+    <Content Include="Content\images\Themes\Editor\Office2010Black.png" />
+    <Content Include="Content\images\Themes\Editor\Office2010Blue.png" />
+    <Content Include="Content\images\Themes\Editor\Office2010Silver.png" />
+    <Content Include="Content\images\Themes\Editor\Outlook.png" />
+    <Content Include="Content\images\Themes\Editor\Simple.png" />
+    <Content Include="Content\images\Themes\Editor\Sitefinity.png" />
+    <Content Include="Content\images\Themes\Editor\Sunset.png" />
+    <Content Include="Content\images\Themes\Editor\Telerik.png" />
+    <Content Include="Content\images\Themes\Editor\Transparent.png" />
+    <Content Include="Content\images\Themes\Editor\Vista.png" />
+    <Content Include="Content\images\Themes\Editor\Web20.png" />
+    <Content Include="Content\images\Themes\Editor\WebBlue.png" />
+    <Content Include="Content\images\Themes\Editor\Windows7.png" />
+    <Content Include="Content\images\Themes\Grid\Black.png" />
+    <Content Include="Content\images\Themes\Grid\Default.png" />
+    <Content Include="Content\images\Themes\Grid\Forest.png" />
+    <Content Include="Content\images\Themes\Grid\Hay.png" />
+    <Content Include="Content\images\Themes\Grid\Metro.png" />
+    <Content Include="Content\images\Themes\Grid\Office2007.png" />
+    <Content Include="Content\images\Themes\Grid\Office2010Black.png" />
+    <Content Include="Content\images\Themes\Grid\Office2010Blue.png" />
+    <Content Include="Content\images\Themes\Grid\Office2010Silver.png" />
+    <Content Include="Content\images\Themes\Grid\Outlook.png" />
+    <Content Include="Content\images\Themes\Grid\Simple.png" />
+    <Content Include="Content\images\Themes\Grid\Sitefinity.png" />
+    <Content Include="Content\images\Themes\Grid\Sunset.png" />
+    <Content Include="Content\images\Themes\Grid\Telerik.png" />
+    <Content Include="Content\images\Themes\Grid\Transparent.png" />
+    <Content Include="Content\images\Themes\Grid\Vista.png" />
+    <Content Include="Content\images\Themes\Grid\Web20.png" />
+    <Content Include="Content\images\Themes\Grid\WebBlue.png" />
+    <Content Include="Content\images\Themes\Grid\Windows7.png" />
+    <Content Include="Content\images\Themes\Menu\Black.png" />
+    <Content Include="Content\images\Themes\Menu\Default.png" />
+    <Content Include="Content\images\Themes\Menu\Forest.png" />
+    <Content Include="Content\images\Themes\Menu\Hay.png" />
+    <Content Include="Content\images\Themes\Menu\Metro.png" />
+    <Content Include="Content\images\Themes\Menu\Office2007.png" />
+    <Content Include="Content\images\Themes\Menu\Office2010Black.png" />
+    <Content Include="Content\images\Themes\Menu\Office2010Blue.png" />
+    <Content Include="Content\images\Themes\Menu\Office2010Silver.png" />
+    <Content Include="Content\images\Themes\Menu\Outlook.png" />
+    <Content Include="Content\images\Themes\Menu\Simple.png" />
+    <Content Include="Content\images\Themes\Menu\Sitefinity.png" />
+    <Content Include="Content\images\Themes\Menu\Sunset.png" />
+    <Content Include="Content\images\Themes\Menu\Telerik.png" />
+    <Content Include="Content\images\Themes\Menu\Transparent.png" />
+    <Content Include="Content\images\Themes\Menu\Vista.png" />
+    <Content Include="Content\images\Themes\Menu\Web20.png" />
+    <Content Include="Content\images\Themes\Menu\WebBlue.png" />
+    <Content Include="Content\images\Themes\Menu\Windows7.png" />
+    <Content Include="Content\images\Themes\NumericTextBox\Black.png" />
+    <Content Include="Content\images\Themes\NumericTextBox\Default.png" />
+    <Content Include="Content\images\Themes\NumericTextBox\Forest.png" />
+    <Content Include="Content\images\Themes\NumericTextBox\Hay.png" />
+    <Content Include="Content\images\Themes\NumericTextBox\Metro.png" />
+    <Content Include="Content\images\Themes\NumericTextBox\Office2007.png" />
+    <Content Include="Content\images\Themes\NumericTextBox\Office2010Black.png" />
+    <Content Include="Content\images\Themes\NumericTextBox\Office2010Blue.png" />
+    <Content Include="Content\images\Themes\NumericTextBox\Office2010Silver.png" />
+    <Content Include="Content\images\Themes\NumericTextBox\Outlook.png" />
+    <Content Include="Content\images\Themes\NumericTextBox\Simple.png" />
+    <Content Include="Content\images\Themes\NumericTextBox\Sitefinity.png" />
+    <Content Include="Content\images\Themes\NumericTextBox\Sunset.png" />
+    <Content Include="Content\images\Themes\NumericTextBox\Telerik.png" />
+    <Content Include="Content\images\Themes\NumericTextBox\Transparent.png" />
+    <Content Include="Content\images\Themes\NumericTextBox\Vista.png" />
+    <Content Include="Content\images\Themes\NumericTextBox\Web20.png" />
+    <Content Include="Content\images\Themes\NumericTextBox\WebBlue.png" />
+    <Content Include="Content\images\Themes\NumericTextBox\Windows7.png" />
+    <Content Include="Content\images\Themes\PanelBar\Black.png" />
+    <Content Include="Content\images\Themes\PanelBar\Default.png" />
+    <Content Include="Content\images\Themes\PanelBar\Forest.png" />
+    <Content Include="Content\images\Themes\PanelBar\Hay.png" />
+    <Content Include="Content\images\Themes\PanelBar\Metro.png" />
+    <Content Include="Content\images\Themes\PanelBar\Office2007.png" />
+    <Content Include="Content\images\Themes\PanelBar\Office2010Black.png" />
+    <Content Include="Content\images\Themes\PanelBar\Office2010Blue.png" />
+    <Content Include="Content\images\Themes\PanelBar\Office2010Silver.png" />
+    <Content Include="Content\images\Themes\PanelBar\Outlook.png" />
+    <Content Include="Content\images\Themes\PanelBar\Simple.png" />
+    <Content Include="Content\images\Themes\PanelBar\Sitefinity.png" />
+    <Content Include="Content\images\Themes\PanelBar\Sunset.png" />
+    <Content Include="Content\images\Themes\PanelBar\Telerik.png" />
+    <Content Include="Content\images\Themes\PanelBar\Transparent.png" />
+    <Content Include="Content\images\Themes\PanelBar\Vista.png" />
+    <Content Include="Content\images\Themes\PanelBar\Web20.png" />
+    <Content Include="Content\images\Themes\PanelBar\WebBlue.png" />
+    <Content Include="Content\images\Themes\PanelBar\Windows7.png" />
+    <Content Include="Content\images\Themes\Slider\Black.png" />
+    <Content Include="Content\images\Themes\Slider\Default.png" />
+    <Content Include="Content\images\Themes\Slider\Forest.png" />
+    <Content Include="Content\images\Themes\Slider\Hay.png" />
+    <Content Include="Content\images\Themes\Slider\Metro.png" />
+    <Content Include="Content\images\Themes\Slider\Office2007.png" />
+    <Content Include="Content\images\Themes\Slider\Office2010Black.png" />
+    <Content Include="Content\images\Themes\Slider\Office2010Blue.png" />
+    <Content Include="Content\images\Themes\Slider\Office2010Silver.png" />
+    <Content Include="Content\images\Themes\Slider\Outlook.png" />
+    <Content Include="Content\images\Themes\Slider\Simple.png" />
+    <Content Include="Content\images\Themes\Slider\Sitefinity.png" />
+    <Content Include="Content\images\Themes\Slider\Sunset.png" />
+    <Content Include="Content\images\Themes\Slider\Telerik.png" />
+    <Content Include="Content\images\Themes\Slider\Transparent.png" />
+    <Content Include="Content\images\Themes\Slider\Vista.png" />
+    <Content Include="Content\images\Themes\Slider\Web20.png" />
+    <Content Include="Content\images\Themes\Slider\WebBlue.png" />
+    <Content Include="Content\images\Themes\Slider\Windows7.png" />
+    <Content Include="Content\images\Themes\Splitter\Black.png" />
+    <Content Include="Content\images\Themes\Splitter\Default.png" />
+    <Content Include="Content\images\Themes\Splitter\Forest.png" />
+    <Content Include="Content\images\Themes\Splitter\Hay.png" />
+    <Content Include="Content\images\Themes\Splitter\Metro.png" />
+    <Content Include="Content\images\Themes\Splitter\Office2007.png" />
+    <Content Include="Content\images\Themes\Splitter\Office2010Black.png" />
+    <Content Include="Content\images\Themes\Splitter\Office2010Blue.png" />
+    <Content Include="Content\images\Themes\Splitter\Office2010Silver.png" />
+    <Content Include="Content\images\Themes\Splitter\Outlook.png" />
+    <Content Include="Content\images\Themes\Splitter\Simple.png" />
+    <Content Include="Content\images\Themes\Splitter\Sitefinity.png" />
+    <Content Include="Content\images\Themes\Splitter\Sunset.png" />
+    <Content Include="Content\images\Themes\Splitter\Telerik.png" />
+    <Content Include="Content\images\Themes\Splitter\Transparent.png" />
+    <Content Include="Content\images\Themes\Splitter\Vista.png" />
+    <Content Include="Content\images\Themes\Splitter\Web20.png" />
+    <Content Include="Content\images\Themes\Splitter\WebBlue.png" />
+    <Content Include="Content\images\Themes\Splitter\Windows7.png" />
+    <Content Include="Content\images\Themes\TabStrip\Black.png" />
+    <Content Include="Content\images\Themes\TabStrip\Default.png" />
+    <Content Include="Content\images\Themes\TabStrip\Forest.png" />
+    <Content Include="Content\images\Themes\TabStrip\Hay.png" />
+    <Content Include="Content\images\Themes\TabStrip\Metro.png" />
+    <Content Include="Content\images\Themes\TabStrip\Office2007.png" />
+    <Content Include="Content\images\Themes\TabStrip\Office2010Black.png" />
+    <Content Include="Content\images\Themes\TabStrip\Office2010Blue.png" />
+    <Content Include="Content\images\Themes\TabStrip\Office2010Silver.png" />
+    <Content Include="Content\images\Themes\TabStrip\Outlook.png" />
+    <Content Include="Content\images\Themes\TabStrip\Simple.png" />
+    <Content Include="Content\images\Themes\TabStrip\Sitefinity.png" />
+    <Content Include="Content\images\Themes\TabStrip\Sunset.png" />
+    <Content Include="Content\images\Themes\TabStrip\Telerik.png" />
+    <Content Include="Content\images\Themes\TabStrip\Transparent.png" />
+    <Content Include="Content\images\Themes\TabStrip\Vista.png" />
+    <Content Include="Content\images\Themes\TabStrip\Web20.png" />
+    <Content Include="Content\images\Themes\TabStrip\WebBlue.png" />
+    <Content Include="Content\images\Themes\TabStrip\Windows7.png" />
+    <Content Include="Content\images\Themes\TreeView\Black.png" />
+    <Content Include="Content\images\Themes\TreeView\Default.png" />
+    <Content Include="Content\images\Themes\TreeView\Forest.png" />
+    <Content Include="Content\images\Themes\TreeView\Hay.png" />
+    <Content Include="Content\images\Themes\TreeView\Metro.png" />
+    <Content Include="Content\images\Themes\TreeView\Office2007.png" />
+    <Content Include="Content\images\Themes\TreeView\Office2010Black.png" />
+    <Content Include="Content\images\Themes\TreeView\Office2010Blue.png" />
+    <Content Include="Content\images\Themes\TreeView\Office2010Silver.png" />
+    <Content Include="Content\images\Themes\TreeView\Outlook.png" />
+    <Content Include="Content\images\Themes\TreeView\Simple.png" />
+    <Content Include="Content\images\Themes\TreeView\Sitefinity.png" />
+    <Content Include="Content\images\Themes\TreeView\Sunset.png" />
+    <Content Include="Content\images\Themes\TreeView\Telerik.png" />
+    <Content Include="Content\images\Themes\TreeView\Transparent.png" />
+    <Content Include="Content\images\Themes\TreeView\Vista.png" />
+    <Content Include="Content\images\Themes\TreeView\Web20.png" />
+    <Content Include="Content\images\Themes\TreeView\WebBlue.png" />
+    <Content Include="Content\images\Themes\TreeView\Windows7.png" />
+    <Content Include="Content\images\Themes\Upload\Black.png" />
+    <Content Include="Content\images\Themes\Upload\Default.png" />
+    <Content Include="Content\images\Themes\Upload\Forest.png" />
+    <Content Include="Content\images\Themes\Upload\Hay.png" />
+    <Content Include="Content\images\Themes\Upload\Metro.png" />
+    <Content Include="Content\images\Themes\Upload\Office2007.png" />
+    <Content Include="Content\images\Themes\Upload\Office2010Black.png" />
+    <Content Include="Content\images\Themes\Upload\Office2010Blue.png" />
+    <Content Include="Content\images\Themes\Upload\Office2010Silver.png" />
+    <Content Include="Content\images\Themes\Upload\Outlook.png" />
+    <Content Include="Content\images\Themes\Upload\Simple.png" />
+    <Content Include="Content\images\Themes\Upload\Sitefinity.png" />
+    <Content Include="Content\images\Themes\Upload\Sunset.png" />
+    <Content Include="Content\images\Themes\Upload\Telerik.png" />
+    <Content Include="Content\images\Themes\Upload\Transparent.png" />
+    <Content Include="Content\images\Themes\Upload\Vista.png" />
+    <Content Include="Content\images\Themes\Upload\Web20.png" />
+    <Content Include="Content\images\Themes\Upload\WebBlue.png" />
+    <Content Include="Content\images\Themes\Upload\Windows7.png" />
+    <Content Include="Content\images\Themes\Window\Black.png" />
+    <Content Include="Content\images\Themes\Window\Default.png" />
+    <Content Include="Content\images\Themes\Window\Forest.png" />
+    <Content Include="Content\images\Themes\Window\Hay.png" />
+    <Content Include="Content\images\Themes\Window\Metro.png" />
+    <Content Include="Content\images\Themes\Window\Office2007.png" />
+    <Content Include="Content\images\Themes\Window\Office2010Black.png" />
+    <Content Include="Content\images\Themes\Window\Office2010Blue.png" />
+    <Content Include="Content\images\Themes\Window\Office2010Silver.png" />
+    <Content Include="Content\images\Themes\Window\Outlook.png" />
+    <Content Include="Content\images\Themes\Window\Simple.png" />
+    <Content Include="Content\images\Themes\Window\Sitefinity.png" />
+    <Content Include="Content\images\Themes\Window\Sunset.png" />
+    <Content Include="Content\images\Themes\Window\Telerik.png" />
+    <Content Include="Content\images\Themes\Window\Transparent.png" />
+    <Content Include="Content\images\Themes\Window\Vista.png" />
+    <Content Include="Content\images\Themes\Window\Web20.png" />
+    <Content Include="Content\images\Themes\Window\WebBlue.png" />
+    <Content Include="Content\images\Themes\Window\Windows7.png" />
+    <Content Include="Content\images\transparent-skin-background.jpg" />
+    <Content Include="Content\Menu\Descriptions\Accessibility.html" />
+    <Content Include="Content\Menu\Descriptions\AnimationEffects.html" />
+    <Content Include="Content\Menu\Descriptions\ClientSideApi.html" />
+    <Content Include="Content\Menu\Descriptions\ClientSideEvents.html" />
+    <Content Include="Content\Menu\Descriptions\DataBindingToModel.html" />
+    <Content Include="Content\Menu\Descriptions\FirstLook.html" />
+    <Content Include="Content\Menu\Descriptions\Orientation.html" />
+    <Content Include="Content\Menu\Descriptions\RtlSupport.html" />
+    <Content Include="Content\Menu\Descriptions\SiteMapBinding.html" />
+    <Content Include="Content\Menu\Descriptions\Sprites.html" />
+    <Content Include="Content\Menu\Descriptions\Templates.html" />
+    <Content Include="Content\NumericTextBox\Descriptions\Accessibility.html" />
+    <Content Include="Content\NumericTextBox\Descriptions\ClientSideApi.html" />
+    <Content Include="Content\NumericTextBox\Descriptions\ClientSideEvents.html" />
+    <Content Include="Content\NumericTextBox\Descriptions\ClientValidation.html" />
+    <Content Include="Content\NumericTextBox\Descriptions\EditTemplate.html" />
+    <Content Include="Content\NumericTextBox\Descriptions\FirstLook.html" />
+    <Content Include="Content\NumericTextBox\Descriptions\Globalization.html" />
+    <Content Include="Content\NumericTextBox\Descriptions\RtlSupport.html" />
+    <Content Include="Content\NumericTextBox\Descriptions\ServerValidation.html" />
+    <Content Include="Content\Office2010Blue\editor.png" />
+    <Content Include="Content\Office2010Blue\gradient.png" />
+    <Content Include="Content\Office2010Blue\imagebrowser.png" />
+    <Content Include="Content\Office2010Blue\loading.gif" />
+    <Content Include="Content\Office2010Blue\slider-h.gif" />
+    <Content Include="Content\Office2010Blue\slider-v.gif" />
+    <Content Include="Content\Office2010Blue\sprite-vertical.png" />
+    <Content Include="Content\Office2010Blue\sprite.png" />
+    <Content Include="Content\PanelBar\Descriptions\Accessibility.html" />
+    <Content Include="Content\PanelBar\Descriptions\AjaxLoading.html" />
+    <Content Include="Content\PanelBar\Descriptions\AnimationEffects.html" />
+    <Content Include="Content\PanelBar\Descriptions\ClientSideApi.html" />
+    <Content Include="Content\PanelBar\Descriptions\ClientSideEvents.html" />
+    <Content Include="Content\PanelBar\Descriptions\DataBindingToModel.html" />
+    <Content Include="Content\PanelBar\Descriptions\FirstLook.html" />
+    <Content Include="Content\PanelBar\Descriptions\RtlSupport.html" />
+    <Content Include="Content\PanelBar\Descriptions\SiteMapBinding.html" />
+    <Content Include="Content\PanelBar\Descriptions\Sprites.html" />
+    <Content Include="Content\PanelBar\Descriptions\Templates.html" />
+    <Content Include="Content\PanelBar\FirstLook\contacts.gif" />
+    <Content Include="Content\PanelBar\FirstLook\contactsItems.gif" />
+    <Content Include="Content\PanelBar\FirstLook\foldersList.gif" />
+    <Content Include="Content\PanelBar\FirstLook\mail.gif" />
+    <Content Include="Content\PanelBar\FirstLook\mailDeletedItems.gif" />
+    <Content Include="Content\PanelBar\FirstLook\mailfolder.gif" />
+    <Content Include="Content\PanelBar\FirstLook\mailInbox.gif" />
+    <Content Include="Content\PanelBar\FirstLook\mailItems.gif" />
+    <Content Include="Content\PanelBar\FirstLook\mailOutbox.gif" />
+    <Content Include="Content\PanelBar\FirstLook\mailPersonalFolders.gif" />
+    <Content Include="Content\PanelBar\FirstLook\mailSearch.gif" />
+    <Content Include="Content\PanelBar\FirstLook\mailSent.gif" />
+    <Content Include="Content\PanelBar\FirstLook\notes.gif" />
+    <Content Include="Content\PanelBar\FirstLook\notesItems.gif" />
+    <Content Include="Content\PanelBar\FirstLook\tasks.gif" />
+    <Content Include="Content\PanelBar\FirstLook\tasksItems.gif" />
+    <Content Include="Content\PanelBar\Templates\digitalCamera.gif" />
+    <Content Include="Content\PanelBar\Templates\exposure.gif" />
+    <Content Include="Content\PanelBar\Templates\How-to-find-us.gif" />
+    <Content Include="Content\PanelBar\Templates\slr.gif" />
+    <Content Include="Content\PanelBar\Templates\Testimonials.gif" />
+    <Content Include="Content\Slider\Descriptions\Accessibility.html" />
+    <Content Include="Content\Slider\Descriptions\ClientSideApi.html" />
+    <Content Include="Content\Slider\Descriptions\ClientSideEvents.html" />
+    <Content Include="Content\Slider\Descriptions\ColorPicker.html" />
+    <Content Include="Content\Slider\Descriptions\EditTemplate.html" />
+    <Content Include="Content\Slider\Descriptions\FirstLook.html" />
+    <Content Include="Content\Splitter\Descriptions\Accessibility.html" />
+    <Content Include="Content\Splitter\Descriptions\AjaxLoading.html" />
+    <Content Include="Content\Splitter\Descriptions\ClientSideApi.html" />
+    <Content Include="Content\Splitter\Descriptions\ClientSideEvents.html" />
+    <Content Include="Content\Splitter\Descriptions\FirstLook.html" />
+    <Content Include="Content\Splitter\Descriptions\NestingComponents.html" />
+    <Content Include="Content\Splitter\Descriptions\Orientation.html" />
+    <Content Include="Content\TabStrip\Descriptions\Accessibility.html" />
+    <Content Include="Content\TabStrip\Descriptions\AjaxLoading.html" />
+    <Content Include="Content\TabStrip\Descriptions\AnimationEffects.html" />
+    <Content Include="Content\TabStrip\Descriptions\ClientSideApi.html" />
+    <Content Include="Content\TabStrip\Descriptions\ClientSideEvents.html" />
+    <Content Include="Content\TabStrip\Descriptions\DataBindingToModel.html" />
+    <Content Include="Content\TabStrip\Descriptions\FirstLook.html" />
+    <Content Include="Content\TabStrip\Descriptions\RtlSupport.html" />
+    <Content Include="Content\TabStrip\Descriptions\SiteMapBinding.html" />
+    <Content Include="Content\TabStrip\Descriptions\Sprites.html" />
+    <Content Include="Content\telerik.common.css" />
+    <Content Include="Content\telerik.office2010blue.css" />
+    <Content Include="Content\telerik.rtl.css" />
+    <Content Include="Content\TreeView\Common\contact.png" />
+    <Content Include="Content\TreeView\Common\file.png" />
+    <Content Include="Content\TreeView\Common\folder.png" />
+    <Content Include="Content\TreeView\Descriptions\Accessibility.html" />
+    <Content Include="Content\TreeView\Descriptions\AjaxLoading.html" />
+    <Content Include="Content\TreeView\Descriptions\AnimationEffects.html" />
+    <Content Include="Content\TreeView\Descriptions\CheckBoxSupport.html" />
+    <Content Include="Content\TreeView\Descriptions\ClientSideApi.html" />
+    <Content Include="Content\TreeView\Descriptions\ClientSideBinding.html" />
+    <Content Include="Content\TreeView\Descriptions\ClientSideEvents.html" />
+    <Content Include="Content\TreeView\Descriptions\DataBindingToModel.html" />
+    <Content Include="Content\TreeView\Descriptions\DragAndDrop.html" />
+    <Content Include="Content\TreeView\Descriptions\FirstLook.html" />
+    <Content Include="Content\TreeView\Descriptions\RtlSupport.html" />
+    <Content Include="Content\TreeView\Descriptions\SiteMapBinding.html" />
+    <Content Include="Content\TreeView\Descriptions\Sprites.html" />
+    <Content Include="Content\TreeView\Descriptions\Templates.html" />
+    <Content Include="Content\TreeView\FirstLook\contacts.gif" />
+    <Content Include="Content\TreeView\FirstLook\contactsItems.gif" />
+    <Content Include="Content\TreeView\FirstLook\foldersList.gif" />
+    <Content Include="Content\TreeView\FirstLook\mail.gif" />
+    <Content Include="Content\TreeView\FirstLook\mailDeletedItems.gif" />
+    <Content Include="Content\TreeView\FirstLook\mailfolder.gif" />
+    <Content Include="Content\TreeView\FirstLook\mailInbox.gif" />
+    <Content Include="Content\TreeView\FirstLook\mailItems.gif" />
+    <Content Include="Content\TreeView\FirstLook\mailOutbox.gif" />
+    <Content Include="Content\TreeView\FirstLook\mailPersonalFolders.gif" />
+    <Content Include="Content\TreeView\FirstLook\mailSearch.gif" />
+    <Content Include="Content\TreeView\FirstLook\mailSent.gif" />
+    <Content Include="Content\TreeView\FirstLook\notes.gif" />
+    <Content Include="Content\TreeView\FirstLook\notesItems.gif" />
+    <Content Include="Content\TreeView\FirstLook\tasks.gif" />
+    <Content Include="Content\TreeView\FirstLook\tasksItems.gif" />
+    <Content Include="Content\Upload\Descriptions\ClientSideApi.html" />
+    <Content Include="Content\Upload\Descriptions\ClientSideEvents.html" />
+    <Content Include="Content\Upload\Descriptions\FirstLook.html" />
+    <Content Include="Content\Upload\Descriptions\RtlSupport.html" />
+    <Content Include="Content\Upload\Descriptions\SyncUpload.html" />
+    <Content Include="Content\Upload\Descriptions\SyncUploadResult.html" />
+    <Content Include="Content\Window\Descriptions\Accessibility.html" />
+    <Content Include="Content\Window\Descriptions\AnimationEffects.html" />
+    <Content Include="Content\Window\Descriptions\ClientSideApi.html" />
+    <Content Include="Content\Window\Descriptions\ClientSideEvents.html" />
+    <Content Include="Content\Window\Descriptions\FirstLook.html" />
+    <Content Include="Content\Window\Descriptions\LoadingExternalPage.html" />
+    <Content Include="Content\Window\Descriptions\PopupForm.html" />
+    <Content Include="Content\Window\Descriptions\RtlSupport.html" />
+    <Content Include="Content\Window\window.png" />
+    <Content Include="Scripts\admin.js" />
+    <Content Include="Scripts\codeMirror\csscolors.css" />
+    <Content Include="Scripts\history.js" />
+    <Content Include="Scripts\jquery.min.js" />
+    <Content Include="Scripts\jquery.sform.js" />
+    <Content Include="Scripts\jquery.poshytip.min.js" />
+    <Content Include="Content\images\alert.png" />
+    <Content Include="Content\reset.css" />
+    <Content Include="Content\site.css" />
+    <Content Include="favicon.ico" />
+    <Content Include="Scripts\jquery-ui.min.js" />
+    <Content Include="Scripts\Chart\main.js" />
+    <Content Include="Scripts\Chart\svg.js" />
+    <Content Include="Scripts\Chart\themes.js" />
+    <Content Include="Scripts\Chart\vml.js" />
+    <Content Include="Scripts\Editor\components.js" />
+    <Content Include="Scripts\Editor\dom.js" />
+    <Content Include="Scripts\Editor\editor.js" />
+    <Content Include="Scripts\Editor\formatblock.js" />
+    <Content Include="Scripts\Editor\image.js" />
+    <Content Include="Scripts\Editor\indent.js" />
+    <Content Include="Scripts\Editor\inlineformat.js" />
+    <Content Include="Scripts\Editor\linebreak.js" />
+    <Content Include="Scripts\Editor\link.js" />
+    <Content Include="Scripts\Editor\lists.js" />
+    <Content Include="Scripts\Editor\pendingformats.js" />
+    <Content Include="Scripts\Editor\range.js" />
+    <Content Include="Scripts\Editor\serializer.js" />
+    <Content Include="Scripts\Editor\system.js" />
+    <Content Include="Scripts\jquery.tmpl.min.js" />
+    <Content Include="Scripts\jquery.treeTable.js" />
+    <Content Include="Scripts\jquery.unobtrusive-ajax.min.js" />
+    <Content Include="Scripts\jquery.validate.min.js" />
+    <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Scripts\knockout-2.1.0.js" />
+    <Content Include="Scripts\lazyload.min.js" />
+    <Content Include="Scripts\PagedList\PagedList.Mvc.js" />
+    <Content Include="Scripts\PagedList\PagedList.Mvc.Template.html" />
+    <Content Include="Scripts\sc\design\designer.js" />
+    <Content Include="Scripts\sc\design\label.js" />
+    <Content Include="Scripts\sc\design\page.js" />
+    <Content Include="Scripts\sc\design\theme.js" />
+    <Content Include="Scripts\sc\design\toolbar.js" />
+    <Content Include="Scripts\sc\design\widget.js" />
+    <Content Include="Scripts\sc\ext\validator.js" />
+    <Content Include="Scripts\sc\string.js" />
+    <Content Include="Scripts\sc\ui\form.js" />
+    <Content Include="Scripts\sc\ui\message.js" />
+    <Content Include="Scripts\sc\ui\telerik.js" />
+    <Content Include="Scripts\telerik.all.js" />
+    <Content Include="Scripts\telerik.autocomplete.js" />
+    <Content Include="Scripts\telerik.calendar.js" />
+    <Content Include="Scripts\telerik.chart.js" />
+    <Content Include="Scripts\telerik.combobox.js" />
+    <Content Include="Scripts\telerik.common.js" />
+    <Content Include="Scripts\telerik.datepicker.js" />
+    <Content Include="Scripts\telerik.datetimepicker.js" />
+    <Content Include="Scripts\telerik.draganddrop.js" />
+    <Content Include="Scripts\telerik.editor.js" />
+    <Content Include="Scripts\telerik.examples.min.js" />
+    <Content Include="Scripts\telerik.grid.editing.js" />
+    <Content Include="Scripts\telerik.grid.filtering.js" />
+    <Content Include="Scripts\telerik.grid.grouping.js" />
+    <Content Include="Scripts\telerik.grid.js" />
+    <Content Include="Scripts\telerik.grid.reordering.js" />
+    <Content Include="Scripts\telerik.grid.resizing.js" />
+    <Content Include="Scripts\telerik.imagebrowser.js" />
+    <Content Include="Scripts\telerik.list.js" />
+    <Content Include="Scripts\telerik.menu.js" />
+    <Content Include="Scripts\telerik.panelbar.js" />
+    <Content Include="Scripts\telerik.slider.js" />
+    <Content Include="Scripts\telerik.splitter.js" />
+    <Content Include="Scripts\telerik.tabstrip.js" />
+    <Content Include="Scripts\telerik.textbox.js" />
+    <Content Include="Scripts\telerik.timepicker.js" />
+    <Content Include="Scripts\telerik.treeview.js" />
+    <Content Include="Scripts\telerik.upload.js" />
+    <Content Include="Scripts\telerik.window.js" />
+    <Content Include="Sites\LengXiaoHua\Themes\Default\base.css" />
+    <Content Include="Sites\LengXiaoHua\Themes\Default\form.css" />
+    <Content Include="Sites\LengXiaoHua\Themes\Default\images\all.png" />
+    <Content Include="Sites\LengXiaoHua\Themes\Default\images\block-bg.png" />
+    <Content Include="Sites\LengXiaoHua\Themes\Default\images\body-bg.jpg" />
+    <Content Include="Sites\LengXiaoHua\Themes\Default\images\image.png" />
+    <Content Include="Sites\LengXiaoHua\Themes\Default\images\logo.png" />
+    <Content Include="Sites\LengXiaoHua\Themes\Default\images\text.png" />
+    <Content Include="Sites\LengXiaoHua\Themes\Default\images\time.png" />
+    <Content Include="Sites\LengXiaoHua\Themes\Default\images\video.png" />
+    <Content Include="Sites\LengXiaoHua\Themes\Default\images\weibo.png" />
+    <Content Include="Sites\LengXiaoHua\Themes\Default\main.css" />
+    <Content Include="Sites\LengXiaoHua\Themes\Default\preview.png" />
+    <Content Include="Sites\LengXiaoHua\Themes\Default\reset.css" />
+    <Content Include="Sites\Maximus4T\Themes\Default\images\banner-image-border.jpg" />
+    <Content Include="Sites\Maximus4T\Themes\Default\images\banner-wrapper-bg.png" />
+    <Content Include="Sites\Maximus4T\Themes\Default\images\dropotron-menu-active-hover.png" />
+    <Content Include="Sites\Maximus4T\Themes\Default\images\dropotron-menu-bg.png" />
+    <Content Include="Sites\Maximus4T\Themes\Default\images\dropotron-menu-separator.png" />
+    <Content Include="Sites\Maximus4T\Themes\Default\images\footer-content-bg-01.png" />
+    <Content Include="Sites\Maximus4T\Themes\Default\images\footer-content-bg-02.png" />
+    <Content Include="Sites\Maximus4T\Themes\Default\images\footer-content-bg-03.png" />
+    <Content Include="Sites\Maximus4T\Themes\Default\images\footer-content-bg.png" />
+    <Content Include="Sites\Maximus4T\Themes\Default\images\header-bg.png" />
+    <Content Include="Sites\Maximus4T\Themes\Default\images\list-separator-bg.jpg" />
+    <Content Include="Sites\Maximus4T\Themes\Default\images\list-separator-bg.png" />
+    <Content Include="Sites\Maximus4T\Themes\Default\images\menu-active-bgleft.jpg" />
+    <Content Include="Sites\Maximus4T\Themes\Default\images\menu-active-bgleft.png" />
+    <Content Include="Sites\Maximus4T\Themes\Default\images\menu-active-bgright.jpg" />
+    <Content Include="Sites\Maximus4T\Themes\Default\images\menu-active-bgright.png" />
+    <Content Include="Sites\Maximus4T\Themes\Default\images\menu-background-default.png" />
+    <Content Include="Sites\Maximus4T\Themes\Default\images\menu-content-bg.png" />
+    <Content Include="Sites\Maximus4T\Themes\Default\images\menu-first-bgleft.png" />
+    <Content Include="Sites\Maximus4T\Themes\Default\images\menu-first-bgright.png" />
+    <Content Include="Sites\Maximus4T\Themes\Default\images\page-content-bg-02.png" />
+    <Content Include="Sites\Maximus4T\Themes\Default\images\page-content-bg-03.png" />
+    <Content Include="Sites\Maximus4T\Themes\Default\images\pics01.jpg" />
+    <Content Include="Sites\Maximus4T\Themes\Default\images\pics02.jpg" />
+    <Content Include="Sites\Maximus4T\Themes\Default\images\post-date-bg.png" />
+    <Content Include="Sites\Maximus4T\Themes\Default\images\posted-meta-bg.png" />
+    <Content Include="Sites\Maximus4T\Themes\Default\images\posted-meta-separator.png" />
+    <Content Include="Sites\Maximus4T\Themes\Default\images\sidebar-title-bg.png" />
+    <Content Include="Sites\Maximus4T\Themes\Default\images\spacer.gif" />
+    <Content Include="Sites\Maximus4T\Themes\Default\images\wrapper-bg.jpg" />
+    <Content Include="Sites\Maximus4T\Themes\Default\preview.png" />
+    <Content Include="Sites\Maximus4T\Themes\Default\reset.css" />
+    <Content Include="Sites\Maximus4T\Themes\Default\site.css" />
+    <Content Include="Sites\Blog\Themes\SimpleBlue\reset.css" />
+    <Content Include="Sites\Blog\Themes\Suhow\preview.png" />
+    <Content Include="Sites\Blog\Themes\Suhow\reset.css" />
+    <Content Include="Sites\Blog\Themes\Suhow\images\logo.png" />
+    <Content Include="Sites\Blog\Themes\Suhow\images\sprites.png" />
+    <Content Include="Sites\Blog\Themes\Suhow\site.css" />
+    <Content Include="Sites\SusuCMS\Themes\Blue\images\home-button.png" />
+    <Content Include="Sites\SusuCMS\Themes\Blue\preview.png" />
+    <Content Include="Sites\SusuCMS\Themes\Blue\base.css" />
+    <Content Include="Sites\SusuCMS\Themes\Blue\images\header-bg.png" />
+    <Content Include="Sites\SusuCMS\Themes\Blue\images\logo.png" />
+    <Content Include="Sites\SusuCMS\Themes\Blue\images\main-arrow.png" />
+    <Content Include="Sites\SusuCMS\Themes\Blue\images\main-bg.png" />
+    <Content Include="Sites\SusuCMS\Themes\Blue\images\page-introduction-bg.png" />
+    <Content Include="Sites\SusuCMS\Themes\Blue\images\recent-work-icon.png" />
+    <Content Include="Sites\SusuCMS\Themes\Blue\layout.css" />
+    <Content Include="Sites\SusuCMS\Themes\Blue\reset.css" />
+    <Content Include="Sites\SusuCMS\Themes\Blue\site.css" />
+    <None Include="App_Code\TelerikHelper.cshtml" />
+    <Content Include="App_Code\HelperPage.cs" />
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Content Include="Sites\Blog\Views\Templates\Template1.cshtml" />
+    <Content Include="Sites\Blog\Views\Templates\Template2.cshtml" />
+    <Content Include="Sites\Blog\Views\Templates\Template3.cshtml" />
+    <Content Include="Sites\Blog\Views\Templates\Template4.cshtml" />
+    <Content Include="Sites\Blog\Views\Templates\Template5.cshtml" />
+    <Content Include="Sites\Blog\Views\Templates\Template6.cshtml" />
+    <Content Include="Areas\Blog\Views\Web.config" />
+    <Content Include="Areas\Shop\Views\Web.config" />
+    <Content Include="Areas\Blog\Views\_ViewStart.cshtml" />
+    <Content Include="Areas\Shop\Views\_ViewStart.cshtml" />
+    <Content Include="Areas\Blog\Views\Home\Index.cshtml" />
+    <Content Include="Areas\Blog\Views\Category\Index.cshtml" />
+    <Content Include="Areas\Blog\Views\Category\EditorTemplates\Category.cshtml" />
+    <Content Include="Areas\Blog\Views\Category\Edit.cshtml" />
+    <Content Include="Areas\Blog\Views\Category\Create.cshtml" />
+    <Content Include="Areas\Blog\Views\Article\Index.cshtml" />
+    <Content Include="Areas\Blog\Views\Article\EditorTemplates\Article.cshtml" />
+    <Content Include="Areas\Blog\Views\Article\Edit.cshtml" />
+    <Content Include="Areas\Blog\Views\Article\Create.cshtml" />
+    <Content Include="Sites\Blog\Views\Shared\Header.cshtml" />
+    <Content Include="Sites\Blog\Views\Shared\Footer.cshtml" />
+    <Content Include="Sites\Blog\Views\Shared\Navigation.cshtml" />
+    <Content Include="Sites\tools.susucms.com\Scripts\site.js" />
+    <Content Include="Sites\tools.susucms.com\Themes\Default\images\link-blank.png" />
+    <Content Include="Sites\tools.susucms.com\Themes\Default\preview.png" />
+    <Content Include="Sites\tools.susucms.com\Themes\Default\site.css" />
+    <Content Include="Views\Site404.cshtml" />
+    <Content Include="Widgets\RichText\Widget.cshtml" />
+    <Content Include="Widgets\RichText\Admin.cshtml" />
+    <Content Include="Widgets\Web.config" />
+    <Content Include="Widgets\RichText\Widget.config" />
+    <Content Include="Widgets\Blog.CategoryLinks\Widget.config" />
+    <Content Include="Widgets\Blog.ArticleList\Widget.config" />
+    <Content Include="Widgets\Blog.CategoryLinks\Widget.cshtml" />
+    <Content Include="Widgets\LinkList\Widget.config" />
+    <Content Include="Widgets\Gallery\Widget.config" />
+    <Content Include="Areas\Admin\Views\Widget\Create.cshtml" />
+    <Content Include="Widgets\Blog.ArticleDetails\Widget.config" />
+    <Content Include="Widgets\Blog.ArticleDetails\Widget.cshtml" />
+    <Content Include="Widgets\Blog.ArticleList\Widget.cshtml" />
+    <Content Include="Areas\Admin\Views\Widget\Edit.cshtml" />
+    <Content Include="Sites\Blog\Themes\Suhow\Theme.config" />
+    <Content Include="Widgets\LinkList\Widget.cshtml" />
+    <Content Include="Widgets\Blog.CategoryLinks\Admin.cshtml" />
+    <Content Include="Widgets\Blog.ArticleList\Admin.cshtml" />
+    <Content Include="Widgets\Blog.TagCloud\Widget.cshtml" />
+    <Content Include="Widgets\Blog.TagCloud\Widget.config" />
+    <Content Include="Widgets\Blog.TagCloud\Admin.cshtml" />
+    <Content Include="Areas\Admin\Views\SiteSetting\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Home\Setting.cshtml" />
+    <Content Include="Widgets\Blog.ArticleLinks\Widget.config">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Widgets\Blog.ArticleLinks\Admin.cshtml" />
+    <Content Include="Widgets\Blog.ArticleLinks\Widget.cshtml" />
+    <Content Include="Areas\Admin\Views\SiteSetting\UrlRewrite.cshtml" />
+    <Content Include="Widgets\Blog.ArticleDetails\Admin.cshtml" />
+    <Content Include="Areas\Admin\Views\Theme\CustomCss.cshtml" />
+    <Content Include="Areas\Admin\Views\Menu\EditorTemplates\Menu.cshtml" />
+    <Content Include="Areas\Admin\Views\Menu\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\Menu\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Menu\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\Account\ChangeLanguage.cshtml" />
+    <Content Include="Areas\Admin\Views\Shared\UserRoleTabs.cshtml" />
+    <Content Include="Areas\Admin\Views\AdminRole\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\AdminRole\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\AdminRole\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\AdminRole\EditorTemplates\AdminRole.cshtml" />
+    <Content Include="Areas\Admin\Views\Shared\SiteSettingTabs.cshtml" />
+    <Content Include="Areas\Admin\Views\Shared\Subheader.cshtml" />
+    <Content Include="Sites\Blog\Views\Web.config" />
+    <Content Include="Sites\Blog\Themes\SimpleBlue\Theme.config" />
+    <Content Include="Views\Web.config" />
+    <Content Include="Sites\SusuCMS\Views\Web.config" />
+    <Content Include="Sites\SusuCMS\Views\Templates\Home.cshtml" />
+    <Content Include="Sites\SusuCMS\Views\Templates\Subpage.cshtml" />
+    <Content Include="Sites\SusuCMS\Themes\Blue\Theme.config" />
+    <Content Include="Sites\SusuCMS\Views\Shared\Header.cshtml" />
+    <Content Include="Sites\SusuCMS\Views\Shared\Footer.cshtml" />
+    <Content Include="Sites\SusuCMS\Views\Shared\404.cshtml" />
+    <Content Include="Areas\Admin\Views\Widget\Option.cshtml" />
+    <Content Include="Areas\Admin\Views\SystemLog\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Widget\Preview.cshtml" />
+    <Content Include="Sites\Blog\Site.config" />
+    <Content Include="Sites\SusuCMS\Site.config" />
+    <Content Include="Areas\Admin\Views\Theme\RenderTheme.cshtml" />
+    <Content Include="Areas\Admin\Views\Label\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Label\Edit.cshtml" />
+    <Content Include="Sites\SusuCMS\Widgets\Web.config" />
+    <Content Include="Areas\Admin\Views\AdminUser\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\Shared\GlobalMenu.cshtml" />
+    <Content Include="Areas\Admin\Views\Shared\SiteMenu.cshtml" />
+    <Content Include="Areas\Blog\Views\Shared\SiteMenu.cshtml" />
+    <Content Include="Areas\Admin\Views\Media\BreadCrumbs.cshtml" />
+    <Content Include="Areas\Admin\Views\Media\CreateFolder.cshtml" />
+    <Content Include="Areas\Admin\Views\Media\EditFile.cshtml" />
+    <Content Include="Areas\Admin\Views\Media\EditFolder.cshtml" />
+    <Content Include="Areas\Admin\Views\Media\EditorTemplates\FolderModel.cshtml" />
+    <Content Include="Areas\Admin\Views\Media\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Media\Upload.cshtml" />
+    <Content Include="Areas\Admin\Views\Shared\NoPermission.cshtml" />
+    <Content Include="Widgets\Blog.Contact\Admin.cshtml" />
+    <Content Include="Widgets\Blog.Contact\Widget.config" />
+    <Content Include="Widgets\Blog.Contact\Widget.cshtml" />
+    <Content Include="Areas\Blog\Views\Contact\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Mail\Setting.cshtml" />
+    <Content Include="Areas\Admin\Views\Mail\Index.cshtml" />
+    <Content Include="Sites\tools.susucms.com\Site.config" />
+    <Content Include="Sites\tools.susucms.com\Themes\Default\Theme.config" />
+    <Content Include="Sites\tools.susucms.com\Views\Templates\Default.cshtml" />
+    <Content Include="Sites\tools.susucms.com\Views\Web.config" />
+    <Content Include="Sites\tools.susucms.com\Views\Shared\Header.cshtml" />
+    <Content Include="Sites\tools.susucms.com\Views\Shared\Footer.cshtml" />
+    <Content Include="Sites\tools.susucms.com\Views\Shared\404.cshtml" />
+    <Content Include="Sites\tools.susucms.com\Widgets\Web.config" />
+    <Content Include="Sites\tools.susucms.com\Widgets\JavaScriptMinify\Widget.config" />
+    <Content Include="Sites\tools.susucms.com\Widgets\JavaScriptMinify\Widget.cshtml" />
+    <Content Include="Sites\tools.susucms.com\Widgets\AspNetUrlAnalysis\Widget.cshtml" />
+    <Content Include="Sites\tools.susucms.com\Widgets\AspNetUrlAnalysis\Widget.config" />
+    <Content Include="Sites\tools.susucms.com\Widgets\PageResponseHeaderAnalysis\Widget.config" />
+    <Content Include="Sites\tools.susucms.com\Widgets\PageResponseHeaderAnalysis\Widget.cshtml" />
+    <Content Include="Sites\tools.susucms.com\Widgets\AspNetMachineKey\Widget.config" />
+    <Content Include="Sites\tools.susucms.com\Widgets\AspNetMachineKey\Widget.cshtml" />
+    <Content Include="Sites\tools.susucms.com\Widgets\WordCount\Widget.cshtml" />
+    <Content Include="Sites\tools.susucms.com\Widgets\WordCount\Widget.config" />
+    <Content Include="Sites\tools.susucms.com\Widgets\RobotsChecker\Widget.config" />
+    <Content Include="Sites\tools.susucms.com\Widgets\RobotsChecker\Widget.cshtml" />
+    <Content Include="Sites\tools.susucms.com\Widgets\DeadLinkDetection\Widget.config" />
+    <Content Include="Sites\tools.susucms.com\Widgets\DeadLinkDetection\Widget.cshtml" />
+    <Content Include="Sites\tools.susucms.com\Widgets\Tools\Widget.config" />
+    <Content Include="Sites\tools.susucms.com\Widgets\Tools\Widget.cshtml" />
+    <Content Include="Sites\tools.susucms.com\Widgets\CultureInfoQuery\Widget.config" />
+    <Content Include="Sites\tools.susucms.com\Widgets\CultureInfoQuery\Widget.cshtml" />
+    <Content Include="Sites\tools.susucms.com\Widgets\HtmlSpecialSymbols\Widget.cshtml" />
+    <Content Include="Sites\tools.susucms.com\Widgets\HtmlSpecialSymbols\Widget.config" />
+    <Content Include="Sites\tools.susucms.com\Widgets\DomainWhois\Widget.config" />
+    <Content Include="Sites\tools.susucms.com\Widgets\DomainWhois\Widget.cshtml" />
+    <Content Include="Sites\tools.susucms.com\Widgets\IPAddressLookUp\Widget.config" />
+    <Content Include="Sites\tools.susucms.com\Widgets\IPAddressLookUp\Widget.cshtml" />
+    <Content Include="Areas\Admin\Views\Site\Export.cshtml" />
+    <Content Include="Areas\Admin\Views\Site\Import.cshtml" />
+    <Content Include="Sites\tools.susucms.com\Widgets\UrlEncodeDecode\Widget.config" />
+    <Content Include="Sites\tools.susucms.com\Widgets\UrlEncodeDecode\Widget.cshtml" />
+    <Content Include="Sites\tools.susucms.com\Widgets\HtmlEncodeDecode\Widget.config" />
+    <Content Include="Sites\tools.susucms.com\Widgets\HtmlEncodeDecode\Widget.cshtml" />
+    <Content Include="Sites\tools.susucms.com\Widgets\Base64EncodeDecode\Widget.config" />
+    <Content Include="Sites\tools.susucms.com\Widgets\Base64EncodeDecode\Widget.cshtml" />
+    <Content Include="Sites\tools.susucms.com\Widgets\CssFormatMinify\Widget.cshtml" />
+    <Content Include="Sites\tools.susucms.com\Widgets\CssFormatMinify\Widget.config" />
+    <Content Include="Sites\tools.susucms.com\Widgets\Query\Widget.cshtml" />
+    <Content Include="Sites\tools.susucms.com\Widgets\Query\Widget.config" />
+    <Content Include="Sites\Maximus4T\Themes\Default\Theme.config" />
+    <Content Include="Sites\Maximus4T\Views\Templates\Default.cshtml" />
+    <Content Include="Sites\Maximus4T\Views\Web.config" />
+    <Content Include="Sites\Maximus4T\Site.config" />
+    <Content Include="Sites\Maximus4T\Views\Shared\Footer.cshtml" />
+    <Content Include="Sites\Maximus4T\Views\Shared\Navigation.cshtml" />
+    <Content Include="Sites\Maximus4T\Views\Shared\Header.cshtml" />
+    <Content Include="Sites\Maximus4T\Views\Shared\404.cshtml" />
+    <Content Include="Areas\Blog\Views\Setting\Permalink.cshtml" />
+    <Content Include="Areas\Blog\Views\Shared\SettingTabs.cshtml" />
+    <Content Include="Areas\Blog\Views\Setting\Index.cshtml" />
+    <Content Include="Widgets\LinkList\Admin.cshtml" />
+    <Content Include="Areas\Blog\Views\Comment\Index.cshtml" />
+    <Content Include="Widgets\Blog.Comment\Widget.config" />
+    <Content Include="Widgets\Blog.Comment\Widget.cshtml" />
+    <Content Include="Widgets\Blog.Comment\Admin.cshtml" />
+    <Content Include="Widgets\GoogleSearchResult\Widget.config" />
+    <Content Include="Widgets\GoogleSearchResult\Widget.cshtml" />
+    <Content Include="Widgets\GoogleSearchResult\Admin.cshtml" />
+    <None Include="Areas\Admin\Content\images\sprites.psd" />
+    <Content Include="Areas\Admin\Views\Shared\MetaFields.cshtml" />
+    <Content Include="Areas\Blog\Views\ArticleDraft\List.cshtml" />
+    <Content Include="Widgets\Blog.MonthList\Widget.config" />
+    <Content Include="Widgets\Blog.MonthList\Widget.cshtml" />
+    <Content Include="Widgets\GoogleMap\Admin.cshtml" />
+    <Content Include="Widgets\GoogleMap\Widget.config" />
+    <Content Include="Widgets\GoogleMap\Widget.cshtml" />
+    <Content Include="Widgets\Login\Admin.cshtml" />
+    <Content Include="Widgets\Login\Widget.config" />
+    <Content Include="Widgets\Login\Widget.cshtml" />
+    <Content Include="Areas\Admin\Views\User\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\User\Setting.cshtml" />
+    <Content Include="Sites\LengXiaoHua\Site.config" />
+    <Content Include="Sites\LengXiaoHua\Themes\Default\Theme.config" />
+    <Content Include="Sites\LengXiaoHua\Views\Shared\404.cshtml" />
+    <Content Include="Sites\LengXiaoHua\Views\Shared\Footer.cshtml" />
+    <Content Include="Sites\LengXiaoHua\Views\Shared\Header.cshtml" />
+    <Content Include="Sites\LengXiaoHua\Views\Shared\Navigation.cshtml" />
+    <Content Include="Sites\LengXiaoHua\Views\Templates\Default.cshtml" />
+    <Content Include="packages.config" />
+    <Content Include="Sites\LengXiaoHua\Views\Web.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Scripts\sc\core.js" />
+    <Content Include="Scripts\codeMirror\editor.js" />
+    <Content Include="Scripts\codeMirror\highlight.js" />
+    <Content Include="Scripts\codeMirror\mirrorframe.js" />
+    <Content Include="Scripts\codeMirror\parsecss.js" />
+    <Content Include="Scripts\codeMirror\parsedummy.js" />
+    <Content Include="Scripts\codeMirror\parsehtmlmixed.js" />
+    <Content Include="Scripts\codeMirror\parsejavascript.js" />
+    <Content Include="Scripts\codeMirror\parsesparql.js" />
+    <Content Include="Scripts\codeMirror\select.js" />
+    <Content Include="Scripts\codeMirror\stringstream.js" />
+    <Content Include="Scripts\codeMirror\tokenize.js" />
+    <Content Include="Scripts\codeMirror\tokenizejavascript.js" />
+    <Content Include="Scripts\codeMirror\undo.js" />
+    <Content Include="Scripts\codeMirror\unittests.js" />
+    <Content Include="Scripts\codeMirror\util.js" />
+    <Content Include="Scripts\codeMirror\xmlcolors.css" />
+    <Content Include="Scripts\codeMirror\codemirror.js" />
+    <Content Include="Scripts\codeMirror\parsexml.js" />
+    <Content Include="Scripts\jquery.query-2.1.7.js" />
+    <Content Include="Scripts\json2.js" />
+    <Content Include="Sites\Blog\Themes\SimpleBlue\preview.png" />
+    <Content Include="Sites\Blog\Themes\SimpleBlue\site.css" />
+    <Content Include="Global.asax" />
+    <Content Include="Areas\Admin\Views\Site\Home.cshtml" />
+    <Content Include="Areas\Admin\Views\Page\Design.cshtml" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Areas\Admin\Views\_ViewStart.cshtml" />
+    <Content Include="Areas\Admin\Views\Account\ChangePassword.cshtml" />
+    <Content Include="Areas\Admin\Views\Home\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Shared\Error.cshtml" />
+    <Content Include="Areas\Admin\Views\Shared\_Layout.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Areas\Shop\Views\Shared\" />
+    <Folder Include="Cms_Data\" />
+    <Folder Include="Content\UserFiles\" />
+    <Folder Include="Sites\Blog\Themes\SimpleBlue\images\" />
+    <Folder Include="Sites\Blog\Widgets\" />
+    <Folder Include="Sites\LengXiaoHua\Widgets\" />
+    <Folder Include="Sites\Maximus4T\Widgets\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\Admin\Views\Web.config">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Areas\Admin\Views\Shared\NotFound.cshtml" />
+    <Content Include="Areas\Admin\Views\Page\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\Page\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\Page\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Shared\_Dialog.cshtml" />
+    <Content Include="Areas\Admin\Views\AdminUser\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\AdminUser\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\Account\Login.cshtml" />
+    <Content Include="Sites\Blog\Views\Shared\404.cshtml" />
+    <Content Include="Areas\Admin\Views\Page\EditorTemplates\Page.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\SusuCMS.Blog\SusuCMS.Blog.csproj">
+      <Project>{ACC5F826-7EB9-42F6-8802-56701F01D591}</Project>
+      <Name>SusuCMS.Blog</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SusuCMS.Shop\SusuCMS.Shop.csproj">
+      <Project>{9A9663D2-443E-4FF3-92CB-F49936492DF8}</Project>
+      <Name>SusuCMS.Shop</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SusuCMS\SusuCMS.csproj">
+      <Project>{8882A7FF-25E4-4831-AD35-ABD2F8F649A4}</Project>
+      <Name>SusuCMS</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\Admin\Views\Site\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\Site\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\Site\EditorTemplates\Site.cshtml" />
+    <Content Include="Areas\Admin\Views\Site\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Site\List.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Widgets\GoogleMap\Resources\Admin.zh-CN.resx">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Widgets\GoogleSearchResult\Resources\Admin.zh-CN.resx">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Widgets\LinkList\Resources\Admin.zh-CN.resx">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Widgets\Login\Resources\Admin.zh-CN.resx">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Widgets\RichText\Resources\Admin.zh-CN.resx">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target> -->
+  <Target Name="MvcBuildViews" AfterTargets="AfterBuild" Condition="'$(MvcBuildViews)'=='true'">
+    <AspNetCompiler VirtualPath="temp" PhysicalPath="$(WebProjectOutputDir)" />
+  </Target>
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>False</UseIIS>
+          <AutoAssignPort>False</AutoAssignPort>
+          <DevelopmentServerPort>15537</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>
+          </IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+</Project>

@@ -1,0 +1,29 @@
+﻿.open-login-sites ul
+{
+    overflow: hidden;
+}
+.open-login-sites li
+{
+    float: left;
+}
+.open-login-sites li a
+{
+    background: url(images/open-login-sites.png) no-repeat;
+    display: inline-block;
+    width: 24px;
+    height: 24px;
+    margin-right: 8px;
+    text-indent: -9999px;
+}
+.open-login-sites li a.sina
+{
+    background-position: left center;
+}
+.open-login-sites li a.qq
+{
+    background-position: -68px center;
+}
+.open-login-sites li a.msn
+{
+    background-position: -102px center;
+}

@@ -1,0 +1,70 @@
+﻿@inherits SusuCMS.Web.Front.WidgetPageBase
+
+@using Winista.Text.HtmlParser
+@using Winista.Text.HtmlParser.Filters
+@using Winista.Text.HtmlParser.Lex
+@{
+    FrontHtml.ClientScript.jQuery(true);
+    
+    var url = Request.QueryString["url"];
+    if (!String.IsNullOrWhiteSpace(url))
+    {
+        try
+        {
+            using (var client = new WebClient())
+            {
+                client.Encoding = System.Text.UTF8Encoding.UTF8;
+                client.Headers.Add("Content-Type", "application/x-www-form-urlencoded");
+                var html = client.UploadString("http://tool.motoricerca.info/robots-checker.phtml", "url=" + url);
+                var parser = new Parser(new Lexer(html));
+                var nodes = parser.ExtractAllNodesThatMatch(new TagNameFilter("table"));
+                for (var i = 0; i < nodes.Count; i++)
+                {
+                    var tag = nodes[i] as ITag;
+                    if (tag != null && tag.GetAttribute("class") == "report")
+                    {
+                        tag.RemoveAttribute("width");
+                        tag.RemoveAttribute("align");
+                        ViewBag.Result = tag.ToHtml();
+                        break;
+                    }
+                }
+            }
+        }
+        catch
+        {
+            ViewBag.Result = WidgetLabel("No Result");
+        }
+    }
+}
+<h2>
+    @WidgetLabel("Robots.txt Checker")</h2>
+<div class="description">
+    @WidgetLabel(@"Robots.txt files (often erroneously called robot.txt, in singular) are created 
+by webmasters to mark (disallow) files and directories of a web site that search engine spiders (and other types of robots) should not access. 
+This robots.txt checker is a ""validator"" that analyzes the syntax of a robots.txt file to see if its format is valid as established by Robot Exclusion Standard (please read the documentation and the tutorial to learn the basics) or if it contains errors.")
+</div>
+<form action="@Request.Url.AbsolutePath" method="get">
+<p>
+    @WidgetLabel("Type Robots.txt full URL (Example: http://www.domain.com/robots.txt):")
+</p>
+@Html.TextBox("url", url)
+<p class="buttons">
+    <button type="submit">
+        @WidgetLabel("Submit")</button>
+</p>
+</form>
+@Html.Raw(ViewBag.Result)
+<p>
+    <a href="http://tool.motoricerca.info/robots-checker.phtml" target="_blank">@WidgetLabel("Goto Robots Checker Site")</a>
+</p>
+<script type="text/javascript">
+    $(function () {
+        $('.report td').each(function () {
+            $(this).removeAttr('align');
+            $(this).removeAttr('valign');
+            $(this).removeAttr('width');
+        });
+        $('.report').prepend('<colgroup><col width="80" /><col /></colgroup>');
+    });
+</script>

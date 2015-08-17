@@ -1,0 +1,40 @@
+﻿@helper BuildItems(Menu menu, IEnumerable<Menu> list)
+    {
+        var children = list.Where(i => i.ParentId == menu.Id).OrderBy(i => i.DisplayOrder);
+        if (children.Count() > 0)
+        {
+    <ul>
+        @foreach (var item in children)
+        {
+            <li><a href="@FrontUrl.GetClientUrl(item.Url)"  
+            @if (item.OpenInNewWindow)
+            {<text>target="_blank"</text>}>@item.Name</a>
+                @BuildItems(item, list)</li>
+        }
+    </ul>
+        }
+}
+@{   
+    var menus = CurrentSite.Menus.Where(i => i.IsOnline).ToList();
+    var parents = menus.Where(i => i.ParentId == null).OrderBy(i => i.DisplayOrder);
+}
+<div id="nav">
+    @if (parents.Any())
+    {
+        <ul>
+            @foreach (var item in parents)
+            {
+                <li @if (item.IsCurrent())
+                    {<text> class="current"</text>}><a href="@FrontUrl.GetClientUrl(item.Url)" 
+                     @if (item.OpenInNewWindow)
+                     {<text>target="_blank"</text>}>@item.Name</a></li>
+            }
+        </ul>
+    }
+    <div class="search-box">
+        <form action="@FrontUrl.GetClientUrl("Search")" method="get">
+        <input type="text" name="q" id="search" />
+        <button type="submit">@SiteLabel("Search")</button>
+        </form>
+    </div>
+</div>

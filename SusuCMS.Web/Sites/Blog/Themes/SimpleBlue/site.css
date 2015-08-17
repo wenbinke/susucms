@@ -1,0 +1,268 @@
+﻿/* = 1 Base
+---------------------------------------------------------------------------------------------------------------------*/
+html
+{
+    overflow: auto;
+}
+body
+{
+    font-size: 12px;
+    line-height: 1.5em;
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: #e2e2e2;
+}
+a
+{
+    color: #3088FF;
+}
+a:hover
+{
+    text-decoration: underline;
+}
+.hide
+{
+    display: none;
+}
+.clear
+{
+    clear: both;
+}
+.clearfix
+{
+    display: block;
+}
+.clearfix:after
+{
+    content: ".";
+    display: block;
+    clear: both;
+    visibility: hidden;
+    height: 0;
+}
+/* For Safari */
+html[xmlns] .clearfix
+{
+    display: block;
+}
+/* For IE6 */
+*html .clearfix
+{
+    height: 1%;
+}
+/* For IE7 */
+* + html .clearfix
+{
+    height: 1%;
+}
+
+/* = 2 Layout
+---------------------------------------------------------------------------------------------------------------------*/
+#wrapper
+{
+    width: 960px;
+    margin: 0 auto;
+}
+#content, #lsidebar, #rsidebar
+{
+    min-height: 250px;
+}
+#lsidebar, #rsidebar
+{
+    width: 200px;
+}
+.layout2 #lsidebar
+{
+    float: left;
+}
+.layout2 #content
+{
+    margin-left: 210px;
+}
+.layout3 #rsidebar
+{
+    float: right;
+}
+.layout3 #content
+{
+    margin-right: 210px;
+}
+.layout4 #lsidebar
+{
+    float: left;
+}
+.layout4 #content
+{
+    margin-left: 210px;
+    margin-right: 210px;
+}
+.layout4 #rsidebar
+{
+    float: right;
+}
+.layout5 #lsidebar
+{
+    float: left;
+    margin-right: 10px;
+}
+.layout5 #rsidebar
+{
+    float: left;
+}
+.layout5 #content
+{
+    margin-left: 420px;
+}
+.layout6 #lsidebar
+{
+    float: right;
+    margin-right: 10px;
+}
+.layout6 #rsidebar
+{
+    float: right;
+}
+.layout6 #content
+{
+    margin-right: 420px;
+}
+
+/* = 2 Typography
+---------------------------------------------------------------------------------------------------------------------*/
+#header
+{
+    padding: 40px 0 25px 0;
+}
+#header h1 a
+{
+    font-family: "Myriad Pro" , Myriad, "Trebuchet MS" , Arial, sans-serif;
+    color: #222;
+    font-size: 40px;
+    text-shadow: 1px 2px #fff;
+}
+#header h1 a:hover
+{
+    text-decoration: none;
+}
+#header .description
+{
+    font: italic 14px/1em Georgia, serif;
+    color: #999;
+    padding-top: 5px;
+}
+
+#nav
+{
+    background-color: #3a4f63;
+    height: 45px;
+}
+#nav ul
+{
+    overflow: hidden;
+}
+#nav ul li
+{
+    float: left;
+}
+#nav ul li a
+{
+    border-right: 1px #4e667D solid;
+    background-color: #3a4f63;
+    color: #fff;
+    display: block;
+    line-height: 45px;
+    padding: 0 30px;
+    white-space: nowrap;
+    font-size: 15px;
+}
+#nav ul li a:hover
+{
+    background-color: #465c71;
+    text-decoration: none;
+}
+
+#main
+{
+    margin-top: 10px;
+    background-color: #fff;
+    min-height: 300px;
+    padding-bottom: 15px;
+}
+
+#footer
+{
+    background: #f9f9f9;
+    border-top: 1px solid #ddd;
+    padding: 30px 0;
+    text-align: center;
+}
+#footer a
+{
+    color: #333;
+    font-weight: 700;
+}
+
+/* = 3 Widgets
+---------------------------------------------------------------------------------------------------------------------*/
+.widget
+{
+    color: #555;
+}
+.widget h3
+{
+    color: #1F2122;
+    font-size: 14px;
+    text-transform: uppercase;
+    padding: 15px 0 10px 10px;
+    margin-bottom: 15px;
+    border-bottom: 1px solid #D9D9D9;
+}
+.widget ul
+{
+    padding-left: 10px;
+    list-style-position: inside;
+    list-style-type: disc;
+}
+.widget.article-category li a, .widget.article-list li a
+{
+    margin-bottom: 3px;
+    padding-right: 5px;
+    line-height: 22px;
+}
+
+.article-tags li
+{
+    display: inline;
+    padding: 5px 0;
+    margin-right: 6px;
+    color: #39F;
+}
+.tag1 a
+{
+    font-size: 100%;
+    font-weight: 200;
+}
+.tag2 a
+{
+    font-size: 110%;
+    font-weight: 300;
+}
+.tag3 a
+{
+    font-size: 120%;
+    font-weight: 500;
+}
+.tag4 a
+{
+    font-size: 130%;
+    font-weight: 600;
+}
+.tag5 a
+{
+    font-size: 150%;
+    font-weight: 800;
+}
+.tag6 a
+{
+    font-size: 180%;
+    font-weight: 900;
+}

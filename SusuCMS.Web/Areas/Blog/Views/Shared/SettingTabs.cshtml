@@ -1,0 +1,10 @@
+﻿@{
+    var controller = GetControllerName();
+    var action = GetActionName();
+}
+<ul class="tabs">
+    <li @if (action == "index" && controller == "setting")
+        {<text>class="current"</text>}>@Html.ActionLink(SusuCMS.DisplayResource.General, "Index", "Setting")</li>
+    <li @if (controller == "setting" && action == "permalink")
+        {<text>class="current"</text>}>@Html.ActionLink(SusuCMS.Blog.DisplayResource.PermalinkSettings, "Permalink", "Setting", new { Area = "Blog" }, null)</li>
+</ul>

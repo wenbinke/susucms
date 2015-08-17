@@ -1,0 +1,295 @@
+﻿@model SusuCMS.Blog.Article
+@{
+    var dataContext = BlogWorkContext.GetDataContext();
+    var tags = dataContext.Tags.WithSiteId(CurrentSite.Id).ToList();
+    var categories = dataContext.Categories.WithSiteId(CurrentSite.Id).ToTreeList();
+}
+@using (Html.BeginForm())
+{
+    @Html.HiddenFor(m => m.Id)
+    <table class="form-table article-form">
+        <tbody>
+            <tr>
+                <th>@Html.LabelFor(m => m.Title)
+                </th>
+                <td>
+                    @Html.TextBoxFor(m => m.Title)
+                    @Html.ValidationMessageFor(m => m.Title)
+                    <a class="right open-draft-window" id="open-draft-window" href="javascript://">@SusuCMS.Blog.DisplayResource.Drafts
+                        (<span>@dataContext.ArticleDrafts.WithSiteId(CurrentSiteId).Count()</span>)</a>
+                </td>
+            </tr>
+            <tr>
+                <th>@Html.LabelFor(m => m.Slug)
+                </th>
+                <td>
+                    @Html.TextBoxFor(m => m.Slug)
+                    <a href="javascript://" id="get-slug" class="button"><span>@SusuCMS.Blog.DisplayResource.ExtractFromTitle</span></a>
+                    @Html.ValidationMessageFor(m => m.Slug)
+                </td>
+            </tr>
+            <tr>
+                <th>@Html.LabelFor(m => m.Content)
+                </th>
+                <td>
+                    @TelerikHelper.Editor("Content", i => { i.HtmlAttributes(new { style = "height:400px" }).ClientEvents(events => events.OnLoad("calcAdminHeight")); })
+                </td>
+            </tr>
+            <tr>
+                <th>@Html.LabelFor(m => m.Tags)
+                </th>
+                <td class="tag-editor">
+                    @Html.Hidden("TagsJson")
+                    <div class="clearfix">
+                        @Html.TextBox("TagName", null, new { maxlength = "30" }) <span class="form-text">@SusuCMS.Blog.DisplayResource.SeparateTagsWithWhitespace</span>
+                    </div>
+                    <ul>
+                        @foreach (var item in Model.Tags)
+                        {
+                            <li data-name="@item.Name"><a href="javascript://" class="remove" title="@SusuCMS.DisplayResource.Remove">
+                            </a>@item.Name</li>
+                        }
+                    </ul>
+                    <div class="exist-tags">
+                        <a href="javascript://">@SusuCMS.Blog.DisplayResource.ChooseFromExistTags</a>
+                        <div>
+                            @if (tags.Count > 0)
+                            {
+                                <ul>
+                                    @foreach (var item in tags)
+                                    {
+                                        <li data-id="@item.Id" data-name="@item.Name"><a href="javascript://" class="delete" title="@SusuCMS.DisplayResource.Delete">
+                                        </a><a href="javascript://" class="add">@item.Name</a></li>
+                                    }
+                                </ul>
+                            }
+                            else
+                            {
+                                @SusuCMS.Blog.DisplayResource.NoTagYet
+                            }
+                        </div>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <th>@Html.LabelFor(m => m.CategoryId)
+                </th>
+                <td>@Html.DropDownListFor(m => m.CategoryId, new SelectList(categories, "Id", "Name"), SusuCMS.Blog.DisplayResource.None)
+                </td>
+            </tr>
+            <tr>
+                <th>@Html.LabelFor(m => m.Author)
+                </th>
+                <td>
+                    @Html.TextBoxFor(m => m.Author)
+                </td>
+            </tr>
+            <tr>
+                <th>
+                    @Html.LabelFor(m => m.MetaFieldsJson)
+                    @Html.HelpTip(SusuCMS.DisplayResource.MetaFieldsTip)
+                </th>
+                <td class="meta-fields">
+                    <ul>
+                    </ul>
+                    <a href="javascript://" class="add">+<span>@SusuCMS.DisplayResource.AddMoreFields</span></a>
+                    @Html.HiddenFor(m => m.MetaFieldsJson)
+                </td>
+            </tr>
+            <tr>
+                <th>
+                    @Html.LabelFor(m => m.IsOnline)
+                </th>
+                <td>
+                    @Html.CheckBoxFor(m => m.IsOnline)
+                </td>
+            </tr>
+            <tr>
+                <th>
+                    @Html.LabelFor(m => m.EnableComment)
+                </th>
+                <td>
+                    @Html.CheckBoxFor(m => m.EnableComment)
+                </td>
+            </tr>
+            <tr>
+                <th>
+                </th>
+                <td>
+                    @Html.AntiForgeryToken()
+                    @Html.SaveButton()
+                    <a href="javascript://" class="button" id="save-draft"><span>@SusuCMS.Blog.DisplayResource.SaveDraft</span></a>
+                    @Html.ReturnButton()
+                    @Html.Hidden("ArticleDraftId", 0)
+                </td>
+            </tr>
+        </tbody>
+    </table>
+}
+@(Html.Telerik().Window()
+        .Name("SelectDraft")
+        .LoadContentFrom("List", "ArticleDraft", new { area = "Blog" })
+        .Title(SusuCMS.Blog.DisplayResource.Drafts)
+        .Buttons(buttons => buttons.Refresh().Maximize().Close())
+        .Width(550).Height(250).Draggable(true).Visible(false).Resizable())
+@Html.Partial("~/Areas/Admin/Views/Shared/MetaFields.cshtml")
+<script type="text/javascript">
+    $(function () {
+        /* Tags
+        ----------------------------------------------------------*/
+        function tagInAddedList(name) {
+            // check tag in added tags
+            var $tags = $('.tag-editor > ul li');
+            for (var i in $tags) {
+                if ($tags.eq(i).data('name') == name) {
+                    return true;
+                }
+            }
+
+            return false;
+        }
+
+        function appendTag(name) {
+            $('.tag-editor > ul').append($.format('<li data-name="{0}"><a href="javascript://" class="remove" title="@SusuCMS.DisplayResource.Remove"></a>{0}</li>', name));
+        }
+
+        function getTagsJson() {
+            var tags = new Array();
+            $('.tag-editor > ul li').each(function () {
+                tags.push($(this).data('name'));
+            });
+
+            return JSON.stringify(tags);
+        }
+
+        /* Show/hide exist tags */
+        $('.exist-tags > a').toggle(function () {
+            $(this).siblings('div').show();
+        }, function () {
+            $(this).siblings('div').hide();
+        });
+
+        /* Remove tag */
+        $('.tag-editor .remove').live('click', function () {
+            $(this).parent('li').remove();
+        });
+
+        /* Select from exist tags */
+        $('.exist-tags .add').click(function () {
+            var name = $(this).parent('li').data('name');
+
+            if (!tagInAddedList(name)) {
+                appendTag(name);
+            }
+        });
+
+        /* Add tag by typing */
+        $('#TagName').keydown(function (e) {
+            if (e.which == '13' || e.which == '32') {
+                var name = $.trim($(this).val());
+                if (name != '') {
+                    if (!tagInAddedList(name)) {
+                        appendTag(name);
+                    }
+                }
+
+                $(this).val('');
+            }
+        }).keyup(function () {
+            $(this).val($.trim($(this).val()));
+        });
+
+        /* Delete tag */
+        $('.exist-tags .delete').live('click', function () {
+            if (confirm('@SusuCMS.MessageResource.DeleteConfirmMessage')) {
+                var $parent = $(this).parent('li');
+                var name = $parent.data('name');
+
+                $.post('@Url.Action("Delete", "Tag")', { id: $parent.data('id') }, function (result) {
+                    if (result == 'true') {
+                        $('.tag-editor > ul li').each(function () {
+                            if ($(this).data('name') == name) {
+                                $(this).remove();
+                            }
+                        });
+
+                        $parent.remove();
+
+                        sc.ui.Message.showSuccess('@SusuCMS.Blog.MessageResource.DeleteTagSuccess');
+                    } else {
+                        sc.ui.Message.showError('@SusuCMS.Blog.MessageResource.DeleteTagFailed');
+                    }
+                });
+            }
+        });
+
+        /* Slug */
+        $('#get-slug').click(function () {
+            $('#Slug').val(sc.String.getSlug($('#Title').val()));
+        });
+
+        /* Draft 
+        ---------------------------------------------------------*/
+        $('#open-draft-window').click(function () {
+            $("#SelectDraft").data("tWindow").refresh().center().open();
+        });
+
+        /* Save draft */
+        $('#save-draft').click(function () {
+            $("#SelectDraft").data("tWindow").close();
+
+            var title = $('#Title').val();
+            if (title.length == 0) {
+                title = '@SusuCMS.Blog.DisplayResource.NoTitle';
+            }
+
+            $.post('@Url.Action("Save", "ArticleDraft")', { Id: $('#ArticleDraftId').val(), Title: title, Content: $('#Content').data('tEditor').value() },
+                function (result) {
+                    $('#ArticleDraftId').val(result.Model.Id);
+                    $('#open-draft-window span').text(result.DraftCount);
+                    sc.ui.Message.showSuccess('@SusuCMS.Blog.MessageResource.SaveDraftSuccess');
+                });
+        });
+
+        /* Delete draft */
+        $('.article-drafts .delete').live('click', function () {
+            if (confirm('@SusuCMS.MessageResource.DeleteConfirmMessage')) {
+                var id = $(this).data('id');
+                var tr = $(this).closest('tr');
+
+                $.post('@Url.Action("Delete", "ArticleDraft")', { Id: id },
+                    function (result) {
+                        if (result.IsSuccess) {
+                            tr.remove();
+                            $('#open-draft-window span').text(result.DraftCount);
+                            sc.ui.Message.showSuccess('@SusuCMS.Blog.MessageResource.DeleteDraftSuccess');
+                        } else {
+                            sc.ui.Message.showError('@SusuCMS.Blog.MessageResource.DeleteDraftFailed');
+                        }
+                    });
+            }
+        });
+
+        /* Load draft */
+        $('.article-drafts .load').live('click', function () {
+            var id = $(this).data('id');
+            $.get('@Url.Action("Get", "ArticleDraft")', { Id: id },
+                function (result) {
+                    $("#SelectDraft").data("tWindow").close();
+                    $('#ArticleDraftId').val(id);
+                    $('#Title').val(result.Title);
+                    $('#Content').data('tEditor').value(result.Content);
+                });
+        });
+
+        initMetaFieldsByJson($('#MetaFieldsJson').val());
+
+        $('form').submit(function () {
+
+            $('#TagsJson').val(getTagsJson());
+            $('#MetaFieldsJson').val(getMetaFieldsJson());
+
+            return true;
+        });
+    });
+</script>

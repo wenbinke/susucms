@@ -1,0 +1,8 @@
+﻿@{
+    var controller = GetControllerName();
+    var action = GetActionName();
+}
+<ul class="tabs">
+    <li @if (action == "index" && controller == "sitesetting")
+        {<text>class="current"</text>}>@Html.ActionLink(DisplayResource.General, "Index", "SiteSetting")</li>
+</ul>

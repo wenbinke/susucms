@@ -1,0 +1,25 @@
+﻿@model IQueryable<ArticleDraft>
+@if (Model.Any())
+{
+    <table class="data-table article-drafts">
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td class="title">@item.Title
+                    </td>
+                    <td class="time">@item.Time
+                    </td>
+                    <td class="action">
+                        <a href="javascript://" class="load" data-id="@item.Id">@SusuCMS.Blog.DisplayResource.Load</a>
+                        <a href="javascript://" class="delete" data-id="@item.Id">@SusuCMS.DisplayResource.Delete</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+else
+{
+    <span>@SusuCMS.Blog.DisplayResource.NoDraftYet</span>
+}

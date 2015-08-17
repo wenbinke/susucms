@@ -1,0 +1,15 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>@DisplayResource.SiteNotFoundTitle - SusuCMS</title>
+    <link href="@Url.Content("~/Content/siteNotFound")" rel="stylesheet" type="text/css" />
+</head>
+<body>
+    <div class="site-not-found">
+        <img src="@Url.Content("~/Content/images/alert.png")" alt="Error!" />
+        <h1>
+            @DisplayResource.SiteNotFoundTitle</h1>
+        @Html.Raw(DisplayResource.SiteNotFoundMessage)
+    </div>
+</body>
+</html>

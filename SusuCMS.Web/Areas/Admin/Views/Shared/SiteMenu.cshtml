@@ -1,0 +1,35 @@
+﻿@{
+    var controller = GetControllerName();
+    var action = GetActionName();
+}
+<li @if (controller == "site" && action == "home")
+    { <text>class="current"</text> }>@Html.ActionLink(DisplayResource.Home, "Home", "Site", new { area = "Admin" }, null)</li>
+@if (CurrentUser.HasPermission(Permission.Pages))
+{
+    <li @if (controller == "page")
+        { <text>class="current"</text> }>@Html.ActionLink(DisplayResource.Pages, "Index", "Page", new { area = "Admin" }, null)
+        <ul>
+            <li @if (controller == "menu")
+                { <text>class="current"</text>}>@Html.ActionLink(DisplayResource.Menus, "Index", "Menu", new { area = "Admin" }, null)</li>
+            <li @if (controller == "label")
+                { <text>class="current"</text>}>@Html.ActionLink(DisplayResource.Labels, "Index", "Label", new { area = "Admin" }, null)</li>
+            <li @if (controller == "theme")
+                {<text>class="current"</text>}>@Html.ActionLink(DisplayResource.CustomCss, "CustomCss", "Theme", new { Area = "Admin" }, null)</li>
+        </ul>
+    </li>
+}
+@if (CurrentUser.HasPermission(Permission.Media))
+{
+    <li @if (controller == "media")
+        { <text>class="current"</text> }>@Html.ActionLink(DisplayResource.Media, "Index", "Media", new { area = "Admin" }, null)</li>
+}
+@if (CurrentUser.HasPermission(Permission.SiteSettings))
+{
+    <li  @if (controller == "sitesetting")
+         { <text>class="current"</text> }>@Html.ActionLink(DisplayResource.Settings, "Index", "SiteSetting", new { area = "Admin" }, null)</li>
+}
+<li class="seperate"></li>
+<li @if (controller == "user")
+     { <text>class="current"</text> }>@Html.ActionLink(DisplayResource.Users, "Index", "User", new { area = "Admin" }, null)</li>
+<li  @if (controller == "mail")
+     { <text>class="current"</text> }>@Html.ActionLink(DisplayResource.Mails, "Index", "Mail", new { area = "Admin" }, null)</li>

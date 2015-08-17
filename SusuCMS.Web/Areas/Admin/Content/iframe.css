@@ -1,0 +1,78 @@
+﻿.s-zone
+{
+    display: block;
+    min-height: 100px;
+}
+.s-zone .ui-sortable-placeholder
+{
+    border: 1px dashed red;
+    visibility: visible !important;
+    background-color: #fff;
+    display: block;
+    max-height: 100px;
+}
+.s-zone .ui-sortable-helper
+{
+    max-width: 200px;
+    min-width: 200px;
+    cursor: move;
+}
+
+
+#s-label-tooltip
+{
+    position: absolute;
+}
+#s-label-tooltip a, #s-label-tooltip a span
+{
+    display: inline-block;
+    text-decoration: none;
+    height: 29px;
+    background: url(images/sprites.png) left -333px;
+    color: #fff;
+    font-size: 12px;
+}
+#s-label-tooltip a
+{
+    float: left;
+    margin-right: 5px;
+    border: none;
+    cursor: pointer;
+    width: auto;
+    overflow: visible;
+}
+#s-label-tooltip a span
+{
+    line-height: 29px;
+    text-align: center;
+    font-weight: bold;
+    padding-left: 10px;
+    padding-right: 15px;
+    margin-left: 5px;
+    background-position: right -362px;
+}
+
+#s-label-tooltip a:hover, #s-label-tooltip a span:hover
+{
+    text-decoration: underline;
+    cursor: pointer;
+}
+#s-label-tooltip a:hover
+{
+    background-position: left -391px;
+}
+#s-label-tooltip a span:hover
+{
+    background-position: right -420px;
+}
+
+.s-compact-view
+{
+    display: block;
+    height: 70px;
+    line-height: 70px;
+    margin: 5px;
+    border: 1px solid #ccc;
+    font-size: 20px;
+    text-align: center;
+}

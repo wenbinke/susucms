@@ -1,0 +1,53 @@
+﻿@inherits SusuCMS.Web.Front.WidgetPageBase
+@{
+    FrontHtml.ClientScript.jQuery(true);
+    var userSetting = CurrentSite.GetUserSetting();
+}
+<div class="widget login">
+    @using (Html.BeginForm())
+    {
+        <dl class="login-form">
+            <dt>
+                <label for="UserName">
+                    @WidgetLabel("User name")
+                </label>
+                <span class="required">*</span> </dt>
+            <dd>
+                <input type="text" name="UserName" value="@Request["UserName"]" @Validation.For("UserName") />
+                @Html.ValidationMessage("UserName")
+            </dd>
+            <dt>
+                <label for="Password">
+                    @WidgetLabel("Password")
+                </label>
+                <span class="required">*</span> </dt>
+            <dd>
+                <input type="text" name="Password" value="@Request["Password"]" @Validation.For("Password") />
+                @Html.ValidationMessage("Password")
+            </dd>
+            <dd>
+                <button type="submit">
+                    @WidgetLabel("Login")
+                </button>
+            </dd>
+        </dl>
+        @Html.AntiForgeryToken()
+        <div class="open-login-sites">
+            <label>
+                @WidgetLabel("Partner sites account login")
+            </label>
+            <ul>
+                <li><a href="javascript://" class="qq" id="qq-login-button">QQ</a></li>
+                <li><a href="javascript://" class="sina">Sina</a></li>
+                <li><a href="javascript://" class="msn">MSN</a></li>
+            </ul>
+        </div>
+    }
+</div>
+<script type="text/javascript">
+    $(function () {
+        $('#qq-login-button').click(function () {
+            window.open('https://graph.qq.com/oauth2.0/authorize?response_type=token&client_id=100280361&redirect_uri=www.susucms.com&scope=all');
+        });
+    });
+</script>

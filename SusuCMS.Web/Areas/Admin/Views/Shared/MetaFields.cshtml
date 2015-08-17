@@ -1,0 +1,64 @@
+﻿<script id="meta-field-template" type="text/x-jquery-tmpl"> 
+    <li>
+        <p class="watermark">
+            <label>name</label>
+            <input name="Name${Index}" type="text" value="${Name}" class="meta-name" />
+        </p>
+        <p class="watermark">
+            <label>content</label>
+            <input name="Content${Index}" type="text" value="${Content}" class="meta-content" />
+        </p>
+        <a href="javascript://" class="delete"></a>
+    </li>
+</script>
+<script type="text/javascript">
+
+    /* meta fields
+    ----------------------------------------------------*/
+    function getMetaFields() {
+        var list = new Array();
+        $('.meta-fields ul li').each(function () {
+            var name = $(this).find('.meta-name').val();
+            var content = $(this).find('.meta-content').val();
+            list.push({ Name: name, Content: content });
+        });
+
+        return list;
+    }
+
+    function initMetaFields(list) {
+
+        var newList = new Array();
+        for (var i in list) {
+            newList.push({ Index: i, Name: list[i].Name, Content: list[i].Content });
+        }
+
+        var fields = $("#meta-field-template").tmpl(newList);
+        $('.meta-fields ul').empty().append(fields);
+
+        sc.ui.Form.transform(fields);
+        sc.ui.Form.initWatermark();
+        sc.ext.Validator.parseDynamicContent('.meta-fields');
+    }
+
+    $('.meta-fields .add').click(function () {
+        var list = getMetaFields();
+        list.push({ Name: '', Content: '' });
+
+        initMetaFields(list);
+    });
+
+    $('.meta-fields .delete').live('click', function () {
+        $(this).parent('li').remove();
+    });
+
+    function getMetaFieldsJson() {
+        return JSON.stringify(getMetaFields());
+    }
+
+    function initMetaFieldsByJson(json) {
+        if (json != '') {
+            initMetaFields($.parseJSON(json));
+        }
+    }
+</script>

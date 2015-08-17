@@ -1,0 +1,62 @@
+﻿@model SusuCMS.Web.Admin.Models.CreateAdminUserModel
+@{
+    ViewBag.Title = DisplayResource.Create;
+    ViewBag.Subtitle = DisplayResource.Create;
+}
+@using (Html.BeginForm("Create", "AdminUser", null, FormMethod.Post, new { autocomplete = "off" }))
+{
+    <table class="form-table">
+        <tbody>
+            <tr>
+                <th>@Html.LabelFor(m => m.UserName)
+                </th>
+                <td>
+                    @Html.TextBoxFor(m => m.UserName)
+                    @Html.ValidationMessageFor(m => m.UserName)
+                </td>
+            </tr>
+            <tr>
+                <th>@Html.LabelFor(m => m.Email)
+                </th>
+                <td>
+                    @Html.TextBoxFor(m => m.Email)
+                    @Html.ValidationMessageFor(m => m.Email)
+                </td>
+            </tr>
+            <tr>
+                <th>@Html.LabelFor(m => m.RoleId)
+                </th>
+                <td>
+                    @Html.DropDownListFor(m => m.RoleId, new SelectList(DataContext.AdminRoles, "Id", "Name"))
+                    @Html.ValidationMessageFor(m => m.RoleId)
+                </td>
+            </tr>
+            <tr>
+                <th>@Html.LabelFor(m => m.Password)
+                </th>
+                <td>
+                    @Html.PasswordFor(m => m.Password)
+                    @Html.ValidationMessageFor(m => m.Password)
+                </td>
+            </tr>
+            <tr>
+                <th>
+                    @Html.LabelFor(m => m.ConfirmPassword)
+                </th>
+                <td>
+                    @Html.PasswordFor(m => m.ConfirmPassword)
+                    @Html.ValidationMessageFor(m => m.ConfirmPassword)
+                </td>
+            </tr>
+            <tr>
+                <th>
+                </th>
+                <td>
+                    @Html.AntiForgeryToken()
+                    @Html.SaveButton()
+                    @Html.ReturnButton()
+                </td>
+            </tr>
+        </tbody>
+    </table>
+}

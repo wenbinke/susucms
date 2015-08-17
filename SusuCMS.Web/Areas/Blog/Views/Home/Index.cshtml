@@ -1,0 +1,14 @@
+﻿@{
+    ViewBag.Title = SusuCMS.DisplayResource.Home;
+    ViewBag.Subtitle = SusuCMS.DisplayResource.Home;
+    var dataContext = BlogWorkContext.GetDataContext();
+}
+<fieldset>
+    <legend>@SusuCMS.Blog.DisplayResource.Stats</legend>
+    <ul>
+        <li>@dataContext.Articles.WithSiteId(CurrentSiteId).Count() Articles</li>
+        <li>@dataContext.Categories.WithSiteId(CurrentSiteId).Count() Categories</li>
+        <li>@dataContext.Tags.WithSiteId(CurrentSiteId).Count() Tags</li>
+        <li>@dataContext.Comments.WithSiteId(CurrentSiteId).Count() Comments</li>
+    </ul>
+</fieldset>

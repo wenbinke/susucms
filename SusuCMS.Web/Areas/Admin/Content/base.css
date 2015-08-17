@@ -1,0 +1,71 @@
+﻿html
+{
+    overflow: hidden;
+}
+body
+{
+    font-size: 12px;
+    line-height: 1.5em;
+    font-family: Arial, Helvetica, sans-serif;
+}
+a, a:focus
+{
+    color: #244281;
+}
+.hide
+{
+    display: none;
+}
+.left
+{
+    float: left;
+}
+.right
+{
+    float: right;
+}
+.clear
+{
+    clear: both;
+}
+.clearfix
+{
+    display: block;
+}
+.clearfix:after
+{
+    content: ".";
+    display: block;
+    clear: both;
+    visibility: hidden;
+    height: 0;
+}
+/* For Safari */
+html[xmlns] .clearfix
+{
+    display: block;
+}
+/* For IE6 */
+*html .clearfix
+{
+    height: 1%;
+}
+/* For IE7 */
+* + html .clearfix
+{
+    height: 1%;
+}
+
+fieldset 
+{
+    border: 1px solid #C0C7D9;
+    padding: 8px;
+    margin-bottom: 5px;
+}
+
+fieldset legend 
+{
+    color: #000;
+    font-weight: 700;
+    padding: 0 5px;
+}

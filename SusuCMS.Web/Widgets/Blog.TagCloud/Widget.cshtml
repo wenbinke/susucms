@@ -1,0 +1,66 @@
+﻿@inherits SusuCMS.Web.Front.WidgetPageBase
+@using SusuCMS.Blog;
+@{
+    var data = CurrentWidget.GetData();
+    var minimumArticleCount = 1;
+    var maximumTagCount = -1;
+    if (data != null)
+    {
+        minimumArticleCount = data.MinimumArticleCount;
+        maximumTagCount = data.MaximumTagCount;
+    }
+
+    var dataContext = BlogWorkContext.GetDataContext();
+    var tags = dataContext.Tags.WithSiteId(CurrentSite.Id).Where(i => i.ArticleCount >= minimumArticleCount);
+    if (maximumTagCount != -1)
+    {
+        tags = tags.OrderByDescending(i => i.ArticleCount).Take(maximumTagCount);
+    }
+
+    var permalinkSetting = CurrentSite.GetPermalinkSetting();
+    var tagUrl = permalinkSetting.TagUrl;
+}
+@functions{
+    string GetTagClass(int tagCount, int maxCount)
+    {
+        var weight = ((double)tagCount / maxCount) * 100;
+        if (weight >= 99)
+        {
+            return "biggest";
+        }
+        else if (weight >= 70)
+        {
+            return "big";
+        }
+        else if (weight >= 40)
+        {
+            return "medium";
+        }
+        else if (weight >= 20)
+        {
+            return "small";
+        }
+        else if (weight >= 3)
+        {
+            return "smallest";
+        }
+
+        return string.Empty;
+    }
+}
+<div class="widget tag-cloud">
+    <h2>
+        @WidgetLabel("Tags")</h2>
+    @if (tags.Any())
+    {
+        var maxArticleCount = tags.Max(i => i.ArticleCount);
+        
+        <ul>
+            @foreach (var item in tags)
+            {
+                <li class="@GetTagClass(item.ArticleCount, maxArticleCount)"><a href="@FrontUrl.GetClientUrl(tagUrl, new { TagId = item.Id, Slug = item.Name.AsSlug() })">@item.Name</a>
+                </li>
+            }
+        </ul>
+    }
+</div>

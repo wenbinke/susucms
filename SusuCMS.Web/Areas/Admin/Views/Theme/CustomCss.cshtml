@@ -1,0 +1,46 @@
+﻿@{
+    ViewBag.Title = DisplayResource.CustomCss;
+    ViewBag.Subtitle = DisplayResource.CustomCss;
+}
+@using (Html.BeginForm())
+{
+    <table class="form-table">
+        <tbody>
+            <tr>
+                <th>@Html.Label("Content", DisplayResource.Content)
+                </th>
+                <td>
+                    <div class="code-editor">
+                        @Html.TextArea("Content")
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <th>@Html.Label("EnableCustomCss", DisplayResource.EnableCustomCss)
+                </th>
+                <td>
+                    @Html.CheckBox("EnableCustomCss")
+                </td>
+            </tr>
+            <tr>
+                <th>
+                </th>
+                <td>@Html.AntiForgeryToken()
+                    @Html.SaveButton()
+                </td>
+            </tr>
+        </tbody>
+    </table>
+}
+<script type="text/javascript" src="@Url.Content("~/Scripts/codeMirrorjs")"></script>
+<script type="text/javascript">
+    $(function () {
+        var editor = CodeMirror.fromTextArea('Content', {
+            height: '350px',
+            parserfile: 'parsecss.js',
+            stylesheet: '@Url.Content("~/Scripts/codeMirror/csscolors.css")',
+            path: '@Url.Content("~/Scripts/codeMirror/")',
+            continuousScanning: 500
+        });
+    });
+</script>

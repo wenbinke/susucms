@@ -1,0 +1,25 @@
+﻿@inherits SusuCMS.Web.App_Code.HelperPage
+@using System.Web.Mvc
+@using System.Web.Mvc.Html
+@using Telerik.Web.Mvc.UI;
+@using Telerik.Web.Mvc.UI.Fluent;
+
+@helper Editor(string name, Action<EditorBuilder> build)
+{
+    var editor = Html.Telerik().Editor()
+                   .Name(name)
+                   .Tools(tools => tools.Custom(settings => settings.HtmlAttributes(new { @class = "t-html" })))
+                   .Encode(false)
+                   .FileBrowser(t => t.Browse("Browse", "ImageBrowser", new { area = "Admin" })
+                   .Thumbnail("Thumbnail", "ImageBrowser", new { area = "Admin" })
+                   .Upload("Upload", "ImageBrowser", new { area = "Admin" })
+                   .DeleteFile("DeleteFile", "ImageBrowser", new { area = "Admin" })
+                   .DeleteDirectory("DeleteDirectory", "ImageBrowser", new { area = "Admin" })
+                   .CreateDirectory("CreateDirectory", "ImageBrowser", new { area = "Admin" }));
+                   
+    build(editor);
+
+    editor.Render();
+}
+
+

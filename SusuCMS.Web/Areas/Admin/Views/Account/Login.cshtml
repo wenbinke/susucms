@@ -1,0 +1,69 @@
+﻿@model SusuCMS.Web.Admin.Models.LoginModel
+@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>@DisplayResource.LoginSusuCMS</title>
+    <link href="@Url.Content("~/Areas/Admin/Content/login")" rel="stylesheet" type="text/css" />
+</head>
+<body>
+    <div id="header">
+        <h1>
+            <a href="/">SusuCMS</a>
+        </h1>
+    </div>
+    <div id="main">
+        <div class="login-wrapper">
+            <div class="login-panel">
+                <div class="login-panel-top">
+                </div>
+                <div class="login-panel-content">
+                    <h2>
+                        @DisplayResource.LoginSusuCMS</h2>
+                    <div class="separate">
+                    </div>
+                    @using (Html.BeginForm())
+                    {
+                        @Html.ValidationSummary()
+                        <table class="form">
+                            <tbody>
+                                <tr>
+                                    <th>
+                                        @Html.LabelFor(m => m.UserName)
+                                    </th>
+                                    <td>
+                                        @Html.TextBoxFor(m => m.UserName)
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th>
+                                        @Html.LabelFor(m => m.Password)
+                                    </th>
+                                    <td>
+                                        @Html.PasswordFor(m => m.Password)
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th>
+                                    </th>
+                                    <td>
+                                        @Html.AntiForgeryToken()
+                                        <button type="submit" class="button blue">
+                                            <span>
+                                                @DisplayResource.Login</span>
+                                        </button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    }
+                </div>
+                <div class="login-panel-bottom">
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

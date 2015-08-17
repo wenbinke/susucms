@@ -1,0 +1,19 @@
+﻿@{
+    ViewBag.Title = DisplayResource.Users;
+    ViewBag.Subtitle = DisplayResource.Users;
+}
+<div class="toolbar clearfix">
+    <a href="@Url.Action("Setting")" class="button blue"><span>@DisplayResource.Config</span></a>
+</div>
+@{
+    var grid = new WebGrid(Model);
+    @grid.GetHtml(
+        tableStyle: "data-table",
+        columns: grid.Columns(
+            grid.Column("UserName", DisplayResource.UserName),
+            grid.Column("Nickname", DisplayResource.Nickname),
+            grid.Column("Email", DisplayResource.Email),
+            grid.Column("CreationTime", DisplayResource.CreationTime)
+        )
+   )
+}

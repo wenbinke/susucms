@@ -1,0 +1,70 @@
+﻿@inherits SusuCMS.Web.Admin.WidgetAdminPageBase
+<tr>
+    <th>
+        @Html.Label("EnableMail", Localize("Enable mail"))
+    </th>
+    <td>
+        @Html.CheckBox("EnableMail")
+    </td>
+</tr>
+<tr>
+    <th>
+        @Html.Label("Subject", Localize("Subject"))
+    </th>
+    <td>
+        @Html.TextBox("Subject", null, new { @class = "small" })
+    </td>
+</tr>
+<tr>
+    <th>
+        @Html.Label("To", Localize("To"))
+    </th>
+    <td>
+        @Html.TextBox("To", null, new { @class = "small" })
+    </td>
+</tr>
+<tr>
+    <th>@Html.Label("MailTemplate", Localize("Mail template"))
+    </th>
+    <td>
+        <strong>@Localize("Template values")</strong>: $$Name$$ $$Email$$ $$Title$$ $$Content$$
+        <a href="javascript://" id="reset-template" class="button blue"><span>@Localize("Reset template")</span></a>
+    </td>
+</tr>
+<tr>
+    <th>
+    </th>
+    <td>
+        @TelerikHelper.Editor("MailTemplate", i => { i.HtmlAttributes(new { style = "height:300px" }); })
+        <script type="text/javascript">
+            function resetMailTemplate() {
+                $('#MailTemplate').data('tEditor').value('<p>Name: $$Name$$</p><p>Email: $$Email$$</p><p>Title: $$Title$$</p><p>Content: $$Content$$</p>');
+            }
+
+            $('#reset-template').click(resetMailTemplate);
+
+            function getData() {
+                return {
+                    EnableMail: $('#EnableMail').is(':checked'),
+                    Subject: $('#Subject').val(),
+                    To: $('#To').val(),
+                    MailTemplate: $('#MailTemplate').data('tEditor').value()
+                };
+            }
+
+            function setData(data) {
+                if (data != null) {
+                    if (data.EnableMail) {
+                        $("#EnableMail").attr('checked', 'checked');
+                        $("#EnableMail").change();
+                    }
+                    $("#Subject").val(data.Subject);
+                    $("#To").val(data.To);
+                    $('#MailTemplate').data('tEditor').value(data.MailTemplate);
+                } else {
+                    resetMailTemplate();
+                }
+            }
+        </script>
+    </td>
+</tr>

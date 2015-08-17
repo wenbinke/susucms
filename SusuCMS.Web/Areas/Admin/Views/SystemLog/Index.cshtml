@@ -1,0 +1,19 @@
+﻿@model IQueryable<SusuCMS.SystemLog>
+@{
+    ViewBag.Title = DisplayResource.SystemLogs;
+    ViewBag.Subtitle = DisplayResource.SystemLogs;
+}
+<div class="toolbar clearfix">
+    @Html.LinkButton(DisplayResource.ClearLogs, Url.Action("Clear", "SystemLog", new { returnUrl = Request.RawUrl }))
+</div>
+@{
+    var grid = new WebGrid(Model);
+}
+@grid.GetHtml(
+        tableStyle: "data-table",
+        columns: grid.Columns(
+        grid.Column(header: DisplayResource.LogType, format: (item) => Enum.GetName(typeof(LogType), item.LogType)),
+        grid.Column("CreationTime", DisplayResource.CreationTime),
+            grid.Column(header: DisplayResource.Message, format: (item) => Html.Raw(item.Message))
+        )
+   )

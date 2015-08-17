@@ -1,0 +1,32 @@
+﻿@model Site
+@{
+    ViewBag.Title = DisplayResource.Export;
+    ViewBag.Subtitle = DisplayResource.Export;
+}
+@using (Html.BeginForm())
+{
+    <table class="form-table">
+        <tbody>
+            <tr>
+                <th>
+                    @Html.HiddenFor(m => m.Id)
+                    @Html.Label("FileName", DisplayResource.FileName)
+                </th>
+                <td>
+                    @Html.TextBox("FileName", Model.Name + ".xml", new { data_val_required = DisplayResource.Required, data_val = "true" })
+                    @Html.ValidationMessage("FileName")
+                </td>
+            </tr>
+            <tr>
+                <th>
+                </th>
+                <td>
+                    @Html.AntiForgeryToken()
+                    <button type="submit" class="button blue">
+                        <span>@DisplayResource.Export</span></button>
+                    @Html.ReturnButton()
+                </td>
+            </tr>
+        </tbody>
+    </table>
+}

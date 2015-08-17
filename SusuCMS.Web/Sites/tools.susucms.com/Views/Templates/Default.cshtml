@@ -1,0 +1,31 @@
+﻿@{
+    FrontHtml.ClientScript.jQuery(true);
+    FrontHtml.ClientScript.Register(string.Format("~/Sites/{0}/Scripts/site.js", CurrentSite.Template));
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>@FrontHtml.HtmlTitle() - @SiteLabel("Online tools / query")</title>
+    @FrontHtml.HeadContent()
+</head>
+<body>
+    <div id="wrapper">
+        @FrontHtml.Shared("Header")
+        <div id="main" class="clearfix">
+            <div id="content">
+                @FrontHtml.Zone("content")
+            </div>
+            <div id="rsidebar">
+                <div class="widget search">
+                    <form action="@FrontUrl.GetClientUrl("Search")" method="get">
+                    <input type="text" name="q" id="search" />
+                    <button type="submit">@SiteLabel("Search")</button>
+                    </form>
+                </div>
+                @FrontHtml.Zone("rsidebar")
+            </div>
+        </div>
+        @FrontHtml.Shared("Footer")
+    </div>
+</body>
+</html>

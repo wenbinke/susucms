@@ -1,0 +1,128 @@
+﻿@model SusuCMS.Data.Page
+@using SusuCMS.Web;
+@{
+    Layout = null;
+    ViewBag.PageWidgets = Model.Widgets.ToList();
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>@DisplayResource.PageDesign - Susu CMS</title>
+    <link href="@Url.Content("~/favicon.ico")" rel="icon" type="image/x-icon" />
+    @Styles.Render("~/Content/telerik", "~/Areas/Admin/Content/design")
+    @Scripts.Render("~/Scripts/jquery")
+</head>
+<body>
+    <div id="designer">
+        <div class="toolbar">
+            @using (Ajax.BeginForm(new AjaxOptions { OnSuccess = "OnPageSavedSuccess" }))
+            {
+                var list = Model.Widgets.Select(i => new { i.ZoneName, i.WidgetId, i.DisplayOrder });
+                <p class="tabs">
+                    <a href="javascript://">@DisplayResource.Widgets</a><a href="javascript://">@DisplayResource.Themes</a><a
+                        href="javascript://">@DisplayResource.Advanced</a>
+                </p>
+                <p class="buttons">
+                    @Html.Hidden("PageWidgetsJson", Json.Encode(list))
+                    @Html.Hidden("ThemeName", CurrentSite.Theme)
+                    @Html.AntiForgeryToken()
+                    <a href="javascript://" id="change-view-type" data-current-view="real-view">@DisplayResource.CompactView</a>
+                    <button type="submit" class="button blue small">
+                        <span>@DisplayResource.Save</span></button>
+                    <a href="javascript://" onclick="window.close()" class="button small"><span>@DisplayResource.Close</span></a>
+                </p>
+            }
+        </div>
+        <div class="containers">
+            <div class="container" id="widget-container">
+                @Html.AntiForgeryToken()
+                <h2 class="title">
+                    Widgets <a href="javascript://" class="create">[+]</a>
+                </h2>
+                <ul class="widget-list clearfix">
+                    @foreach (var widget in CurrentSite.Widgets)
+                    {
+                        @Html.Partial("~/Areas/Admin/Views/Widget/Option.cshtml", widget)
+                    }
+                </ul>
+            </div>
+            <div class="container">
+                <h2 class="title">
+                    @DisplayResource.Themes @Html.HelpTip("All themes in this site.")
+                </h2>
+                <ul class="theme-list clearfix">
+                    @foreach (var theme in CurrentSite.GetThemeInfos())
+                    {
+                        <li @if (CurrentSite.Theme == theme.Name)
+                            {<text> class="current"</text>}><a href="javascript://" data-theme-name="@theme.Name">
+                                <img src="@Url.Content(theme.PreviewImagePath)" />
+                            </a><span>
+                                @theme.DisplayName
+                            </span></li>
+                    }
+                </ul>
+            </div>
+            <div class="container" id="advanced-container">
+            </div>
+        </div>
+    </div>
+    <iframe src="@Url.Action("Preview", "Page", new { area = "Admin", id = Model.Id })" id="page-preview" frameborder="0">
+    </iframe>
+</body>
+</html>
+@Scripts.Render("~/Scripts/validate", "~/Scripts/telerik", "~/Scripts/admin", "~/Scripts/design")
+<script type="text/javascript">
+    var page;
+    var designer;
+
+    $(function () {
+        page = new sc.design.Page();
+
+        var widgetConfig = new sc.design.WidgetConfig();
+        widgetConfig.editWidgetTitle = '@DisplayResource.EditWidget';
+        widgetConfig.createWidgetTitle = '@DisplayResource.CreateWidget';
+        widgetConfig.deleteConfirmMessage = '@MessageResource.DeleteConfirmMessage';
+
+        var labelConfig = new sc.design.LabelConfig();
+        labelConfig.editLabelTitle = '@DisplayResource.EditLabel';
+
+        var toolbarConfig = new sc.design.ToolbarConfig();
+        toolbarConfig.widgetConfig = widgetConfig;
+
+        var designerConfig = new sc.design.DesignerConfig();
+        designerConfig.toolbarConfig = toolbarConfig;
+
+        designer = new sc.design.Designer(designerConfig, page);
+        designer.initialize();
+    });
+
+    /* Page functions(for other page to call)
+    -----------------------------------------------------------------*/
+    function OnPageSavedSuccess(result) {
+        if (result == 'true') {
+            page.reload();
+            sc.ui.Message.showSuccess('@MessageResource.SaveSuccess');
+        }
+        else {
+            sc.ui.Message.showError('@MessageResource.SaveFailed');
+        }
+    }
+
+    $(function () {
+
+        /* Change view type
+        -----------------------------------------------------------------*/
+        $('#change-view-type').click(function () {
+            var type = $(this).data('current-view');
+            if (type == 'compact-view') {
+                $(this).data('current-view', 'real-view');
+                $(this).text('@DisplayResource.CompactView');
+            } else {
+                $(this).data('current-view', 'compact-view');
+                $(this).text('@DisplayResource.RealView');
+            }
+
+            changeViewType($('#page-preview').contents().find('.s-widget'));
+        });
+    });
+</script>

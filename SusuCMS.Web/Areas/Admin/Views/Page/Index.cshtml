@@ -1,0 +1,162 @@
+﻿@model IQueryable<SusuCMS.Data.Page>
+@{
+    ViewBag.Title = DisplayResource.Pages;
+    ViewBag.Subtitle = DisplayResource.Pages;
+}
+<div class="toolbar clearfix">
+    @Html.LinkButton(DisplayResource.Create, Url.Action("Create", "Page", new { returnUrl = Request.RawUrl }))
+</div>
+@using (Html.BeginForm("Delete", "Page"))
+{
+    @Html.AntiForgeryToken()
+    <table class="data-table" id="tree-table">
+        <colgroup>
+            <col />
+            <col />
+            <col />
+            <col class="time" />
+            <col />
+            <col class="action" />
+            <col class="action" />
+            <col class="action" />
+        </colgroup>
+        <thead>
+            <tr>
+                <th>
+                    @DisplayResource.Name
+                </th>
+                <th>
+                    @DisplayResource.Template
+                </th>
+                <th>
+                    @DisplayResource.Url
+                </th>
+                <th>
+                    @DisplayResource.CreationTime
+                </th>
+                <th>
+                    @DisplayResource.IsOnline
+                </th>
+                <th>
+                    @DisplayResource.Design
+                </th>
+                <th>
+                    @DisplayResource.Edit
+                </th>
+                <th>
+                    @DisplayResource.Delete
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @{
+    var home = Model.FirstOrDefault(i => i.ParentId == null);
+    if (home != null)
+    {
+                <tr id="node-@home.Id">
+                    <td>
+                        <span class="home" title="@DisplayResource.Homepage"></span>
+                        @home.Name
+                    </td>
+                    <td>
+                        @home.Template
+                    </td>
+                    <td>
+                        @home.Url
+                    </td>
+                    <td>
+                        @home.CreationTime
+                    </td>
+                    <td>
+                        @Html.ActionLink(DisplayResource.IsOnline, "ToggleOnline", "Page", new { id = home.Id, returnUrl = Request.RawUrl }, new { @class = home.IsOnline.ToString().ToLower() })
+                    </td>
+                    <td>
+                        @Html.ActionLink(DisplayResource.Design, "Design", "Page", new { id = home.Id }, new { @class = "design", target = "_blank" })
+                    </td>
+                    <td>
+                        @Html.ActionLink(DisplayResource.Edit, "Edit", "Page", new { id = home.Id, returnUrl = Request.RawUrl }, new { @class = "edit" })
+                    </td>
+                    <td>
+                    </td>
+                </tr>
+    }
+    foreach (var item in Model.Where(i => i.ParentId != null))
+    {
+                <tr id="node-@item.Id" class="child-of-node-@item.ParentId">
+                    <td>
+                        <span class="draggable">@item.Name</span>
+                    </td>
+                    <td>
+                        @item.Template
+                    </td>
+                    <td>
+                        @item.Url
+                    </td>
+                    <td>
+                        @item.CreationTime
+                    </td>
+                    <td>
+                        @Html.ActionLink(DisplayResource.IsOnline, "ToggleOnline", "Page", new { id = item.Id, returnUrl = Request.RawUrl }, new { @class = item.IsOnline.ToString().ToLower() })
+                    </td>
+                    <td>
+                        @Html.ActionLink(DisplayResource.Design, "Design", "Page", new { id = item.Id }, new { @class = "design", target = "_blank" })
+                    </td>
+                    <td>
+                        @Html.ActionLink(DisplayResource.Edit, "Edit", "Page", new { id = item.Id, returnUrl = Request.RawUrl }, new { @class = "edit" })
+                    </td>
+                    <td>
+                        @Html.DeleteButton("Id", (int)item.Id)
+                    </td>
+                </tr>
+    }
+            }
+        </tbody>
+    </table>
+}
+@using (Html.BeginForm("Move", "Page", FormMethod.Post, new { @class = "page-move" }))
+{
+    @Html.Hidden("id")
+    @Html.Hidden("parentId")
+    @Html.AntiForgeryToken()
+}
+<script type="text/javascript" src="@Url.Content("~/Scripts/jqueryui")"></script>
+<script type="text/javascript" src="@Url.Content("~/Scripts/jquery.treeTable")"></script>
+<script type="text/javascript">
+    $(function () {
+
+        $("#tree-table").treeTable({
+            initialState: "expanded"
+        });
+
+        $("#tree-table span.draggable").draggable({
+            helper: "clone",
+            cursor: 'default',
+            opacity: .75,
+            refreshPositions: true,
+            revert: "invalid",
+            revertDuration: 300,
+            scroll: true,
+            delay: 100
+        });
+
+        $("#tree-table tbody tr").droppable({
+            accept: "*",
+            drop: function (e, ui) {
+                var draggableTr = $(ui.draggable).closest('tr');
+                draggableTr.appendBranchTo(this);
+
+                var id = draggableTr.attr('id');
+                if (id != $(this).attr('id')) {
+                    var id = id.replace('node-', '');
+                    var parentId = $(this).attr('id').replace('node-', '');
+
+                    $('.page-move input[type=hidden][name=id]').val(id);
+                    $('.page-move input[type=hidden][name=parentId]').val(parentId);
+
+                    $('.page-move').submit();
+                }
+            },
+            hoverClass: "accept"
+        });
+    });
+</script>

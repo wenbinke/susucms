@@ -1,0 +1,59 @@
+﻿@{
+    ViewBag.Title = SusuCMS.Blog.DisplayResource.Comments;
+    ViewBag.Subtitle = SusuCMS.Blog.DisplayResource.Comments;
+    var blogDataContext = BlogWorkContext.GetDataContext();
+}
+@helper IsCurrent(string status)
+    {
+        var requestStatus = Request.QueryString["status"];
+        if (String.IsNullOrWhiteSpace(requestStatus) && status == "all")
+        {
+    <text>class="current"</text>  
+        }
+        else if (status.Equals(requestStatus, StringComparison.OrdinalIgnoreCase))
+        {
+    <text>class="current"</text>  
+        }
+}
+<div class="toolbar cleafix">
+    <ul class="comment-status">
+        <li @IsCurrent("all")>@Html.ActionLink(SusuCMS.Blog.DisplayResource.All, "Index")
+            |</li>
+        <li @IsCurrent(CommentStatus.Pending.ToString())>@Html.ActionLink(SusuCMS.Blog.DisplayResource.Pending, "Index", new { status = CommentStatus.Pending })
+            <span>( @blogDataContext.Comments.Count(i => i.SiteId == CurrentSiteId && i.Status == (int)CommentStatus.Pending)
+                )</span> |</li>
+        <li @IsCurrent(CommentStatus.Approved.ToString())>@Html.ActionLink(SusuCMS.Blog.DisplayResource.Approved, "Index", new { status = CommentStatus.Approved })
+            <span>( @blogDataContext.Comments.Count(i => i.SiteId == CurrentSiteId && i.Status == (int)CommentStatus.Approved)
+                )</span> |</li>
+        <li @IsCurrent(CommentStatus.Spam.ToString())>@Html.ActionLink(SusuCMS.Blog.DisplayResource.Spam, "Index", new { status = CommentStatus.Spam })
+            <span>( @blogDataContext.Comments.Count(i => i.SiteId == CurrentSiteId && i.Status == (int)CommentStatus.Spam)
+                )</span></li>
+    </ul>
+    <div class="right">
+        @using (Html.BeginForm("Search", "Comment", FormMethod.Get))
+        {
+            @Html.TextBox("keywords", Request["keywords"], new { @class = "mini" })
+            <button type="submit" class="button blue">
+                <span>@SusuCMS.Blog.DisplayResource.Search</span></button>
+        }
+    </div>
+</div>
+@{
+    var grid = new WebGrid(Model);
+    using (Html.BeginForm("Delete", "Comments"))
+    {
+    @Html.ReturnUrl()
+    @Html.AntiForgeryToken()
+    @grid.GetHtml(
+            tableStyle: "data-table",
+            columns: grid.Columns(
+                grid.Column("Author", SusuCMS.Blog.DisplayResource.Author),
+                grid.Column("Email", SusuCMS.DisplayResource.Email),
+                grid.Column("CreationTime", SusuCMS.DisplayResource.CreationTime),
+                grid.Column("Content", SusuCMS.DisplayResource.Content),
+                grid.Column(header: SusuCMS.DisplayResource.Edit, format: (item) => Html.ActionLink(SusuCMS.DisplayResource.Edit, "Edit", "Comment", new { id = item.Id, returnUrl = Request.RawUrl }, new { @class = "edit" })),
+                grid.Column(header: SusuCMS.DisplayResource.Delete, format: (item) => Html.DeleteButton("Id", (int)item.Id), style: "action")
+            )
+        )
+    }
+}

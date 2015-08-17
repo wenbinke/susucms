@@ -1,0 +1,28 @@
+﻿@inherits SusuCMS.Web.Front.WidgetPageBase
+@{
+    FrontHtml.ClientScript.jQuery(true);
+}
+<h2>
+    @WidgetLabel("Url Encode / Decode")</h2>
+<div class="description">
+    @WidgetLabel(@"Under normal circumstances, the parameters between pages will be URL encoded transmission,
+    URL decode them, can help users understand the content of the website. URL encoding
+    and decoding tools to facilitate the developer to debug the program.")
+</div>
+<textarea id="text"></textarea><p class="buttons">
+    <button id="encode" type="button">
+        @WidgetLabel("Encode")</button>
+    <button id="decode" type="button">
+        @WidgetLabel("Decode")</button></p>
+<script type="text/javascript">
+    $(function () {
+        $('#encode').click(function () {
+            $('#text').val(encodeURIComponent($('#text').val()));
+        });
+
+        $('#decode').click(function () {
+            var encoded = $('#text').val();
+            $('#text').val(decodeURIComponent(encoded.replace(/\+/g, " ")));
+        });
+    });
+</script>

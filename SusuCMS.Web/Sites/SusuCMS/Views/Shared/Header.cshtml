@@ -1,0 +1,21 @@
+﻿@{
+    var menus = CurrentSite.Menus.Where(i => i.IsOnline).ToList();
+    var parents = menus.Where(i => i.ParentId == null).OrderBy(i => i.DisplayOrder);
+}
+<div id="header">
+    <div class="inner">
+        <h1>
+            <a href="@FrontUrl.GetClientUrl()">@SiteLabel("SusuCMS")</a></h1>
+        @if (parents.Any())
+        {
+            <ul id="nav">
+                @foreach (var item in parents)
+                {
+                    <li><a href="@FrontUrl.GetClientUrl(item.Url)"
+                     @if (item.OpenInNewWindow)
+                     {<text>target="_blank"</text>}>@item.Name</a></li>
+                }
+            </ul>
+        }
+    </div>
+</div>

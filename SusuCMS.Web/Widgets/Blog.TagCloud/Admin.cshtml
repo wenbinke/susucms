@@ -1,0 +1,38 @@
+﻿@inherits SusuCMS.Web.Admin.WidgetAdminPageBase
+@{
+    var minimumArticleCounts = new Dictionary<int, string> { { 1, Localize("1 (default)") }, { 2, "2" }, { 3, "3" }, 
+    { 4, "4" }, { 5, "5" }, { 6, "6" }, { 7, "7" }, { 8, "8" }, { 9, "9" }, { 10, "10" } };
+    var minimumTagCounts = new Dictionary<int, string> { { -1, Localize("Unlimited (default)") }, 
+    { 10, "10" }, { 25, "25" }, { 50, "50" }, { 75, "75" }, { 100, "100" }, { 125, "125" }, { 150, "150" } };
+
+    var data = Model.GetData();
+    if (data != null)
+    {
+        ViewBag.MinimumArticleCount = data.MinimumArticleCount;
+        ViewBag.MaximumTagCount = data.MaximumTagCount;
+    }
+}
+<tr>
+    <th>
+        @Localize("Minimum article count in each tag")
+    </th>
+    <td>
+        @Html.DropDownList("MinimumArticleCount", new SelectList(minimumArticleCounts, "key", "value"), new { @class = "small" })
+    </td>
+</tr>
+<tr>
+    <th>
+        @Localize("Maximum tag count shown in widget")
+    </th>
+    <td>
+        @Html.DropDownList("MaximumTagCount", new SelectList(minimumTagCounts, "key", "value"), new { @class = "small" })
+        <script type="text/javascript">
+            function getData() {
+                return {
+                    MinimumArticleCount: parseInt($('#MinimumArticleCount').val()),
+                    MaximumTagCount: parseInt($('#MaximumTagCount').val())
+                };
+            }
+        </script>
+    </td>
+</tr>

@@ -1,0 +1,19 @@
+﻿@inherits SusuCMS.Web.Front.WidgetPageBase
+@{
+    var tools = CurrentSite.Pages.FirstOrDefault(i => i.Name == "Online tools");
+}
+<div class="tool-list">
+    <h3>
+        @WidgetLabel("Online tools")</h3>
+    @if (tools != null)
+    {
+        var pages = CurrentSite.Pages.Where(i => i.ParentId == tools.Id);
+        <ul>
+            @foreach (var page in pages)
+            {
+                <li><a href="@FrontUrl.GetClientUrl(page.Url)">@WidgetLabel(page.Name)</a></li>
+            }
+            <li><a href="http://validator.w3.org" target="_blank" class="link-blank">@WidgetLabel("W3C validators")</a></li>
+        </ul>
+    }
+</div>

@@ -1,0 +1,78 @@
+﻿@inherits SusuCMS.Web.Front.WidgetPageBase
+@{
+    var dictionary = new Dictionary<string, object>();
+    var url = Request.QueryString["url"];
+    if (!String.IsNullOrWhiteSpace(url))
+    {
+        try
+        {
+            if (!url.StartsWith("http://") && !url.StartsWith("https://"))
+            {
+                url = "http://" + url;
+            }
+            var uri = new Uri(url);
+            foreach (var item in uri.GetType().GetProperties())
+            {
+                dictionary.Add(item.Name, item.GetValue(uri, null));
+            }
+        }
+        catch
+        {
+
+        }
+    }
+}
+<h2>@WidgetLabel("ASP.NET URL Analysis")</h2>
+<div class="description">
+    @WidgetLabel(@"Usually we do Asp.net development time often need to deal Url, and we get from the Request Uri object we usually attribute it contains the possible values ​​of doubts. This tool will show new Uri (""Your entered the URL address"") values ​​of all attributes.")
+</div>
+<p>
+    @WidgetLabel("Type page full URL (Example: http://tools.susucms.com/Tools/AspNetUrlAnalysis):")
+</p>
+<form action="@Request.Url.AbsolutePath" method="get">
+@Html.TextBox("url", url)
+<p class="buttons">
+    <button type="submit">
+        @WidgetLabel("Analysis")</button>
+</p>
+</form>
+@if (dictionary.Count > 0)
+{
+    <table class="data-table">
+        <colgroup>
+            <col width="25%" />
+            <col />
+        </colgroup>
+        <thead>
+            <tr>
+                <th>
+                    @WidgetLabel("Property")
+                </th>
+                <th>
+                    @WidgetLabel("Value")
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in dictionary.OrderBy(i => i.Key))
+            {
+                <tr>
+                    <td>
+                        @item.Key
+                    </td>
+                    <td>
+                        @if (item.Key == "Segments")
+                        {
+                            <text> @string.Join(" , ", (string[])item.Value)</text>
+                        }
+                        else
+                        {
+                            @item.Value
+                    
+                        }
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}

@@ -1,0 +1,162 @@
+﻿@{
+    IList<string> moduleNames = null;
+    if (CurrentSite != null)
+    {
+        moduleNames = CurrentSite.GetSiteInfo().ModuleNames;
+    }
+    var area = GetAreaName();
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>@ViewBag.Title - Susu CMS</title>
+    <link href="@Url.Content("~/favicon.ico")" rel="icon" type="image/x-icon" />
+    @Styles.Render("~/Areas/Admin/Content/base", "~/Content/telerik", "~/Areas/Admin/Content/admin")
+    @if (area != "admin")
+    {
+        <link href="@Url.Content(string.Format("~/Areas/{0}/Content/admin", area))" rel="stylesheet" type="text/css" />
+    }
+    @Scripts.Render("~/Scripts/jquery")
+</head>
+<body>
+    <div id="header">
+        <h1>
+            @Html.ActionLink("Susu CMS", "Index", "Home", new { area = "Admin" }, null)
+        </h1>
+        <div class="quick-nav">
+            @DisplayResource.Hello
+            @Html.ActionLink(String.IsNullOrWhiteSpace(Context.User.Identity.Name) ? DisplayResource.AnonymousUser : Context.User.Identity.Name, "ChangePassword", "Account", new { area = "Admin" }, null)
+            | <a href="javascript://" id="change-language">@DisplayResource.Language</a> | <a href="#">@DisplayResource.Help</a> |
+            @Html.ActionLink(DisplayResource.Logout, "Logout", "Account", new { area = "Admin" }, null)
+        </div>
+        @if (CurrentSite != null)
+        {
+            var url = CurrentSite.Urls.First().Name;
+            <p class="visit-site">
+                @DisplayResource.VisitYourSite: <a href="http://@url" target="_blank">@url</a>
+            </p>
+        }
+    </div>
+    <div id="main">
+        <div id="sidebar">
+            <div class="menu">
+                <a href="javascript://">@(CurrentSite == null ? DisplayResource.GlobalMenu : CurrentSite.Name)</a>
+                <ul class="hide">
+                    <li>@Html.ActionLink(DisplayResource.GlobalMenu, "Index", "Home", new { area = "Admin" }, null)</li>
+                    @if (CurrentUser.HasPermission(Permission.Sites))
+                    {
+                        <li><a href="javascript://" id="select-site">@DisplayResource.SelectSite</a> </li>
+                    }
+                </ul>
+            </div>
+            <ul class="nav">
+                @if (CurrentSite == null)
+                {
+                    @Html.Partial("GlobalMenu")
+                }
+                else
+                {
+                    @Html.Partial("~/Areas/Admin/Views/Shared/SiteMenu.cshtml")
+                    foreach (var moduleName in moduleNames)
+                    {
+                        @Html.Partial(string.Format("~/Areas/{0}/Views/Shared/SiteMenu.cshtml", moduleName))
+                    }
+                }
+            </ul>
+        </div>
+        <div>
+            <div id="subheader">
+                @Html.Partial("~/Areas/Admin/Views/Shared/Subheader.cshtml")
+            </div>
+            <div id="main-content">
+                <div id="inner">
+                    @RenderBody()
+                </div>
+            </div>
+        </div>
+    </div>
+    @(Html.Telerik().Window()
+        .Name("SelectSiteWindow")
+        .LoadContentFrom("List", "Site", new { area = "Admin" })
+        .Title(DisplayResource.SelectSite)
+        .Buttons(buttons => buttons.Refresh().Maximize().Close())
+        .Width(490).Draggable(true).Visible(false).Resizable())
+    @(Html.Telerik().Window()
+        .Name("HelpContentWindow")
+        .Content(@<text><div class="help-content">@Html.Raw(ViewBag.HelpContent)</div></text>)
+        .Title(DisplayResource.Help)
+        .Buttons(buttons => buttons.Refresh().Maximize().Close())
+        .Modal(true).Width(490).Draggable(true).Visible(false).Resizable())
+    @Scripts.Render("~/Scripts/validate", "~/Scripts/telerik", "~/Scripts/admin")
+    @Html.Telerik().ScriptRegistrar().OutputScriptFiles(false)
+    <script>
+        $(function () {
+            @if (TempData.ContainsKey("Message"))
+        {
+            <text>sc.ui.Message.showSuccess('</text>@TempData["Message"]<text>');</text>
+        }
+        else if (TempData.ContainsKey("ErrorMessage"))
+        {
+            <text>sc.ui.Message.showError('</text>@TempData["ErrorMessage"]<text>');</text>
+        }
+
+            /* Site menus
+            ----------------------------------------------*/
+            $('#sidebar .nav a').live('click', function () {
+                highlightMenu($(this).parent('li'));
+            });
+
+            function highlightMenu($currentLi) {
+                $('#sidebar .nav li').removeClass('current');
+                $currentLi.addClass('current');
+
+                // it is top menu
+                if ($currentLi.parent('ul').is('.nav')) {
+                    $currentLi.siblings().each(function () {
+                        $(this).find('a').removeClass('highlight');
+                    });
+                } else {
+                    $currentLi.parent().prev('a').addClass('highlight');
+                }
+            }
+
+            $('#sidebar .nav ul li.current').parent().prev('a').addClass('highlight');
+
+            $('#sidebar .menu > a').click(function () {
+                var ul = $(this).siblings('ul');
+                if (ul.is(':visible')) {
+                    ul.slideUp('fast');
+                } else {
+                    ul.slideDown('fast');
+                }
+            });
+
+            $('#select-site').click(function () {
+                $(this).closest('ul').slideUp('fast');
+                $("#SelectSiteWindow").data("tWindow").center().open();
+            });
+
+            $('body').click(function (e) {
+                if (!$(e.target).is('#sidebar .menu a')) {
+                    $('#sidebar .menu ul:visible').slideUp('fast');
+                }
+            });
+
+            $('.data-table .delete').click(function () {
+                return confirm('@MessageResource.DeleteConfirmMessage');
+            });
+
+            $('#change-language').click(function () {
+                sc.ui.telerik.openWindow('ChangeLanguage', '@Url.Action("ChangeLanguage", "Account", new { area = "Admin" })', '@DisplayResource.ChangeLanguage', 500, 160);
+            });
+
+            $('#subheader a.help').click(function () {
+                $("#HelpContentWindow").data("tWindow").center().open();
+            });
+
+            $(window).resize(calcAdminHeight).load(calcAdminHeight);
+        });
+    </script>
+
+</body>
+</html>

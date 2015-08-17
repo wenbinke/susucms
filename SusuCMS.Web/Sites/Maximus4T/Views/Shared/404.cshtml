@@ -1,0 +1,18 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>@SiteLabel(DisplayResource.NotFound404)</title>
+    @FrontHtml.RenderFavicon()
+    @FrontHtml.RenderTheme()
+</head>
+<body>
+    <div id="wrapper">
+        @FrontHtml.Shared("Header")
+        @FrontHtml.Shared("Navigation")
+        <div id="main">
+            @SiteLabel("The page you requested could not be found.Please check the URL and try again.")
+        </div>
+        @FrontHtml.Shared("Footer")
+    </div>
+</body>
+</html>

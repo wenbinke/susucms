@@ -1,0 +1,44 @@
+﻿@{
+    var path = Request.QueryString["path"];
+    if (!String.IsNullOrWhiteSpace(path))
+    {
+        var action = ViewContext.RouteData.GetRequiredString("action").ToLower();
+        var splitted = path.Split(new[] { Path.DirectorySeparatorChar, Path.AltDirectorySeparatorChar }, StringSplitOptions.RemoveEmptyEntries).ToList();
+        if (action == "editfile")
+        {
+            splitted.Remove(splitted.Last());
+        }
+        var previousPath = string.Empty;
+    <div class="bread-crumbs">
+        @Html.ActionLink(DisplayResource.MediaFolders, "Index")
+        &gt;
+        @foreach (var item in splitted)
+        {
+            previousPath = String.IsNullOrWhiteSpace(previousPath) ? item : Path.Combine(previousPath, item);
+            @Html.ActionLink(item, "Index", new { name = item, path = previousPath })
+            <text>&gt;</text>
+        }
+        @{
+        switch (action)
+        {
+            case "createfolder":
+            @DisplayResource.CreateFolder
+       break;
+            case "editfolder":
+            @DisplayResource.EditFolder
+       break;
+            case "index":
+            @DisplayResource.ManageFolder
+            
+       break;
+            case "upload":
+            @DisplayResource.UploadFile
+       break;
+            case "editfile":
+            @DisplayResource.EditFile
+       break;
+        }
+        }
+    </div>
+    }
+}

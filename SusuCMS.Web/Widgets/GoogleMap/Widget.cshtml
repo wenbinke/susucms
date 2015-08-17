@@ -1,0 +1,73 @@
+﻿@inherits SusuCMS.Web.Front.WidgetPageBase
+@{
+    FrontHtml.ClientScript.jQuery(true);
+    FrontHtml.ClientScript.RegisterScript("http://maps.googleapis.com/maps/api/js?sensor=false");
+
+    var mapId = "map-" + CurrentWidget.Id;
+    var address = string.Empty;
+    var data = CurrentWidget.GetData();
+}
+@if (FrontContext.Current.IsEditMode)
+{
+    <div class="map" id="@mapId">
+        Google Map
+    </div>
+}
+else if (data != null)
+{
+    <script type="text/javascript">
+        $(function () {
+            function initializeGoogleMap(map, address) {
+                var geocoder = new google.maps.Geocoder();
+                geocoder.geocode({ 'address': address }, function (results, status) {
+                    if (status == google.maps.GeocoderStatus.OK) {
+                        var location = results[0].geometry.location;
+                        var options = {
+                            zoom: 16,
+                            center: location,
+                            mapTypeId: google.maps.MapTypeId.ROADMAP,
+                            streetViewControl: true,
+                            navigationControlOptions: false,
+                            mapTypeControl: false,
+                            scrollwheel: true
+                        };
+                        gMap = new google.maps.Map(map, options);
+
+                        @if (data.ShowStreetView)
+                        {
+                           <text>  
+                                var panoramaOptions = {
+                                    position: location,
+                                    pov: {
+                                        heading: 34,
+                                        pitch: 10,
+                                        zoom: 1
+                                    },
+                                    scrollwheel: false
+                                };
+                                var panorama = new google.maps.StreetViewPanorama(map, panoramaOptions);
+                                gMap.setStreetView(panorama);
+                            </text> 
+                        }
+                        else
+                        {
+                         <text>
+                            gMap.setCenter(location);
+                            var marker = new google.maps.Marker({
+                                title: address,
+                                map: gMap,
+                                position: location
+                            });
+                           </text> 
+                        }
+                    }
+                });
+            }
+
+            map = document.getElementById('@mapId');
+            initializeGoogleMap(map, '@data.Address');
+        });
+    </script>
+    <div class="widget map" id="@mapId">
+    </div>
+}

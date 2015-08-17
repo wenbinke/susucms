@@ -1,0 +1,73 @@
+/* Tags
+------------------------------------------------------------------------------*/
+.tag-editor ul
+{
+    margin-top: 4px;
+    overflow: hidden;
+    max-width: 500px;
+}
+.tag-editor li
+{
+    float: left;
+    margin-right: 25px;
+    margin-bottom: 5px;
+    color: #333;
+}
+.exist-tags > a
+{
+    text-decoration: underline;
+}
+.exist-tags > div
+{
+    margin-top: 8px;
+    padding: 4px 8px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    width: 382px;
+    display: none;
+}
+.exist-tags li .delete
+{
+    margin-right: 5px;
+}
+.exist-tags li a
+{
+    float: left;
+}
+
+/* Comments
+----------------------------------------------------*/
+.comment-status li
+{
+    float: left;
+    color: #666;
+    margin-right: 5px;
+}
+.comment-status li.current a
+{
+    color: #000;
+    font-weight: bold;
+}
+
+/* Drafts 
+---------------------------------------------------------*/
+.article-form .open-draft-window
+{
+    text-decoration: underline;
+}
+.article-drafts
+{
+    margin-top: 5px;
+}
+.article-drafts .time
+{
+    width: 120px;
+}
+.article-drafts .action
+{
+    width: 50px;
+}
+.article-drafts .action .load, .article-drafts .action .delete
+{
+    display: inline-block;
+}

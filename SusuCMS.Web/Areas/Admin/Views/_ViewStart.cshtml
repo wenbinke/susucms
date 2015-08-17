@@ -1,0 +1,6 @@
+﻿@{
+    if (String.IsNullOrWhiteSpace(Request.Headers["pajax"]))
+    {
+        Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+    }
+}

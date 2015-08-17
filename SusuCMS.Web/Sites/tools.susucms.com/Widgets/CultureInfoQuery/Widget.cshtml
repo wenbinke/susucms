@@ -1,0 +1,45 @@
+﻿@inherits SusuCMS.Web.Front.WidgetPageBase
+
+@using System.Globalization
+<h2>
+    @WidgetLabel("Culture info query")</h2>
+@{
+    var cultures = CultureInfo.GetCultures(CultureTypes.SpecificCultures).OrderBy(i => i.Name).ToArray();
+}
+<table class="data-table">
+    <thead>
+        <tr>
+            <th>
+                @WidgetLabel("Number")
+            </th>
+            <th>
+                @WidgetLabel("Name")
+            </th>
+            <th>
+                @WidgetLabel("English name")
+            </th>
+            <th>
+                @WidgetLabel("Native name")
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @for (var i = 0; i < cultures.Length; i++)
+        {
+            <tr>
+                <td>
+                    @i
+                </td>
+                <td>
+                    @cultures[i].Name
+                </td>
+                <td>
+                    @cultures[i].EnglishName
+                </td>
+                <td>
+                    @cultures[i].NativeName
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

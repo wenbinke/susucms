@@ -1,0 +1,200 @@
+﻿#designer .toolbar
+{
+    height: 40px;
+    background: url(images/sprites.png) left -689px;
+    padding-left: 10px;
+    min-width: 960px;
+}
+#designer .toolbar .tabs
+{
+    overflow: hidden;
+}
+#designer .toolbar .tabs a
+{
+    color: #555;
+    display: block;
+    height: 40px;
+    font-size: 16px;
+    line-height: 38px;
+    padding: 0 12px;
+    float: left;
+    position: relative;
+    z-index: 10;
+}
+#designer .toolbar .tabs a.current
+{
+    color: #fff;
+    background: url(images/sprites.png) left -729px;
+}
+#designer .toolbar .buttons
+{
+    padding-top: 0;
+    position: absolute;
+    top: 8px;
+    right: 15px;
+}
+#change-view-type
+{
+    float: left;
+    margin-right: 10px;
+    margin-top: 5px;
+}
+#designer .container
+{
+    position: absolute;
+    top: 40px;
+    background: #fff;
+    border: 1px solid #ccc;
+    border-top: none;
+    border-bottom-right-radius: 7px;
+    border-bottom-left-radius: 7px;
+    padding: 10px 15px;
+    display: none;
+    min-height: 100px;
+    min-width: 350px;
+}
+#designer .container .title
+{
+    margin-bottom: 3px;
+}
+#designer .tips
+{
+    color: #888;
+    font-size: 10px;
+    font-weight: normal;
+}
+#page-preview
+{
+    border: none;
+    width: 100%;
+}
+/* Widget list
+-------------------------------------------------------------------*/
+.widget-list
+{
+    width: 615px;
+}
+.widget-list li
+{
+    float: left;
+    width: 135px;
+    height: 40px;
+    overflow: hidden;
+    margin: 0 5px 5px 0;
+    padding: 3px;
+    position: relative;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+.widget-list li span:first-child
+{
+    width: 115px;
+    float: left;
+}
+.widget-list li label
+{
+    display: block;
+    cursor: pointer;
+}
+.widget-list li .s-form-checkbox-wrapper
+{
+    position: absolute;
+    right: 3px;
+    top: 3px;
+}
+.widget-list li .edit, .widget-list li .delete
+{
+    background: url(images/sprites.png) no-repeat;
+    width: 15px;
+    height: 15px;
+}
+.widget-list li .edit
+{
+    margin-right: 2px;
+    background-position: -1020px -280px;
+}
+.widget-list li .delete
+{
+    background-position: right -280px;
+}
+.widget-list li .buttons
+{
+    position: absolute;
+    bottom: 0;
+    right: 3px;
+    padding: 0;
+}
+
+/* Theme list
+---------------------------------------------------------------*/
+.theme-list li
+{   
+    width: 105px;
+    height: 105px;
+    text-align: center;
+    margin: 0 10px 38px 0;
+    border: 1px solid #D8D8D8;
+    padding: 1px;
+    background: #fff;
+    color: #6C6F79;
+    position: relative;
+    float: left;
+}
+.theme-list li a
+{
+    width: 103px;
+    height: 103px;
+    display: block;
+    border: 1px solid #fff;
+}
+.theme-list li span
+{
+    width: 102px;
+    line-height: 14px;
+    padding-top: 12px;
+    position: absolute;
+    bottom: -22px;
+    height: 14px;
+    left: 0;
+    text-align: center;
+}
+.theme-list li:hover, .theme-list li.current
+{
+    border-color: #50B2E7;
+    background: #50B2E7;
+}
+.add, .create
+{
+    font-size: 12px;
+    font-weight: normal;
+}
+/* Message
+------------------------------------------------------------------------------------*/
+#message
+{
+    text-align: center;
+    position: absolute;
+    left: 0;
+    top: 5px;
+    z-index: 0;
+    height: 0;
+    width: 100%;
+}
+#message span
+{
+    background-color: #68AF02;
+    color: #FFFFFF;
+    padding: 0 24px;
+    line-height: 24px;
+    display: inline-block;
+    border-radius: 3px;
+}
+#message span.error
+{
+    background-color: #EAA000;
+}
+#message span.loading
+{
+    background: url(images/small-loading.gif) no-repeat #4B981D 5px center;
+    padding-left: 25px;
+}

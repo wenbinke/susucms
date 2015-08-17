@@ -1,0 +1,80 @@
+﻿@inherits SusuCMS.Web.Front.WidgetPageBase
+@using SusuCMS.Blog;
+@using System.Globalization;
+@{
+    
+    Article article = null;
+    var dataContext = BlogWorkContext.GetDataContext();
+
+    var id = ((string)ViewContext.RouteData.Values["articleId"]).AsInt();
+    article = dataContext.Articles.WithSiteId(CurrentSite.Id).FirstOrDefault(i => i.Id == id);
+
+    var requestSlug = (string)ViewContext.RouteData.Values["slug"];
+
+    var permalinkSetting = CurrentSite.GetPermalinkSetting();
+    var articleUrl = permalinkSetting.ArticleUrl;
+
+    if (article != null && !article.Slug.Equals(requestSlug, StringComparison.OrdinalIgnoreCase))
+    {
+        Response.StatusCode = 302;
+        Response.Redirect(FrontUrl.GetClientUrl(articleUrl, new { ArticleId = article.Id, Slug = article.Slug }), true);
+    }
+
+    var categoryUrl = permalinkSetting.CategoryUrl;
+    var tagUrl = permalinkSetting.TagUrl;
+}
+<div class="widget article-details">
+    @if (article != null)
+    {
+        FrontHtml.SetHtmlTitle(article.Title);
+        foreach (var item in article.MetaFields)
+        {
+            FrontHtml.AddOrUpdateMetaField(item.Name, item.Content);
+        }
+        
+        <p class="date">
+            @CultureInfo.CurrentCulture.DateTimeFormat.GetMonthName(article.CreationTime.Month)<span>@article.CreationTime.Day</span></p>
+        <h1>@article.Title</h1>
+        <p class="posted">
+            @WidgetLabel("Posted by") <a href="#">@article.Author</a></p>
+        <div class="richtext">
+            @Html.Raw(article.Content)
+        </div>
+        <div class="meta">
+            <span class="listed">@WidgetLabel("Posted in")
+                @if (article.Category != null)
+                {
+                    <a href="@FrontUrl.GetClientUrl(categoryUrl, new { CategoryId = article.Category.Id, Slug = article.Category.Name.AsSlug() })">
+                        @article.Category.Name
+                    </a>
+                }
+                else
+                {
+                    @WidgetLabel("uncategorized")
+                }
+            </span><span class="tags">@WidgetLabel("Tags:")
+                @Html.Raw(string.Join(",", article.Tags.Select(i => string.Format(@"<a href=""{0}"">{1}</a>", FrontUrl.GetClientUrl(tagUrl, new { TagId = i.Id, Slug = i.Name.AsSlug() }), i.Name))))</span>
+            <span class="comments"><a href="#Comments">@article.CommentCount @WidgetLabel("Comments")</a></span>
+        </div>
+    }
+    else if (FrontContext.Current.IsEditMode)
+    {
+        <p class="date">
+            12<span>5</span></p>
+        <h1>
+            Hi. This is a test post</h1>      <p class="posted">
+                @WidgetLabel("Posted by") <a href="~/">Admin</a></p>
+        <div class="richtext">
+            Hi. This is a test post
+        </div>
+        <div class="meta">
+            <span class="listed">@WidgetLabel("Posted in")
+                @WidgetLabel("uncategorized") </span><span class="tags">@WidgetLabel("Tags:")
+                </span><span class="comments"><a href="#Comments">0 @WidgetLabel("Comments")</a></span>
+        </div>
+    }
+    else
+    {
+        <div>@WidgetLabel("Article not found!")</div>
+    }
+</div>

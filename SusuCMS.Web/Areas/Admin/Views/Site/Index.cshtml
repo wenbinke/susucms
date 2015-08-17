@@ -1,0 +1,64 @@
+﻿@model IQueryable<Site>
+@using System.Linq
+@{
+    ViewBag.Title = DisplayResource.Sites;
+    ViewBag.Subtitle = DisplayResource.Sites;
+}
+@helper GetUrlLink(IEnumerable<SiteUrl> urls)
+    {
+        var url = urls.First();
+    <a href="http://@url.Name" target="_blank">@url.Name</a>
+        
+        if (urls.Count() > 1)
+        {
+    <a class="more" href="javascript://"></a>
+    <ul class="hide">
+        @foreach (var item in urls.Skip(1))
+        {
+            <li><a href="http://@item.Name" target="_blank">@item.Name</a></li>
+        }
+    </ul>
+        }
+}
+<div class="toolbar clearfix">
+    @Html.LinkButton(DisplayResource.Create, Url.Action("Create", "Site", new { returnUrl = Request.RawUrl }))
+    @Html.LinkButton(DisplayResource.Import, Url.Action("Import", "Site", new { returnUrl = Request.RawUrl }))
+</div>
+@using (Html.BeginForm("Delete", "Site"))
+{
+    var grid = new WebGrid(Model);
+    @Html.AntiForgeryToken()
+    @Html.ReturnUrl()
+    @grid.GetHtml(
+        tableStyle: "data-table",
+        columns: grid.Columns(
+            grid.Column("Name", DisplayResource.Name),
+            grid.Column("CreationTime", DisplayResource.CreationTime),
+            grid.Column("IsOnline", DisplayResource.IsOnline, format: (item) => Html.ActionLink(DisplayResource.IsOnline, "ToggleOnline", "Site", new { id = item.Id, returnUrl = Request.RawUrl }, new { @class = item.IsOnline.ToString().ToLower() })),
+            grid.Column(header: DisplayResource.Urls, format: (item) => GetUrlLink(item.Urls), style: "urls"),
+            grid.Column(header: DisplayResource.Export, format: (item) => Html.ActionLink(DisplayResource.Export, "Export", "Site", new { id = item.Id, returnUrl = Request.RawUrl }, new { @class = "export" })),
+            grid.Column(header: DisplayResource.Manage, format: (item) => Html.ActionLink(DisplayResource.Manage, "Home", "Site", new { siteId = item.Id }, new { @class = "config" }), style: "action"),
+            grid.Column(header: DisplayResource.Edit, format: (item) => Html.ActionLink(DisplayResource.Edit, "Edit", "Site", new { id = item.Id, returnUrl = Request.RawUrl }, new { @class = "edit" }), style: "action"),
+            grid.Column(header: DisplayResource.Delete, format: (item) => Html.DeleteButton("Id", (int)item.Id), style: "action")
+        )
+       )
+}
+<script type="text/javascript">
+    $(function () {
+        $('.data-table .more').click(function () {
+            var ul = $(this).next('ul');
+            if (ul.is(':visible')) {
+                ul.slideUp('fast');
+            } else {
+                $('.data-table .more + ul:visible').slideUp('fast');
+                ul.slideDown('fast');
+            }
+        });
+
+        $('body').click(function (e) {
+            if (!$(e.target).is('.data-table .more + ul, .data-table .more')) {
+                $('.data-table .more + ul:visible').slideUp('fast');
+            }
+        });
+    });
+</script>

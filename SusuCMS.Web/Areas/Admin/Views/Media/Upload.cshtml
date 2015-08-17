@@ -1,0 +1,41 @@
+﻿@{
+    ViewBag.Title = DisplayResource.UploadFile;
+    ViewBag.Subtitle = DisplayResource.UploadFile;
+}
+@Html.Partial("BreadCrumbs")
+@using (Html.BeginForm("Upload", "Media", new { path = Request.QueryString["path"], returnUrl = Request.QueryString["returnUrl"] }, FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    <table class="form-table">
+        <tbody>
+            <tr>
+                <th>@DisplayResource.SelectFile
+                </th>
+                <td>
+                    @{
+    Html.Telerik().Upload()
+        .Name("file")
+        .Multiple(false)
+        .Render();
+                    }
+                </td>
+            </tr>
+            <tr>
+                <th>
+                    @Html.Label("ExtractZip", DisplayResource.ExtractZip)
+                </th>
+                <td>
+                    @Html.CheckBox("ExtractZip")
+                </td>
+            </tr>
+            <tr>
+                <th>
+                </th>
+                <td>
+                    @Html.AntiForgeryToken()
+                    @Html.SaveButton()
+                    @Html.ReturnButton()
+                </td>
+            </tr>
+        </tbody>
+    </table>
+}

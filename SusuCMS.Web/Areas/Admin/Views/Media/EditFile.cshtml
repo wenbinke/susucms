@@ -1,0 +1,29 @@
+﻿@model SusuCMS.Web.Admin.Models.FileModel
+@{
+    ViewBag.Title = DisplayResource.EditFile;
+    ViewBag.Subtitle = DisplayResource.EditFile;
+}
+@Html.Partial("BreadCrumbs")
+@using (Html.BeginForm())
+{
+    <table class="form-table">
+        <tbody>
+            <tr>
+                <th>@Html.LabelFor(m => m.Name)</th>
+                <td>
+                    @Html.TextBoxFor(m => m.Name)
+                    @Html.ValidationMessageFor(m => m.Name)
+                </td>
+            </tr>
+            <tr>
+                <th></th>
+                <td>
+                    @Html.HiddenFor(m => m.Path)
+                    @Html.AntiForgeryToken()
+                    @Html.SaveButton()
+                    @Html.ReturnButton()
+                </td>
+            </tr>
+        </tbody>
+    </table>
+}

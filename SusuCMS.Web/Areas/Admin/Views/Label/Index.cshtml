@@ -1,0 +1,57 @@
+﻿@model IQueryable<Label>
+@{
+    ViewBag.Title = DisplayResource.Labels;
+    ViewBag.Subtitle = DisplayResource.Labels;
+    var labelTypes = new Dictionary<LabelType, string>();
+    labelTypes.Add(LabelType.SiteLabel, DisplayResource.SiteLabel);
+    labelTypes.Add(LabelType.PageLabel, DisplayResource.PageLabel);
+    labelTypes.Add(LabelType.WidgetLabel, DisplayResource.WidgetLabel);
+}
+<div class="toolbar clearfix">
+    @using (Html.BeginForm("Index", "Label", new { Area = "Admin" }, FormMethod.Get))
+    {
+        @Html.DropDownList("LabelType", new SelectList(labelTypes, "Key", "Value"), new { @class = "small" })
+        if (ViewBag.LabelType == LabelType.PageLabel)
+        {
+        @Html.DropDownList("RelativeId", new SelectList(CurrentSite.Pages.OrderBy(i => i.Name), "Id", "Name"),
+        DisplayResource.AllPages, new { @class = "small" })
+        }
+        else if (ViewBag.LabelType == LabelType.WidgetLabel)
+        {
+        @Html.DropDownList("RelativeId", new SelectList(CurrentSite.Widgets.OrderBy(i => i.DisplayName), "Id", "DisplayName"),
+        DisplayResource.AllWidgets, new { @class = "small" })
+        }
+    }
+</div>
+@{
+    var grid = new WebGrid(Model);
+}
+@using (Html.BeginForm("Delete", "Label"))
+{
+    @Html.AntiForgeryToken()
+    @Html.Hidden("LabelType2", (LabelType)ViewBag.LabelType)
+    @Html.ReturnUrl()
+    @grid.GetHtml(
+        tableStyle: "data-table",
+        columns: grid.Columns(
+            grid.Column("Key", DisplayResource.Key),
+            grid.Column("Value", DisplayResource.Value, style: "label-value"),
+            grid.Column(header: DisplayResource.Edit, format: (item) => Html.Raw(string.Format(@"<a href=""javascript://"" class=""edit"" data-label-id=""{0}"">{1}</a>", item.Id, DisplayResource.Edit)), style: "action"),
+            grid.Column(header: DisplayResource.Delete, format: (item) => Html.DeleteButton("Id", (int)item.Id), style: "action")
+        )
+   )
+}
+<script type="text/javascript">
+    $('#LabelType, #RelativeId').change(function () {
+        $(this).closest('form').submit();
+    });
+
+    function refreshLabelData(labelType, labelId, value) {
+        $('.data-table .delete[value="' + labelId + '"]').closest('tr').find('.label-value').html(value);
+    }
+    $('.data-table .edit').click(function () {
+        var labelId = $(this).data('label-id');
+        var url = '@Url.Action("Edit", "Label", new { area = "Admin" })' + '?labelType=@ViewBag.LabelType&id=' + labelId;
+        openWindow('EditLabelWindow', url, '@DisplayResource.EditLabel', 650, 320);
+    });
+</script>

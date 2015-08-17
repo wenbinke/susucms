@@ -1,0 +1,23 @@
+﻿@{
+    ViewBag.Title = SusuCMS.Blog.DisplayResource.Contacts;
+    ViewBag.Subtitle = SusuCMS.Blog.DisplayResource.Contacts;
+}
+@{
+    var grid = new WebGrid(Model);
+    using (Html.BeginForm("Delete", "Contact"))
+    {
+    @Html.ReturnUrl()
+    @Html.AntiForgeryToken()
+    @grid.GetHtml(
+            tableStyle: "data-table",
+            columns: grid.Columns(
+                grid.Column("Name", SusuCMS.DisplayResource.Name),
+                grid.Column("Title", SusuCMS.DisplayResource.Title),
+                grid.Column("Email", SusuCMS.DisplayResource.Email),
+                grid.Column("CreationTime", SusuCMS.DisplayResource.CreationTime),
+                grid.Column("Content", SusuCMS.DisplayResource.Content),
+                grid.Column(header: SusuCMS.DisplayResource.Delete, format: (item) => Html.DeleteButton("Id", (int)item.Id), style: "action")
+            )
+        )
+    }
+}

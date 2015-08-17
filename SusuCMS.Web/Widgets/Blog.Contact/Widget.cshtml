@@ -1,0 +1,112 @@
+﻿@inherits SusuCMS.Web.Front.WidgetPageBase
+@using SusuCMS.Blog
+@using SusuCMS.Services
+@{
+    FrontHtml.ClientScript.jQuery(true);
+    FrontHtml.ClientScript.jQueryValidation(true);
+
+    Validation.RequireField("Name", WidgetLabel("Required").ToHtmlString());
+    Validation.RequireField("Title", WidgetLabel("Required").ToHtmlString());
+    Validation.RequireField("Email", WidgetLabel("Required").ToHtmlString());
+    Validation.RequireField("Content", WidgetLabel("Required").ToHtmlString());
+    Validation.Add("Email", Validator.Regex(@"\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*", WidgetLabel("Invalid email address").ToHtmlString()));
+
+    if (IsPost)
+    {
+        AntiForgery.Validate();
+
+        if (Validation.IsValid())
+        {
+            var model = new Contact();
+            FrontController.TryUpdatePageModel(model);
+
+            var blogDataContext = BlogWorkContext.GetDataContext();
+            model.SiteId = CurrentSite.Id;
+            model.CreationTime = DateTime.Now;
+            blogDataContext.Contacts.Add(model);
+            blogDataContext.SaveChanges();
+
+            var contactSetting = CurrentWidget.GetData();
+            if (contactSetting != null && contactSetting.EnableMail)
+            {
+                var body = contactSetting.MailTemplate
+                    .Replace("$$Name$$", model.Name)
+                    .Replace("$$Email$$", model.Email)
+                    .Replace("$$Title$$", model.Title)
+                    .Replace("$$Content$$", model.Content);
+
+                var mailService = new MailService(DataContext);
+                var mail = new Mail
+                {
+                    Body = body,
+                    Subject = contactSetting.Subject,
+                    ReplyTo = model.Email,
+                    To = contactSetting.To
+                };
+
+                var mailSetting = CurrentSite.GetMailSetting();
+                if (mailSetting != null)
+                {
+                    mailService.AddMail(CurrentSite.Id, mailSetting, mail);
+                    mailService.SendMail(mailSetting, mail);
+                }
+            }
+            ViewBag.Message = WidgetLabel("Send successfully!");
+        }
+    }
+}
+<div class="widget contact">
+    @using (Html.BeginForm())
+    {
+        if (ViewBag.Message != null)
+        {
+        <div class="message success">
+            @ViewBag.Message
+        </div>
+        }
+        <dl class="contact-form">
+            <dt>
+                <label for="Name">
+                    @WidgetLabel("Name")
+                </label>
+                <span class="required">*</span> </dt>
+            <dd>
+                <input type="text" name="Name" value="@Request["Name"]" @Validation.For("Name") />
+                @Html.ValidationMessage("Name")
+            </dd>
+            <dt>
+                <label for="Email">
+                    @WidgetLabel("Email")
+                </label>
+                <span class="required">*</span> </dt>
+            <dd>
+                <input type="text" name="Email" value="@Request["Email"]" @Validation.For("Email") />
+                @Html.ValidationMessage("Email")
+            </dd>
+            <dt>
+                <label for="Title">
+                    @WidgetLabel("Title")
+                </label>
+                <span class="required">*</span> </dt>
+            <dd>
+                <input type="text" name="Title" value="@Request["Title"]" @Validation.For("Title") />
+                @Html.ValidationMessage("Title")
+            </dd>
+            <dt>
+                <label for="Content">
+                    @WidgetLabel("Content")
+                </label>
+                <span class="required">*</span> </dt>
+            <dd>
+                <textarea name="Content" @Validation.For("Content")>@Request["Content"]</textarea>
+                @Html.ValidationMessage("Content")
+            </dd>
+            <dd>
+                <button type="submit">
+                    @WidgetLabel("Send")
+                </button>
+            </dd>
+        </dl>
+        @Html.AntiForgeryToken()
+    }
+</div>

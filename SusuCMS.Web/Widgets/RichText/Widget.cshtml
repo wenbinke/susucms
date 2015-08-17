@@ -1,0 +1,10 @@
+﻿@inherits SusuCMS.Web.Front.WidgetPageBase
+@{
+    FrontHtml.ClientScript.jQuery(true);
+    
+    var data = CurrentWidget.GetData();
+    if (data != null)
+    {
+    @Html.Raw(data.Content)
+    }
+}

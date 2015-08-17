@@ -1,0 +1,29 @@
+﻿@{
+    var menus = CurrentSite.Menus.Where(i => i.IsOnline).ToList();
+    var parents = menus.Where(i => i.ParentId == null).OrderBy(i => i.DisplayOrder);
+}
+<div id="header">
+    <h1>
+        <a href="/">@SiteLabel("Online tools / query")</a>
+    </h1>
+    @if (CurrentPage != null)
+    {
+        <p class="lang">
+            <a href="/cn/@CurrentPage.Url">@SiteLabel("中文")</a><span>|</span><a href="/@CurrentPage.Url">English</a>
+        </p>
+    }
+</div>
+<div id="nav">
+    @if (parents.Any())
+    {
+        <ul>
+            @foreach (var item in parents)
+            {
+                <li @if (item.IsCurrent())
+                    {<text> class="current"</text>}><a href="@FrontUrl.GetClientUrl(item.Url)" 
+                     @if (item.OpenInNewWindow)
+                     {<text>target="_blank"</text>}>@item.Name</a></li>
+            }
+        </ul>
+    }
+</div>

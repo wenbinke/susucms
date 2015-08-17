@@ -1,0 +1,141 @@
+﻿@model Site
+@{
+    var controller = ViewContext.Controller as SiteController;
+    var action = GetActionName();
+}
+@using (Html.BeginForm())
+{
+    <table class="form-table">
+        <tbody>
+            <tr>
+                <th>
+                    @Html.HiddenFor(m => m.Id)
+                    @Html.LabelFor(m => m.Name)
+                </th>
+                <td>
+                    @Html.TextBoxFor(m => m.Name)
+                    @Html.ValidationMessageFor(m => m.Name)
+                </td>
+            </tr>
+            <tr>
+                <th>
+                    @Html.LabelFor(m => m.Template)
+                </th>
+                <td>
+                    @if (action == "edit")
+                    {
+                        @Html.DropDownListFor(m => m.Template, controller.Templates, new { disabled = "disabled" })
+                    }
+                    else
+                    {
+                        @Html.DropDownListFor(m => m.Template, controller.Templates)
+                    }
+                </td>
+            </tr>
+            <tr>
+                <th>
+                    @Html.LabelFor(m => m.UrlsJson)
+                </th>
+                <td class="urls">
+                    <ul>
+                    </ul>
+                    <a href="javascript://" class="add">+<span>Add more urls?</span></a>
+                    @Html.HiddenFor(m => m.UrlsJson)
+                </td>
+            </tr>
+            <tr>
+                <th>
+                    @Html.LabelFor(m => m.CultureName)
+                </th>
+                <td>
+                    @Html.DropDownListFor(m => m.CultureName, Html.GetCultureNames())
+                </td>
+            </tr>
+            <tr>
+                <th>
+                    @Html.LabelFor(m => m.IsOnline)
+                </th>
+                <td>
+                    @Html.CheckBoxFor(m => m.IsOnline)
+                </td>
+            </tr>
+            <tr>
+                <th>
+                </th>
+                <td>
+                    @Html.AntiForgeryToken()
+                    @Html.SaveButton()
+                    @Html.ReturnButton()
+                </td>
+            </tr>
+        </tbody>
+    </table>
+}
+<script id="site-urls-template" type="text/x-jquery-tmpl"> 
+    <li>
+        <label>http://</label>
+        <input data-val="true" data-val-regex="@MessageResource.InvalidUrl" data-val-regex-pattern="^([\w-]+\.)+[\w-]+(|:\d{1,5})(/[\w-]+)*$" 
+            data-val-required="@MessageResource.Required" name="Urls${Index}" type="text" value="${Name}" />
+        {{if Index != 0}} <a href="javascript://" class="delete"></a> {{/if}}
+        <span class="field-validation-valid" data-valmsg-for="Urls${Index}" data-valmsg-replace="true"></span>
+        {{if Index == 0}}
+            <span class="checkbox">@Html.CheckBoxFor(m => m.RedirectToMainUrl) @Html.LabelFor(m => m.RedirectToMainUrl)</span>
+        {{/if}}
+    </li>
+</script>
+<script type="text/javascript">
+    $(function () {
+
+        /* Site Urls
+        ----------------------------------------------------*/
+        function getUrls() {
+            var list = new Array();
+            $('.urls ul li').each(function () {
+                var name = $(this).find('input:text').val();
+                list.push({ Name: name });
+            });
+
+            return list;
+        }
+
+        function setUrlsJson(list) {
+            $('#UrlsJson').val(JSON.stringify(list));
+        }
+
+        function initUrls(list) {
+
+            var newList = new Array();
+            for (var i in list) {
+                newList.push({ Index: i, Name: list[i].Name });
+            }
+
+            var urls = $("#site-urls-template").tmpl(newList);
+            $('.urls ul').empty().append(urls);
+
+            sc.ui.Form.transform(urls);
+            sc.ext.Validator.parseDynamicContent('.urls');
+        }
+
+        $('.urls .add').click(function () {
+            var list = getUrls();
+            list.push({ Name: '' });
+
+            initUrls(list);
+        });
+
+        $('.urls .delete').live('click', function () {
+            if ($('.urls ul li').length > 1) {
+                $(this).parent('li').remove();
+            }
+        });
+
+        // Save all
+        $('form').submit(function () {
+            setUrlsJson(getUrls());
+
+            return true;
+        });
+
+        initUrls($.parseJSON($('#UrlsJson').val()));
+    });
+</script>

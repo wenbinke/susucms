@@ -1,0 +1,90 @@
+﻿@inherits SusuCMS.Web.Front.WidgetPageBase
+@using SusuCMS.Blog;
+@using System.Globalization;
+@using SusuCMS.Web.Paging;
+@{
+    var dataContext = BlogWorkContext.GetDataContext();
+    var list = dataContext.Articles.WithSiteId(CurrentSite.Id);
+
+    int pageSize = 5;
+    var data = CurrentWidget.GetData();
+    if (data != null)
+    {
+        string filterBy = data.FilterBy;
+        switch (filterBy)
+        {
+            case "FilterByCategory":
+                var categoryId = ((string)ViewContext.RouteData.Values["categoryId"]).AsInt();
+                list = list.Where(i => i.CategoryId == categoryId);
+                break;
+            case "FilterByTag":
+                var tagId = ((string)ViewContext.RouteData.Values["tagId"]).AsInt();
+                list = list.Where(i => i.Tags.Any(j => j.Id == tagId));
+                break;
+            default:
+                break;
+        }
+
+        pageSize = data.PageSize;
+    }
+
+    var page = Request.QueryString["page"].AsInt(1);
+    var pagedList = list.OrderByDescending(i => i.CreationTime).ToPagedList(page, pageSize);
+
+    var permalinkSetting = CurrentSite.GetPermalinkSetting();
+    var articleUrl = permalinkSetting.ArticleUrl;
+    var categoryUrl = permalinkSetting.CategoryUrl;
+    var tagUrl = permalinkSetting.TagUrl;
+}
+<div class="widget article-list">
+    @if (pagedList.Any())
+    {
+        foreach (var item in pagedList)
+        {
+            var itemUrl = FrontUrl.GetClientUrl(articleUrl, new { ArticleId = item.Id, Slug = item.Slug });
+        <div class="article">
+            <p class="date">
+                @CultureInfo.CurrentCulture.DateTimeFormat.GetMonthName(item.CreationTime.Month)<span>@item.CreationTime.Day</span></p>
+            <h2 class="title">
+                <a href="@itemUrl">@item.Title</a></h2>
+            <p class="posted">
+                @WidgetLabel("Posted by") <a href="#">@item.Author</a></p>
+            <div class="entry">
+                <p>
+                    @item.Content.Summary(500)
+                </p>
+                <div class="meta">
+                    <span class="listed">@WidgetLabel("Posted in")
+                        @if (item.Category != null)
+                        {
+                            <a href="@FrontUrl.GetClientUrl(categoryUrl, new { categoryId = item.Category.Id, Slug = item.Category.Name.AsSlug() })">
+                                @item.Category.Name
+                            </a>
+                        }
+                        else
+                        {
+                            @WidgetLabel("Uncategorized")
+                        }
+                    </span><span class="tags">@WidgetLabel("Tags:")
+                        @Html.Raw(string.Join(",", item.Tags.Select(i => string.Format(@"<a href=""{0}"">{1}</a>", FrontUrl.GetClientUrl(tagUrl, new { TagId = i.Id, Slug = i.Name.AsSlug() }), i.Name))))</span>
+                    <span class="comments"><a href="@itemUrl#Comments">@item.CommentCount @WidgetLabel("Comments")</a></span>
+                </div>
+            </div>
+        </div>
+        }
+
+        if (list.Count() > pageSize)
+        {
+            @Html.PagedListPager(pagedList, i => FrontUrl.GetClientUrl(CurrentPage.Url) + "?page=" + i, new PagedListRenderOptions
+                {
+                    LinkToPreviousPageFormat = WidgetLabel("Prev").ToHtmlString(),
+                    LinkToNextPageFormat = WidgetLabel("Next").ToHtmlString(),
+                    EllipsesFormat = WidgetLabel("...").ToHtmlString()
+                })
+        }
+    }
+    else
+    {
+        @WidgetLabel("Apologies, but no results were found for the requested archive. Perhaps searching will help find a related post.")
+    }
+</div>

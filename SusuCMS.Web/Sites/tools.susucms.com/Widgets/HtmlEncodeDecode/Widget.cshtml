@@ -1,0 +1,45 @@
+﻿@inherits SusuCMS.Web.Front.WidgetPageBase
+
+@{
+    FrontHtml.ClientScript.jQuery(true);
+}
+<h2>
+    @WidgetLabel("Html Encode / Decode")</h2>
+<div class="description">
+    @WidgetLabel(@"In order to secure the site, some sites will block submission of information input HTML code,
+through the encoding, you can input this information, but also to the relevant technical staff to provide a small tool.")
+</div>
+<textarea id="text"></textarea>
+<p class="buttons">
+    <button id="encode" type="button">
+        @WidgetLabel("Encode")</button>
+    <button id="decode" type="button">
+        @WidgetLabel("Decode")</button>
+</p>
+<script type="text/javascript">
+    $(function () {
+        function HtmlEncode(html) {
+            var temp = document.createElement("div");
+            (temp.textContent != null) ? (temp.textContent = html) : (temp.innerText = html);
+            var output = temp.innerHTML;
+            temp = null;
+            return output;
+        }
+
+        function HtmlDecode(text) {
+            var temp = document.createElement("div");
+            temp.innerHTML = text;
+            var output = temp.innerText || temp.textContent;
+            temp = null;
+            return output;
+        }
+
+        $('#encode').click(function () {
+            $('#text').val(HtmlEncode($('#text').val()));
+        });
+
+        $('#decode').click(function () {
+            $('#text').val(HtmlDecode($('#text').val()));
+        });
+    });
+</script>

@@ -1,0 +1,33 @@
+﻿@{
+    ViewBag.Title = DisplayResource.Import;
+    ViewBag.Subtitle = DisplayResource.Import;
+}
+@using (Html.BeginForm())
+{
+    <table class="form-table">
+        <tbody>
+            <tr>
+                <th>
+                    @Html.Label("File", DisplayResource.File)
+                </th>
+                <td>
+                    @{
+                        Html.Telerik().Upload()
+                            .Name("file")
+                            .Multiple(false)
+                            .Render();
+                    }
+                </td>
+            </tr>
+            <tr>
+                <th>
+                </th>
+                <td>
+                    @Html.AntiForgeryToken()
+                    <button type="submit" class="button blue"><span>@DisplayResource.Import</span></button>
+                    @Html.ReturnButton()
+                </td>
+            </tr>
+        </tbody>
+    </table>
+}

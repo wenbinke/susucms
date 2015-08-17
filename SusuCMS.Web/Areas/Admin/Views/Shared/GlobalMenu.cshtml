@@ -1,0 +1,26 @@
+﻿@{
+    var controller = GetControllerName();
+    var action = GetActionName();
+}
+<li @if (controller == "home" && action == "index")
+    { <text>class="current"</text> }>@Html.ActionLink(DisplayResource.Home, "Index", "Home", new { area = "Admin" }, null)</li>
+@if (CurrentUser.HasPermission(Permission.Sites))
+{
+    <li @if (controller == "site")
+        { <text>class="current"</text> }>@Html.ActionLink(DisplayResource.Sites, "Index", "Site", new { area = "Admin" }, null)</li>
+}
+@if (CurrentUser.HasPermission(Permission.Users))
+{
+    <li @if (controller == "adminuser" || controller == "adminrole")
+        { <text>class="current"</text> }>@Html.ActionLink(DisplayResource.Administrators, "Index", "AdminUser", new { area = "Admin" }, null)</li>
+}
+@if (CurrentUser.HasPermission(Permission.SystemSettings))
+{
+    <li  @if (controller == "home" && action == "setting")
+         { <text>class="current"</text> }>@Html.ActionLink(DisplayResource.Settings, "Setting", "Home", new { area = "Admin" }, null)</li>
+}
+@if (CurrentUser.HasPermission(Permission.SystemLogs))
+{
+    <li  @if (controller == "systemlog")
+         { <text>class="current"</text> }>@Html.ActionLink(DisplayResource.SystemLogs, "Index", "SystemLog", new { area = "Admin" }, null)</li>
+}

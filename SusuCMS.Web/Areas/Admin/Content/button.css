@@ -1,0 +1,173 @@
+﻿/* Buttons
+-----------------------------------------------------------------------------*/
+.button, .button span
+{
+    display: inline-block;
+    text-decoration:none;
+    height: 29px;
+    background: url(images/sprites.png) left -217px;
+}
+.button
+{
+    float: left;
+    margin-right: 5px;
+    border: none;
+    cursor: pointer;
+    width: auto;
+    overflow: visible;
+}
+.button span
+{
+    line-height: 29px;
+    text-align: center;
+    color: #333;
+    font-weight: bold;
+    padding-left: 10px;
+    padding-right: 15px;
+    margin-left: 5px;
+    background-position:  right -246px;
+    white-space: nowrap; /* IE7 bug */
+}
+
+.button:hover, .button span:hover 
+{
+    text-decoration:none;
+    cursor:pointer;
+}
+.button:hover
+{
+    background-position:  left -275px;
+}
+.button span:hover 
+{
+    background-position:  right -304px;
+}
+
+/* Blue button */
+.button.blue 
+{
+    background-position:  left -333px;
+}
+.button.blue span
+{
+    color: #fff;
+    background-position:  right -362px;
+}
+.button.blue:hover
+{
+    background-position:  left -391px;
+}
+.button.blue span:hover
+{
+    background-position:  right -420px;
+}
+
+.button.small, .button.small span
+{
+    height: 26px;
+    line-height: 26px;
+    background-position:  left -449px;
+}
+.button.small span
+{
+    background-position:  right -475px;
+}
+.button.small:hover
+{
+    background-position:  left -501px;
+}
+.button.small span:hover 
+{
+    background-position:  right -527px;
+}
+
+/* Blue button */
+.button.small.blue 
+{
+    background-position:  left -553px;
+}
+.button.small.blue span
+{
+    color: #fff;
+    background-position:  right -579px;
+}
+.button.small.blue:hover
+{
+    background-position:  left -605px;
+}
+.button.small.blue span:hover
+{
+    background-position:  right -631px;
+}
+
+/* Icons
+---------------------------------------------------------------------*/
+.delete, .edit, .config, .true, .false, .design, .remove, .more, .up, .down
+{
+    width: 16px;
+    height: 16px;
+    display: inline-block;
+    border: none;
+    text-indent: -9999px;
+    background: url(images/sprites.png) no-repeat;
+}
+.edit
+{
+    background-position: -1020px -129px;
+}
+.delete
+{
+    background-position: right -129px;
+}
+.delete:hover
+{
+    cursor: pointer;
+}
+.config
+{
+    background-position: -999px -129px;
+}
+.design
+{
+    background-position: -978px -129px;
+}
+.true
+{
+    background-position: right -222px;
+}
+.false
+{
+    background-position: -999px -222px;
+}
+.remove
+{
+    background-position: -1002px -278px;
+}
+.more
+{
+    width: 14px;
+    height: 7px;
+    background-position: -980px -280px;
+}
+.up
+{
+    background-position: -1035px -339px;
+}
+.down
+{
+    background-position: -1016px -339px;
+}
+.data-table td .down
+{
+    margin-left: 16px;
+}
+.data-table td .up + .down
+{
+    margin-left: 0;
+}
+.blank-up
+{
+    width: 16px;
+    height: 16px;
+    display: inline-block;
+}

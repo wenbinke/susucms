@@ -1,0 +1,73 @@
+﻿@model IQueryable<Category>
+@{
+    ViewBag.Title = SusuCMS.Blog.DisplayResource.Categories;
+    ViewBag.Subtitle = SusuCMS.Blog.DisplayResource.Categories;
+}
+<div class="toolbar clearfix">
+    @Html.LinkButton(SusuCMS.DisplayResource.Create, Url.Action("Create", "Category", new { returnUrl = Request.RawUrl }))
+</div>
+@using (Html.BeginForm("Delete", "Category"))
+{
+    @Html.ReturnUrl()
+    @Html.AntiForgeryToken()
+    <table class="data-table" id="tree-table">
+        <colgroup>
+            <col />
+            <col />
+            <col />
+            <col class="action" />
+            <col class="action" />
+        </colgroup>
+        <thead>
+            <tr>
+                <th>
+                    @SusuCMS.DisplayResource.Name
+                </th>
+                <th>
+                    @SusuCMS.Blog.DisplayResource.Articles
+                </th>
+                <th>
+                    @SusuCMS.DisplayResource.IsOnline
+                </th>
+                <th>
+                    @SusuCMS.DisplayResource.Edit
+                </th>
+                <th>
+                    @SusuCMS.DisplayResource.Delete
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr id="node-@item.Id" @if (item.ParentId != null)
+                                       {<text>class="child-of-node-@item.ParentId"</text>}>
+                    <td>
+                        @item.Name
+                    </td>
+                    <td>
+                        @Html.ActionLink(item.ArticleCount.ToString(), "Index", "Article", new { categoryId = item.Id }, null)
+                    </td>
+                    <td>
+                        @Html.ActionLink(SusuCMS.DisplayResource.IsOnline, "ToggleOnline", "Category", new { id = item.Id, returnUrl = Request.RawUrl }, new { @class = item.IsOnline.ToString().ToLower() })
+                    </td>
+                    <td>
+                        @Html.ActionLink(SusuCMS.DisplayResource.Edit, "Edit", "Category", new { id = item.Id }, new { @class = "edit" })
+                    </td>
+                    <td>
+                        <button type="submit" value="@item.Id" name="Id" class="delete">@SusuCMS.DisplayResource.Delete</button>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+<script type="text/javascript" src="@Url.Content("~/Scripts/jqueryui")"></script>
+<script type="text/javascript" src="@Url.Content("~/Scripts/jquery.treeTable")"></script>
+<script type="text/javascript">
+    $(function () {
+        $("#tree-table").treeTable({
+            initialState: "expanded"
+        });
+    });
+</script>

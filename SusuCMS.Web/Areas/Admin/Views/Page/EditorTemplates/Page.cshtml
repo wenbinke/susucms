@@ -1,0 +1,93 @@
+﻿@model SusuCMS.Data.Page
+@{
+    var controller = ViewContext.Controller as PageController;
+}
+@using (Html.BeginForm())
+{
+    <table class="form-table page-form">
+        <tbody>
+            <tr>
+                <th>@Html.LabelFor(m => m.Name)
+                </th>
+                <td>
+                    @Html.TextBoxFor(m => m.Name)
+                    @Html.ValidationMessageFor(m => m.Name)
+                </td>
+            </tr>
+            <tr>
+                <th>@Html.LabelFor(m => m.Url)
+                </th>
+                <td>
+                    <p class="url">
+                        <label>
+                            http://@Request.Url.Authority/</label>
+                        @Html.TextBoxFor(m => m.Url)
+                        @Html.ValidationMessageFor(m => m.Url)
+                    </p>
+                </td>
+            </tr>
+            <tr>
+                <th>
+                    @Html.LabelFor(m => m.Template)
+                </th>
+                <td>
+                    @Html.DropDownListFor(m => m.Template, controller.Templates)
+                </td>
+            </tr>
+            <tr>
+                <th>
+                    @Html.LabelFor(m => m.HtmlTitle)
+                </th>
+                <td>
+                    @Html.TextBoxFor(m => m.HtmlTitle)
+                </td>
+            </tr>
+            <tr>
+                <th>
+                    @Html.LabelFor(m => m.MetaFieldsJson)
+                    @Html.HelpTip(DisplayResource.MetaFieldsTip)
+                </th>
+                <td class="meta-fields">
+                    <ul>
+                    </ul>
+                    <a href="javascript://" class="add">+<span>@DisplayResource.AddMoreFields</span></a>
+                    @Html.HiddenFor(m => m.MetaFieldsJson)
+                </td>
+            </tr>
+            <tr>
+                <th>
+                    @Html.LabelFor(m => m.IsOnline)
+                </th>
+                <td>
+                    @Html.CheckBoxFor(m => m.IsOnline)
+                </td>
+            </tr>
+            <tr>
+                <th>
+                </th>
+                <td>
+                    @Html.AntiForgeryToken()
+                    @Html.HiddenFor(m => m.ParentId)
+                    @Html.SaveButton()
+                    @Html.ReturnButton()
+                </td>
+            </tr>
+        </tbody>
+    </table>
+}
+@Html.Partial("MetaFields")
+<script type="text/javascript">
+    $(function () {
+        var labelWidth = $('.url label').width() + 3;
+        var textWidth = $('.url input:text').width();
+        $('.url input:text').css('padding-left', labelWidth + 'px').width(textWidth - labelWidth);
+
+        // Save all
+        $('form').submit(function () {
+            $('#MetaFieldsJson').val(getMetaFieldsJson());
+            return true;
+        });
+
+        initMetaFieldsByJson($('#MetaFieldsJson').val());
+    });
+</script>

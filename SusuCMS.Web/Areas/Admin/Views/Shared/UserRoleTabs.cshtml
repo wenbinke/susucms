@@ -1,0 +1,13 @@
+﻿@{
+    var controller = GetControllerName();
+}
+<ul class="tabs">
+    <li @if (controller == "adminuser")
+        {<text>class="current"</text> }>
+        @Html.ActionLink(DisplayResource.Users, "Index", "AdminUser")
+    </li>
+    <li @if (controller == "adminrole")
+        {<text>class="current"</text> }>
+        @Html.ActionLink(DisplayResource.Roles, "Index", "AdminRole")
+    </li>
+</ul>

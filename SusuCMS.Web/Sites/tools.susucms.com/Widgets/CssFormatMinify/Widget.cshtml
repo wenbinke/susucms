@@ -1,0 +1,75 @@
+﻿@inherits SusuCMS.Web.Front.WidgetPageBase
+
+@{
+    FrontHtml.ClientScript.jQuery(true);
+    FrontHtml.ClientScript.RegisterScript("~/Scripts/codeMirror/codemirror.js");
+}
+
+<h2>
+    @WidgetLabel("CSS Format / Minify")</h2>
+<div class="description">
+    @WidgetLabel(@"Compressed CSS code, CSS code format, a simple tool for CSS, the CSS code in order to facilitate more clear.")
+</div>
+<div class="code-editor">
+    <textarea id="text"></textarea></div>
+<p class="buttons">
+    <button id="format" type="button">
+        @WidgetLabel("Format")
+    </button>
+    <button id="minify" type="button">
+        @WidgetLabel("Minify")
+    </button>
+</p>
+<script type="text/javascript">
+    $(function () {
+        function CssMinify(code) {
+            code = code.replace(/\n/ig, '');
+            code = code.replace(/(\s){2,}/ig, '$1');
+            code = code.replace(/\t/ig, '');
+            code = code.replace(/\n\}/ig, '\}');
+            code = code.replace(/\n\{\s*/ig, '\{');
+            code = code.replace(/(\S)\s*\}/ig, '$1\}');
+            code = code.replace(/(\S)\s*\{/ig, '$1\{');
+            code = code.replace(/\{\s*(\S)/ig, '\{$1');
+
+            return code;
+        }
+
+        function CssFormat(code) {
+            code = code.replace(/(\s){2,}/ig, '$1');
+            code = code.replace(/(\S)\s*\{/ig, '$1 {');
+            code = code.replace(/\*\/(.[^\}\{]*)}/ig, '\*\/\n$1}');
+            code = code.replace(/\/\*/ig, '\n\/\*');
+            code = code.replace(/;\s*(\S)/ig, ';\n\t$1');
+            code = code.replace(/\}\s*(\S)/ig, '\}\n$1');
+            code = code.replace(/\n\s*\}/ig, '\n\}');
+            code = code.replace(/\{\s*(\S)/ig, '\{\n\t$1');
+            code = code.replace(/(\S)\s*\*\//ig, '$1\*\/');
+            code = code.replace(/\*\/\s*([^\}\{]\S)/ig, '\*\/\n\t$1');
+            code = code.replace(/(\S)\}/ig, '$1\n\}');
+            code = code.replace(/(\n){2,}/ig, '\n');
+            code = code.replace(/:/ig, ': ');
+            code = code.replace(/  /ig, ' ');
+
+            return code;
+        }
+
+        var editor = CodeMirror.fromTextArea('text', {
+            height: '450px',
+            parserfile: 'parsecss.js',
+            stylesheet: '/Scripts/codeMirror/csscolors.css',
+            path: '/Scripts/codeMirror/',
+            continuousScanning: 500
+        });
+
+        $('#format').click(function () {
+            var formatText = CssFormat(editor.getCode());
+            editor.setCode(formatText);
+        });
+
+        $('#minify').click(function () {
+            var minifyText = CssMinify(editor.getCode());
+            editor.setCode(minifyText);
+        });
+    });
+</script>

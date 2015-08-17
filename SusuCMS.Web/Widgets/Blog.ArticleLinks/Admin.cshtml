@@ -1,0 +1,44 @@
+﻿@inherits SusuCMS.Web.Admin.WidgetAdminPageBase
+@using SusuCMS.Web;
+@using SusuCMS.Blog;
+@{
+    var orderby = new Dictionary<string, string> { { "CreateTimeDesc", Localize("Create time descing") }, { "CreateTimeAsc", Localize("Create time ascing") } };
+}
+<tr>
+    <th>
+        @Html.Label("DisplayNumber", Localize("Display number"))
+    </th>
+    <td>
+        @Html.DropDownList("DisplayNumber", new SelectList(Enumerable.Range(1, 15)), new { @class = "small" })
+    </td>
+</tr>
+<tr>
+    <th>
+        @Html.Label("OrderBy", "Order by")
+    </th>
+    <td>
+        @Html.DropDownList("OrderBy", new SelectList(orderby, "key", "value"), new { @class = "small" })
+    </td>
+</tr>
+<tr>
+    <th>
+        @Html.Label("FilterCategories", "Filter by category")
+    </th>
+    <td>
+        <script type="text/javascript">
+            function getData() {
+                return {
+                    DisplayNumber: $('#DisplayNumber').val(),
+                    OrderBy: $('#OrderBy').val()
+                };
+            }
+
+            function setData(data) {
+                if (data != null) {
+                    $('#DisplayNumber').val(data.DisplayNumber);
+                    $('#OrderBy').val(data.OrderBy);
+                }
+            }
+        </script>
+    </td>
+</tr>

@@ -1,0 +1,78 @@
+﻿@model SusuCMS.AdminRole
+@helper GetPermissionOption(Permission permission, string displayName)
+    {
+        var id = "permission" + (int)permission;
+        if (Model.IsRoot)
+        {
+    @Html.CheckBox(id, Model.HasPermission(permission), new { disabled = "disabled" })
+        }
+        else
+        {
+    @Html.CheckBox(id, Model.HasPermission(permission))
+        }
+    @Html.Label(id, displayName)
+}
+@using (Html.BeginForm())
+{
+    <table class="form-table">
+        <tbody>
+            <tr>
+                <th>@Html.LabelFor(m => m.Name)
+                </th>
+                <td>
+                    @if (Model.IsRoot)
+                    {
+                        @Html.TextBoxFor(m => m.Name, new { @readonly = "readonly" })
+                    }
+                    else
+                    {
+                        @Html.TextBoxFor(m => m.Name)
+                    }
+                    @Html.ValidationMessageFor(m => m.Name)
+                </td>
+            </tr>
+            <tr>
+                <th>@Html.LabelFor(m => m.Permissions)
+                </th>
+                <td>
+                    <strong>@DisplayResource.System</strong>
+                    <ul class="checkbox-list">
+                        <li>
+                            @GetPermissionOption(Permission.Sites, DisplayResource.Sites)
+                        </li>
+                        <li>
+                            @GetPermissionOption(Permission.SystemLogs, DisplayResource.SystemLogs)
+                        </li>
+                        <li>
+                            @GetPermissionOption(Permission.SystemSettings, DisplayResource.SystemSettings)
+                        </li>
+                        <li>
+                            @GetPermissionOption(Permission.Users, DisplayResource.Users)
+                        </li>
+                    </ul>
+                    <strong>@DisplayResource.Sites</strong>
+                    <ul class="checkbox-list">
+                        <li>
+                            @GetPermissionOption(Permission.Pages, DisplayResource.Pages)
+                        </li>
+                        <li>
+                            @GetPermissionOption(Permission.Media, DisplayResource.Media)
+                        </li>
+                        <li>
+                            @GetPermissionOption(Permission.SiteSettings, DisplayResource.Settings)
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+            <tr>
+                <th>
+                </th>
+                <td>
+                    @Html.AntiForgeryToken()
+                    @Html.SaveButton()
+                    @Html.ReturnButton()
+                </td>
+            </tr>
+        </tbody>
+    </table>
+}

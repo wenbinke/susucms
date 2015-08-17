@@ -1,0 +1,125 @@
+﻿@model UserSetting
+@{
+    ViewBag.Title = DisplayResource.UserSettings;
+    ViewBag.Subtitle = DisplayResource.UserSettings;
+}
+@using SusuCMS.Connect
+@using (Html.BeginForm())
+{
+    <ul class="tabs">
+        @foreach (AppType item in Enum.GetValues(typeof(AppType)))
+        {
+            <li><a href="#@item">@item.GetDisplayValue()</a></li>
+        }
+    </ul>
+    <table class="form-table">
+        <tbody>
+            <tr>
+                <th>@Html.Label("AppId", "App ID")
+                </th>
+                <td>
+                    @Html.TextBox("AppId")
+                </td>
+            </tr>
+            <tr>
+                <th>@Html.Label("AppSecret", "App Secret")
+                </th>
+                <td>
+                    @Html.TextBox("AppSecret")
+                </td>
+            </tr>
+            <tr>
+                <th>@Html.Label("Scope", "Scope")
+                </th>
+                <td>
+                    @Html.TextBox("Scope")
+                </td>
+            </tr>
+            <tr>
+                <th>@Html.Label("RedirectUri", "Redirect Uri")
+                </th>
+                <td>
+                    @Html.TextBox("RedirectUri")
+                </td>
+            </tr>
+            <tr>
+                <th>@Html.Label("Enabled", DisplayResource.Enable)
+                </th>
+                <td>
+                    @Html.CheckBox("Enabled")
+                </td>
+            </tr>
+            <tr>
+                <th>
+                </th>
+                <td>
+                    @Html.Hidden("json", Json.Encode(Model))
+                    @Html.AntiForgeryToken()
+                    @Html.SaveButton()
+                    @Html.ReturnButton()
+                </td>
+            </tr>
+        </tbody>
+    </table>
+}
+<script type="text/javascript">
+    $(function () {
+        function initForm(appInfo) {
+            if (appInfo != null) {
+                $('#AppId').val(appInfo.AppId);
+                $('#AppSecret').val(appInfo.AppSecret);
+                $('#Scope').val(appInfo.Scope);
+                $('#RedirectUri').val(appInfo.RedirectUri);
+
+                $('#Enabled').data('sCheckBox').val(appInfo.Enabled);
+            } else {
+                $('#AppId').val('');
+                $('#AppSecret').val('');
+                $('#Scope').val('');
+                $('#RedirectUri').val('');
+                $('#Enabled').data('sCheckBox').val(false);
+            }
+        }
+
+        var userSetting = $.parseJSON($('#json').val());
+        if (userSetting != null) {
+            for (var i in userSetting.AppInfoConfigs) {
+                $('.tabs li').eq(i).data('appinfo', userSetting.AppInfoConfigs[i]);
+            }
+        }
+
+        var first = $('.tabs li').eq(0).addClass('current');
+        initForm(first.data('appinfo'));
+
+        function getAppInfo() {
+            return {
+                AppId: $('#AppId').val(),
+                AppSecret: $('#AppSecret').val(),
+                Scope: $('#Scope').val(),
+                RedirectUri: $('#RedirectUri').val(),
+                Enabled: $('#Enabled').is(':checked')
+            };
+        }
+
+        $('.tabs li').click(function () {
+            var current = $('.tabs li.current').removeClass('current');
+            current.data('appinfo', getAppInfo());
+
+            $(this).addClass('current');
+            initForm($(this).data('appinfo'));
+        });
+
+        $('form').submit(function () {
+            $('.tabs li.current').data('appinfo', getAppInfo());
+
+            var list = new Array();
+            $('.tabs li').each(function () {
+                list.push($(this).data('appinfo'));
+            });
+
+            $('#json').val(JSON.stringify({ AppInfoConfigs: list }));
+
+            return true;
+        });
+    });
+</script>

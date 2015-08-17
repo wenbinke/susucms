@@ -1,0 +1,87 @@
+﻿@model SusuCMS.Web.Admin.Models.EditAdminUserModel
+@{
+    ViewBag.Title = DisplayResource.Edit;
+    ViewBag.Subtitle = DisplayResource.Edit;
+    var canEdit = !Model.IsRoot || (Model.IsRoot && CurrentUser.IsRoot);
+}
+@using (Html.BeginForm("Edit", "AdminUser", null, FormMethod.Post, new { autocomplete = "off" }))
+{
+    <table class="form-table">
+        <tbody>
+            <tr>
+                <th>@Html.LabelFor(m => m.UserName)
+                </th>
+                <td>
+                    @Html.TextBoxFor(m => m.UserName, new { @readonly = "readonly" })
+                </td>
+            </tr>
+            <tr>
+                <th>@Html.LabelFor(m => m.Email)
+                </th>
+                <td>
+                    @if (canEdit)
+                    {
+                        @Html.TextBoxFor(m => m.Email)
+                    }
+                    else
+                    {
+                        @Html.TextBoxFor(m => m.Email, new { @readonly = "readonly" })
+                        
+                    }
+                    @Html.ValidationMessageFor(m => m.Email)
+                </td>
+            </tr>
+            <tr>
+                <th>@Html.LabelFor(m => m.RoleId)
+                </th>
+                <td>
+                    @if (canEdit)
+                    {
+                        @Html.DropDownListFor(m => m.RoleId, new SelectList(DataContext.AdminRoles, "Id", "Name"))
+                    }
+                    else
+                    {
+                        @Html.DropDownListFor(m => m.RoleId, new SelectList(DataContext.AdminRoles, "Id", "Name"), new { @readonly = "readonly" })
+                    }
+                    @Html.ValidationMessageFor(m => m.RoleId)
+                </td>
+            </tr>
+            @if (canEdit)
+            {
+                <tr>
+                    <th>@Html.LabelFor(m => m.Password)
+                    </th>
+                    <td>
+                        <p class="watermark">
+                            <label>@DisplayResource.PasswordMock</label>
+                            @Html.PasswordFor(m => m.Password)
+                            @Html.ValidationMessageFor(m => m.Password)
+                        </p>
+                    </td>
+                </tr>
+                   
+                <tr>
+                    <th>
+                        @Html.LabelFor(m => m.ConfirmPassword)
+                    </th>
+                    <td>
+                        <p class="watermark">
+                            <label>@DisplayResource.PasswordMock</label>
+                            @Html.PasswordFor(m => m.ConfirmPassword)
+                            @Html.ValidationMessageFor(m => m.ConfirmPassword)
+                        </p>
+                    </td>
+                </tr>
+            }
+            <tr>
+                <th>
+                </th>
+                <td>
+                    @Html.AntiForgeryToken()
+                    @Html.SaveButton()
+                    @Html.ReturnButton()
+                </td>
+            </tr>
+        </tbody>
+    </table>
+}

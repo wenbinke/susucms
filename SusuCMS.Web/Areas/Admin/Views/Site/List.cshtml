@@ -1,0 +1,10 @@
+﻿@model IQueryable<Site>
+<ul class="site-list">
+    @foreach (var item in Model)
+    {
+        var theme = item.GetThemeInfo();
+        <li><a class="image" href="@Url.Action("Home", "Site", new { siteId = item.Id })">
+            <img src="@Url.Content(theme.PreviewImagePath)" /></a> <span>@item.Name</span>
+        </li>
+    }
+</ul>

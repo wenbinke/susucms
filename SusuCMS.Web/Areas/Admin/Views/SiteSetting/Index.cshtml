@@ -1,0 +1,105 @@
+﻿@model Site
+@{
+    ViewBag.Title = DisplayResource.Settings;
+    ViewBag.Subtitle = DisplayResource.Settings;
+    var faviconPath = CurrentSite.GetFaviconPath();
+}
+@Html.Partial("SiteSettingTabs")
+@using (Html.BeginForm())
+{
+    <table class="form-table">
+        <tbody>
+            <tr>
+                <th>@DisplayResource.Favicon
+                </th>
+                <td>
+                    @if (File.Exists(Server.MapPath(faviconPath)))
+                    {
+                        <img src="@Url.Content(faviconPath)?@DateTime.Now.Ticks" id="favicon-preview" />
+                    }
+                    @(Html.Telerik().Upload()
+                            .Name("Favicon")
+                            .Multiple(false)
+                            .Async(async => async
+                            .Save("FaviconUpload", "SiteSetting")
+                            .Remove("FaviconRemove", "SiteSetting")
+                            .AutoUpload(true)
+                    ).ClientEvents(i => i.OnUpload("onUploadFavicon").OnSuccess("onFaviconSuccess")))
+                </td>
+            </tr>
+            <tr>
+                <th>
+                    @Html.LabelFor(m => m.AnalyticsCode)
+                </th>
+                <td>
+                    @Html.TextAreaFor(m => m.AnalyticsCode)
+                </td>
+            </tr>
+            <tr>
+                <th>
+                    @Html.Label("Robots", "Robots.txt")
+                </th>
+                <td>
+                    @Html.TextArea("Robots")
+                    <a href="javascript://" id="insert-sample-code">@DisplayResource.SampleRobots_txt</a>
+                </td>
+            </tr>
+            <tr>
+                <th>
+                    @Html.LabelFor(m => m.MetaFieldsJson)
+                    @Html.HelpTip(DisplayResource.MetaFieldsTip)
+                </th>
+                <td class="meta-fields">
+                    <ul>
+                    </ul>
+                    <a href="javascript://" class="add">+<span>@DisplayResource.AddMoreFields</span></a>
+                    @Html.HiddenFor(m => m.MetaFieldsJson)
+                </td>
+            </tr>
+            <tr>
+                <th>
+                </th>
+                <td>
+                    @Html.AntiForgeryToken()
+                    @Html.SaveButton()
+                </td>
+            </tr>
+        </tbody>
+    </table>
+}
+@Html.Partial("MetaFields")
+<script type="text/javascript">
+    function onUploadFavicon(e) {
+        $.each(e.files, function () {
+            if (this.extension != '.ico') {
+                sc.ui.Message.showError('@MessageResource.OnlyICO')
+                e.preventDefault();
+                return false;
+            }
+        });
+    }
+
+    function onFaviconSuccess(e) {
+        var preview = $('#favicon-preview');
+        if (e.operation == 'remove') {
+            preview.hide();
+        } else {
+            preview.attr('src', '@Url.Content(CurrentSite.GetDataFolderPath())/temp.ico?' + Math.random());
+            preview.show();
+        }
+    }
+
+    $(function () {
+        $('#insert-sample-code').click(function () {
+            $('#Robots').val('User-agent: *\r\nDisallow: ');
+        });
+
+        // Save all
+        $('form').submit(function () {
+            $('#MetaFieldsJson').val(getMetaFieldsJson());
+            return true;
+        });
+
+        initMetaFieldsByJson($('#MetaFieldsJson').val());
+    });
+</script>

@@ -1,0 +1,407 @@
+﻿.buttons
+{
+    padding-top: 10px;
+}
+/* Form Table
+----------------------------------------------------------------------*/
+.form-table
+{
+    width: 98%;
+    table-layout: fixed;
+}
+.form-table th
+{
+    width: 150px;
+    vertical-align: top;
+    text-align: left;
+    padding: 5px 0;
+    font-size: 13px;
+}
+.form-table td
+{
+    padding: 3px 0 10px 0;
+    vertical-align: top;
+}
+.form-table .form-text
+{
+    padding-top: 6px;
+    float: left;
+}
+.required
+{
+    color: #ff0000;
+    padding-left: 3px;
+}
+
+/* Form Elements
+----------------------------------------------------------------------*/
+.field-validation-error, .validation-summary-errors
+{
+    color: #ff0000;
+}
+.field-validation-error
+{
+    margin-left: 3px;
+    margin-top: 6px;
+    display: inline-block;
+    vertical-align: top;
+}
+.validation-summary-errors
+{
+    font-weight: bold;
+}
+.field-validation-valid, .validation-summary-valid
+{
+    display: none;
+}
+input[type="text"], input[type="password"], textarea, select
+{
+    width: 400px;
+}
+textarea
+{
+    height: 160px;
+    overflow: auto;
+}
+input[type="text"].small, input[type="password"].small, textarea.small, select.small
+{
+    width: 280px;
+}
+input[type="text"].mini, input[type="password"].mini, textarea.mini, select.mini
+{
+    width: 170px;
+}
+.checkbox-tree ul
+{
+    margin-left: 18px;
+}
+.checkbox-tree
+{
+    margin-left: -18px;
+}
+/* Telerik
+-------------------------------------------------------------*/
+table.t-editor
+{
+    border-spacing: 4px;
+}
+.t-editor .t-html
+{
+    background-image: url(/Content/Editor/CustomTools/insert-html-icon.png);
+}
+.html-view .t-button-wrapper
+{
+    padding: 5px;
+}
+.html-view .textarea
+{
+    padding: 5px;
+}
+.html-view textarea
+{
+    width: 680px;
+    height: 300px;
+}
+
+/* Watermark
+-------------------------------------------------------------*/
+.watermark
+{
+    position: relative;
+    display: inline-block;
+}
+.watermark label
+{
+    position: absolute;
+    left: 10px;
+    top: 7px;
+    color: #A0A0A0;
+}
+
+/*  Inputs
+---------------------------------------------------- */
+.s-form-input-wrapper
+{
+    background: transparent url(images/sprites.png) no-repeat left top;
+    height: 31px;
+    float: left;
+    margin-right: 5px;
+}
+.s-form-input-wrapper input
+{
+    background: transparent url(images/sprites.png) no-repeat right -31px;
+    height: 21px;
+    margin-left: 8px;
+    padding: 5px 8px 5px 0;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 12px;
+    line-height: 21px;
+    color: #404040;
+    border: none;
+    *margin-top: -1px;
+}
+
+/*hover*/
+.s-form-input-wrapper-hover
+{
+    background-position: left -62px;
+}
+.s-form-input-wrapper-hover input
+{
+    background-position: right -93px;
+}
+
+/*focus*/
+.s-form-input-wrapper-focus
+{
+    background-position: left -124px;
+}
+.s-form-input-wrapper-focus input
+{
+    background-position: right -155px;
+}
+
+/*  Textarea
+------------------------------------------------------------------------------ */
+table.s-form-textarea td#s-form-textarea-mm textarea
+{
+    font-size: 12px;
+    line-height: 16px;
+}
+
+table.s-form-textarea td
+{
+    font-size: 1px;
+    line-height: 1px;
+    width: 5px;
+    height: 5px;
+    margin: 0;
+    padding: 0;
+}
+table.s-form-textarea textarea
+{
+    margin: 0;
+    padding: 0;
+    border: 0;
+    background: none;
+}
+table.s-form-textarea td#s-form-textarea-tl
+{
+    background: url(images/textarea/textarea_tl.gif) no-repeat top left;
+}
+table.s-form-textarea td#s-form-textarea-tm
+{
+    background: url(images/textarea/textarea_tm.gif) repeat-x top left;
+}
+table.s-form-textarea td#s-form-textarea-tr
+{
+    background: url(images/textarea/textarea_tr.gif) no-repeat top left;
+}
+
+table.s-form-textarea td#s-form-textarea-ml
+{
+    background: url(images/textarea/textarea_ml.gif) repeat-y top left;
+}
+table.s-form-textarea td#s-form-textarea-mm
+{
+    background: url(images/textarea/textarea-mm.gif) repeat;
+}
+table.s-form-textarea td#s-form-textarea-mr
+{
+    background: url(images/textarea/textarea_mr.gif) repeat-y top left;
+}
+
+table.s-form-textarea td#s-form-textarea-bl
+{
+    background: url(images/textarea/textarea_bl.gif) no-repeat top left;
+}
+table.s-form-textarea td#s-form-textarea-bm
+{
+    background: url(images/textarea/textarea_bm.gif) repeat-x top left;
+}
+table.s-form-textarea td#s-form-textarea-br
+{
+    background: url(images/textarea/textarea_br.gif) no-repeat top left;
+}
+
+/*hover*/
+table.s-form-textarea-hover td#s-form-textarea-tl
+{
+    background-position: 0px -5px;
+}
+table.s-form-textarea-hover td#s-form-textarea-tm
+{
+    background-position: 0px -5px;
+}
+table.s-form-textarea-hover td#s-form-textarea-tr
+{
+    background-position: 0px -5px;
+}
+table.s-form-textarea-hover td#s-form-textarea-ml
+{
+    background-position: -5px 0px;
+}
+table.s-form-textarea-hover td#s-form-textarea-mm
+{
+    background-image: url(images/textarea/textarea-mm-hover.gif);
+}
+table.s-form-textarea-hover td#s-form-textarea-mr
+{
+    background-position: -5px 0px;
+}
+table.s-form-textarea-hover td#s-form-textarea-bl
+{
+    background-position: 0px -5px;
+}
+table.s-form-textarea-hover td#s-form-textarea-bm
+{
+    background-position: 0px -5px;
+}
+table.s-form-textarea-hover td#s-form-textarea-br
+{
+    background-position: 0px -5px;
+}
+
+/*focus*/
+table.s-form-textarea-focus td#s-form-textarea-tl
+{
+    background-position: 0px -10px;
+}
+table.s-form-textarea-focus td#s-form-textarea-tm
+{
+    background-position: 0px -10px;
+}
+table.s-form-textarea-focus td#s-form-textarea-tr
+{
+    background-position: 0px -10px;
+}
+table.s-form-textarea-focus td#s-form-textarea-ml
+{
+    background-position: -10px 0px;
+}
+table.s-form-textarea-focus td#s-form-textarea-mm
+{
+    background-image: url(images/textarea/textarea-mm-focus.gif);
+}
+table.s-form-textarea-focus td#s-form-textarea-mr
+{
+    background-position: -10px 0px;
+}
+table.s-form-textarea-focus td#s-form-textarea-bl
+{
+    background-position: 0px -10px;
+}
+table.s-form-textarea-focus td#s-form-textarea-bm
+{
+    background-position: 0px -10px;
+}
+table.s-form-textarea-focus td#s-form-textarea-br
+{
+    background-position: 0px -10px;
+}
+
+/* Radios
+----------------------------------------------------------------------------- */
+.s-form-radio-wrapper
+{
+    float: left;
+    margin-right: 4px;
+}
+.s-form-radio
+{
+    background: transparent url(images/sprites.png) no-repeat center top;
+    vertical-align: middle;
+    height: 19px;
+    width: 18px;
+    display: block; /*display: -moz-inline-block;*/
+}
+
+
+/* Checkboxes
+----------------------------------------------------------- */
+.s-form-checkbox-wrapper
+{
+    display: block;
+    float: left;
+}
+.s-form-checkbox
+{
+    display: block;
+    background: transparent url(images/sprites.png) no-repeat -1019px -5px;
+    height: 16px;
+    width: 16px;
+}
+.s-form-checked
+{
+    background-position: right -5px;
+}
+
+/*  Selects
+-------------------------------------------------------------------------------------- */
+.s-form-select-wrapper
+{
+    position: relative;
+    background: url(images/sprites.png) no-repeat left -186px;
+    display: block;
+    float: left;
+}
+.s-form-select-wrapper > div
+{
+    height: 31px;
+}
+.s-form-select-wrapper > div span
+{
+    font-size: 12px;
+    width: 100%;
+    position: absolute;
+    white-space: nowrap;
+    line-height: 31px;
+    text-indent: 8px;
+    overflow: hidden;
+    cursor: pointer;
+}
+.s-form-select-wrapper > div a
+{
+    position: absolute;
+    right: 0px;
+    width: 31px;
+    height: 31px;
+    background: url(images/sprites.png) no-repeat right -186px;
+}
+.s-form-select-wrapper ul
+{
+    position: absolute;
+    top: 30px;
+    left: 0px;
+    list-style: none;
+    background-color: #FFF;
+    border: solid 1px #CCC;
+    display: none;
+    max-height: 150px;
+    overflow: auto;
+    overflow-y: auto;
+    z-index: 10;
+}
+.s-form-select-wrapper ul a
+{
+    display: block;
+    padding: 5px;
+    text-decoration: none;
+    color: #333;
+    background-color: #FFF;
+    font-size: 12px;
+}
+.s-form-select-wrapper ul a.selected
+{
+    background: #EDEDED;
+    color: #333;
+}
+.s-form-select-wrapper ul a:hover, .s-form-select-wrapper ul a.selected:hover
+{
+    background: #3582c4;
+    color: #fff;
+}
+.s-form-hide
+{
+    display: none;
+}
